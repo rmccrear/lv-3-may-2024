@@ -16,11 +16,12 @@
 
 ## Week 3: Sass, CSS Modules, and Styling in Next.js
 
-- Day 1: Introduction to Sass and 7-1 architecture.
-- Day 2: Using Sass with Next.js projects and creating styled components.
-- Day 3: Integrating CSS modules in Next.js and comparing them with Sass practices.
-- Day 4: Building a UI using Bootstrap and Tailwind CSS within a Next.js project.
+- Day 1: Review of Sass and 7-1 architecture integration into Next.js. Introduction to SCSS modules.
+- Day 2: Advanced Sass features including variables, mixins, and functions in Next.js.
+- Day 3: Introduction to React Bootstrap and Tailwind CSS for styling in Next.js projects.
+- Day 4: Building a responsive website using Bootstrap and Tailwind CSS within Next.js.
 - Day 5: Review and practice day: Refining styling practices and troubleshooting common issues.
+
 
 ## Week 4: Unit Testing with Jest in Node.js
 
