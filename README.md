@@ -14,7 +14,7 @@
 - Day 4: Mapping over data and expanding the weather app to display a week's forecast.
 - Day 5: Deploying the weather app to Netlify and reviewing Next.js basics.
 
-##Week 3: Sass, CSS Modules, and Styling in Next.js
+## Week 3: Sass, CSS Modules, and Styling in Next.js
 
 - Day 1: Introduction to Sass and 7-1 architecture.
 - Day 2: Using Sass with Next.js projects and creating styled components.
