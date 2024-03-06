@@ -75,22 +75,31 @@
 - Implement client-side navigation and render dynamic lists of data.
 - **Assignment**: Build a feature allowing users to toggle between different views of data.
 
-## Day 5: Advanced React Concepts and Deploying Next.js Apps
+# Week 2: Introduction to Next.js and React Fundamentals
 
-### Hour 1: Passing Props and Advanced React Patterns
+## Day 5: Comprehensive Review and Optional Expansion Assignment
 
-- Deep dive into passing props between components.
-- Discussion on component composition and reusability in React.
+### Hour 1: Consolidated Review of Next.js and React Concepts
 
-### Hour 2: Deploying Next.js Applications
+- Summarize the key learnings of the week, emphasizing Next.js benefits, React's core concepts, JSX syntax, and dynamic UI construction techniques.
+- Interactive review session on state management with `useState`, effects with `useEffect`, and the importance of modular code architecture in React applications.
+- Address student questions and clarify any complex topics discussed during the week.
 
-- Preparing a Next.js app for production.
-- Overview of deployment options, with a focus on deploying to Netlify.
-- Step-by-step guide to deploying a Next.js app to Netlify.
+### Hour 2: Practical Examples and Common Pitfalls
 
-### Hour 3: Hands-On Practice and Deployment
+- Walk through practical examples that combine the week's topics, showcasing typical use cases in web development with Next.js and React.
+- Discuss common pitfalls in React development, such as improper state management, and how to avoid them.
+- **Code Example**: A mini-project that integrates `useState` and `useEffect` for a dynamic user interface, such as a live search feature or a simple blog post fetcher.
 
-- Practice passing props between components in a Next.js project.
-- Students prepare and deploy their projects to Netlify.
-- **Assignment**: Deploy your project, incorporating advanced React concepts learned in the first hour.
-<!--TODO Move learning in Week 2 Day 5 to Day 4, Day 5 Should Always be for review with an optional assignment. This gives students time to catch up  -->
+### Hour 3: Optional Assignment - Expanding Knowledge
+
+- **Optional Assignment**: Encourage students to create a small Next.js project that incorporates learned concepts and explores additional functionalities. Possible project ideas include:
+  - A ToDo List application with basic CRUD operations, leveraging `useState` for state management.
+  - A simple blog using Next.js where posts are fetched from a public API and displayed using `useEffect`.
+  - Implementing a feature that requires students to research and integrate a new npm package that wasn't covered in the lessons, fostering self-directed learning and exploration.
+
+**Assignment Objectives**:
+
+- Apply and reinforce the concepts learned during the week.
+- Encourage exploration of Next.js documentation and React ecosystem to solve real-world problems.
+- Practice building a small, complete project from scratch, reinforcing the project setup process and modular development approach.
