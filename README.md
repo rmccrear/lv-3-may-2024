@@ -17,11 +17,10 @@
 ## Week 3: Sass, CSS Modules, and Styling in Next.js
 
 - Day 1: Review of Sass and 7-1 architecture integration into Next.js. Introduction to SCSS modules.
-- Day 2: Advanced Sass features including variables, mixins, and functions in Next.js.
+- Day 2: Introduction to adding animations with Framer Motion in Next.js, focusing on simple effects like sliding and fading elements.
 - Day 3: Introduction to React Bootstrap and Tailwind CSS for styling in Next.js projects.
 - Day 4: Building a responsive website using Bootstrap and Tailwind CSS within Next.js.
 - Day 5: Review and practice day: Refining styling practices and troubleshooting common issues.
-
 
 ## Week 4: Unit Testing with Jest in Node.js
 
@@ -39,7 +38,7 @@
 - Day 4: Enhancing the Todo application with Tailwind CSS for styling.
 - Day 5: Review of the week's learning and preparation for the capstone project.
 
-##  Week 6: Firebase Integration in Next.js Applications
+## Week 6: Firebase Integration in Next.js Applications
 
 - Day 1: Introduction to Firebase and its services.
 - Day 2: Integrating Firebase Auth for user authentication in Next.js.
