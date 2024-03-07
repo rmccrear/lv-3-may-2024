@@ -66,8 +66,12 @@
   - Finishing the homepage by adding responsive features and ensuring accessibility.
   - Adding additional pages (e.g., About Us, Contact) using Bootstrap and Tailwind CSS for design consistency.
 
-- **Hour 3:** Practice Session - Building a Portfolio Page
-  - Students apply the skills learned by building out a personal portfolio page. This includes setting up the project, choosing a design theme, and implementing responsive design with Bootstrap or Tailwind CSS.
+- **Hour 3:** Practice Session - Building a "Sweets Storefront" Website
+  - Create a captivating website for a fictional sweets storefront that specializes in candies and cookies. The website should include three main pages:
+    1. **Home Page**: An enticing landing page that showcases featured sweets and introduces the brand.
+    2. **Products Page**: A detailed page that lists available sweets, including candies and cookies, with images and descriptions.
+    3. **Visit Us Page**: A page providing information on the physical storefront location, hours, and contact details. Encourage visitors to explore the store in person.
+  - This project encourages students to apply responsive web design principles using Bootstrap and Tailwind CSS, enhancing their ability to craft visually appealing and user-friendly web experiences.
 
 ### Day 5: Review and Practice
 
