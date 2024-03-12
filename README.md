@@ -30,13 +30,36 @@
 - Day 4: Introduction to testing in Next.js with Jest.
 - Day 5: Practice and review of testing concepts covered during the week.
 
-## Week 5: Building Frontend Applications with Next.js
+## Week 5: Webpack and Babel in Modern Web Development
 
-- Day 1: Review of Next.js and React basics.
-- Day 2: Building a simple Todo application with client-side handling.
-- Day 3: Introduction to component libraries and integrating Bootstrap with a Next.js project.
-- Day 4: Enhancing the Todo application with Tailwind CSS for styling.
-- Day 5: Review of the week's learning and preparation for the capstone project.
+- Day 1: Introduction to Build Tools and Webpack
+
+  - Overview of Webpack and its role in modern web development.
+  - Setting up a new project with Webpack.
+  - Demonstrating how Webpack bundles JavaScript files.
+
+- Day 2: Webpack for Optimizing Web Applications
+
+  - Configuring Webpack to optimize HTML, CSS, and JavaScript output for faster download times.
+  - Introduction to Webpack loaders and plugins.
+  - Using Webpack to create a production-ready build.
+
+- Day 3: Introduction to Babel and JavaScript Transpilation
+
+  - Explaining the need for JavaScript transpilation and how Babel addresses this need.
+  - Setting up Babel in a project alongside Webpack.
+  - Demonstrating Babel's JavaScript transpilation using an online REPL.
+
+- Day 4: Advanced Babel and Webpack Integration
+
+  - Configuring Babel with Webpack to transpile ES6+ JavaScript to browser-compatible JavaScript.
+  - Using loaders in Webpack for handling SASS precompiling and integrating with Babel for JS transpilation.
+  - Optimizing project builds with Babel and Webpack configurations for better performance.
+
+- Day 5: Practical Application and Review
+  - Applying knowledge by integrating Webpack and Babel into an existing Next.js project.
+  - Reviewing the build process of a Next.js application to understand similarities with Webpack and Babel.
+  - Recap of the week's topics with a Q&A session to clarify doubts and reinforce learning.
 
 ## Week 6: Firebase Integration in Next.js Applications
 
