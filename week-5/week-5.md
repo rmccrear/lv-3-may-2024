@@ -35,6 +35,7 @@
 
 - Implementing code splitting in a Webpack project.
 - Configuring Webpack for production builds with optimizations.
+- Use a loader to bring in 7-1 SASS from your template repo.
 - **Assignment**: Optimize an existing Webpack project for better performance.
 
 ## Day 3: Introduction to Babel and JavaScript Transpilation
