@@ -23,13 +23,13 @@
 
 ### Hour 1: Demo Code
 
-- Configuring Webpack to optimize HTML, CSS, and JavaScript output for faster download times.
-- Introduction to code splitting and lazy loading with Webpack.
+- Introduction to Webpack loaders and plugins.
+- Using Webpack to manage environment variables and development modes.
 
 ### Hour 2: Demo Code
 
-- Introduction to Webpack loaders and plugins.
-- Using Webpack to manage environment variables and development modes.
+- Configuring Webpack to optimize HTML, CSS, and JavaScript output for faster download times.
+- Introduction to code splitting and lazy loading with Webpack.
 
 ### Hour 3: Hands-On Practice
 
