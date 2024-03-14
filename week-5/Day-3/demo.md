@@ -1,60 +1,148 @@
-## Hour 1: Getting Started with Babel and Webpack
+## Day 3: Introduction to Babel and JavaScript Transpilation
 
-As we step into Day 3 of our journey with Webpack, we'll dive into the world of JavaScript transpilation, focusing on how Babel plays a pivotal role in modern web development. Babel allows us to write JavaScript using the latest features without worrying about browser compatibility. Let's explore how to integrate Babel into our Webpack setup for seamless transpilation.
+### Hour 1: Understanding JavaScript Transpilation with Babel
 
-### Understanding JavaScript Transpilation
+Today, we're focusing on Babel—a powerful tool that lets us write modern JavaScript that works across all browsers. Babel converts ES6+ code into backwards-compatible versions, ensuring broad compatibility.
+Right after introducing Babel and its purpose, let's dive into some ES6 syntax examples that Babel can convert into backwards-compatible JavaScript. This will give you a clearer understanding of how Babel allows us to use modern JavaScript features without worrying about browser support.
 
-JavaScript is continually evolving, with new features and syntax improvements introduced regularly. However, not all browsers keep up with this pace, leading to compatibility issues. **Transpilation** is the process of converting modern JavaScript (ES6+) code into a backward-compatible version (ES5) that can run in older browsers. Babel is a popular tool for this purpose, ensuring that your cutting-edge JavaScript code can be understood universally.
+#### Why Babel?
 
-### Step 1: Installing Babel and Its Webpack Loader
+JavaScript evolves rapidly, introducing new syntax and features that improve the developer experience and code efficiency. However, not all users' browsers support the latest JavaScript features. This is where Babel comes in, allowing us to use next-gen JavaScript without worrying about browser support.
 
-To incorporate Babel into your Webpack project, you need to install Babel itself along with `babel-loader`, which allows Webpack to process JavaScript files using Babel.
+#### Setting Up Babel
+
+First, we need to initialize a new npm project and install Babel:
+
+1. **Initialize a New Project**:
+   Open your terminal, create a new directory for your project, and navigate into it:
+
+   ```bash
+   mkdir babel-demo
+   cd babel-demo
+   npm init -y
+   touch index.js
+   ```
+
+   This command creates a new npm project with default settings.
+
+### ES6 Syntax Examples
+
+ES6 (ECMAScript 2015) introduced many updates to JavaScript, including new syntax and features for more expressive and concise code. Here are a few examples of ES6 syntax that Babel can transpile:
+
+1. **Arrow Functions**:
+   ES6 introduced arrow functions, a concise way to write function expressions.
+
+   ```js
+   // ES6 Arrow Function
+   const add = (a, b) => a + b;
+   ```
+
+   Babel transpiles this to a traditional function expression for broader compatibility.
+
+2. **Template Literals**:
+   Template literals provide an easy way to interpolate variables and expressions into strings.
+
+   ```js
+   // ES6 Template Literal
+   const name = 'Babel';
+   console.log(`Hello, ${name}!`);
+   ```
+
+3. **Let and Const**:
+   `let` and `const` introduce block-scoped variable declarations, with `const` being for constants.
+
+   ```js
+   // ES6 let and const
+   let score = 0;
+   const playerName = 'Alice';
+   ```
+
+4. **Classes**:
+   ES6 classes provide a syntactic sugar for prototypal inheritance but don't introduce a new object-oriented inheritance model.
+
+   ```js
+   // ES6 Class
+   class Person {
+     constructor(name) {
+       this.name = name;
+     }
+
+     greet() {
+       console.log(`Hello, my name is ${this.name}`);
+     }
+   }
+   ```
+
+5. **Default Parameters**:
+   Functions can have default parameter values.
+
+   ```js
+   // ES6 Default Parameters
+   function greet(name = 'World') {
+     console.log(`Hello, ${name}!`);
+   }
+   ```
+
+6. **Destructuring Assignment**:
+   Destructuring allows binding using pattern matching, with support for matching arrays and objects.
+
+   ```js
+   // ES6 Destructuring Assignment
+   const { firstName, lastName } = { firstName: 'John', lastName: 'Doe' };
+   console.log(firstName); // Output: John
+   ```
+
+7. **Modules (Import/Export)**:
+   ES6 modules allow for the modularization of JavaScript code.
+
+   ```js
+   // ES6 Import/Export
+   // In file math.js
+   export const add = (a, b) => a + b;
+
+   // In another file
+   import { add } from './math';
+   console.log(add(2, 3));
+   ```
+
+Each of these features enhances JavaScript's expressiveness and can be seamlessly integrated into your projects with Babel's help. By transpiling this syntax to ES5, Babel ensures that your codebase remains compatible with older browsers, broadening your application's reach. 2. **Install Babel**:
+Install Babel core and the preset for environment:
 
 ```bash
-npm install --save-dev @babel/core babel-loader @babel/preset-env
+npm install --save-dev @babel/core @babel/cli @babel/preset-env
 ```
 
-Here, `@babel/core` is the main Babel library, `babel-loader` connects Babel with Webpack, and `@babel/preset-env` is a smart preset that allows you to use the latest JavaScript without needing to micromanage syntax transformations.
+- `@babel/core` is the main part of Babel
+- `@babel/cli` is the command-line interface for Babel
+- `@babel/preset-env` is a smart preset that allows you to use the latest JavaScript.
 
-### Step 2: Configuring Webpack to Use Babel
+3. **Create a Babel Configuration File**:
+   Babel needs to know how you want to transform your code. Create a `babel.config.json` file in the root of your project:
+   From the docs: https://babeljs.io/docs/usage
+   ```json
+   {
+     "presets": [
+       [
+         "@babel/preset-env",
+         {
+           "targets": {
+             "edge": "17",
+             "firefox": "60",
+             "chrome": "67",
+             "safari": "11.1"
+           },
+           "useBuiltIns": "usage",
+           "corejs": "3.6.5"
+         }
+       ]
+     ]
+   }
+   ```
+   This tells Babel to use the preset-env, which transforms your JavaScript to be compatible with over 90% of browsers globally.
 
-In your `webpack.config.js`, add a rule to use `babel-loader` for JavaScript files:
+#### Writing Modern JavaScript
 
-```js
-const path = require('path');
-
-module.exports = {
-  entry: './src/index.js',
-  output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist'),
-  },
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env'],
-          },
-        },
-      },
-      // Your CSS/SCSS loader configuration here
-    ],
-  },
-  mode: 'development',
-};
-```
-
-Exclude keeps from testing files within the node_module directory, or any other exclusions you wish to add using regex.
-
-This configuration tells Webpack to use Babel to process `.js` files, excluding anything in `node_modules`. The `@babel/preset-env` preset instructs Babel on how to transpile the JavaScript code based on the current browser market share and the features they support.
-
-### Step 3: Writing Modern JavaScript
-
-Create or update your `src/index.js` with modern JavaScript features to see Babel in action. For instance, you could use arrow functions, `const` and `let` for variable declarations, template literals, and more.
+Create a new file `src/index.js` and add some modern JavaScript code. For example:
 
 ```js
 // src/index.js
@@ -62,148 +150,108 @@ const greet = (name) => `Hello, ${name}!`;
 console.log(greet('World'));
 ```
 
-### Step 4: Building with Webpack
+#### Transpiling with Babel
 
-Run Webpack to bundle your project:
+Now, let's transpile our modern JavaScript to something more universally compatible:
 
-```bash
-npx webpack
-```
+1. **Run Babel**:
+   To transpile your `src/index.js`, run:
 
-Upon completion, Webpack, with the help of Babel, will transpile your modern JavaScript code into a version compatible with older browsers. This process ensures that your application remains accessible to a broader audience without sacrificing the developer experience or code maintainability.
+   ```bash
+   npx babel src --out-dir lib
+   ```
 
-### Conclusion
+   This command reads the JavaScript files in `src/`, transpiles them using the configuration defined in `.babelrc`, and outputs the result to `lib/`.
 
-Integrating Babel with Webpack is a critical step in modern web development, allowing you to leverage the latest JavaScript features confidently. This setup not only streamlines development but also ensures your applications are performant and compatible across various environments. As we move forward, we'll explore more about Babel's capabilities, including presets and plugins, to further enhance our workflow.
+2. **Check the Output**:
+   Open `lib/index.js` to see the transpiled code. You should notice that the arrow function has been transformed into a function expression or declaration, depending on the specific features used and the browsers you're targeting.
 
-<!--! Hour 2  -->
+#### Conclusion
 
-Diving deeper into Babel's functionality, Hour 2 of Day 3 focuses on the exploration of Babel presets and plugins. These tools enhance Babel's capabilities, allowing for more specific transformations and optimizations of our JavaScript code. Let's see how to utilize these features to further tailor our Webpack and Babel setup.
+Babel is a cornerstone tool in modern web development, allowing us to leverage the full power of the latest JavaScript features while ensuring our applications remain accessible to all users. By setting up Babel in our projects, we make a significant step towards writing cleaner, more efficient code without sacrificing compatibility.
 
-## Hour 2: Enhancing JavaScript with Babel Presets and Plugins
+<!--! Hour 2 -->
 
-### Babel Presets and Plugins Explained
+## Day 3: Introduction to Babel and JavaScript Transpilation
 
-Babel presets are collections of plugins that together enable the transformation of specific sets of JavaScript features. For instance, `@babel/preset-env` is a smart preset that includes all the necessary plugins to support modern JavaScript (ES2015 and beyond) across many browser environments.
+### Hour 2: Delving Deeper into Babel's Power
 
-Babel plugins are more granular transformations that apply specific changes to your JavaScript code, such as transforming arrow functions into function expressions. While presets are more comprehensive, plugins give you fine-grained control over each transformation.
+Now that we've set the stage with Babel's basics, let's explore how to fine-tune our setup with presets and plugins, and understand the crucial role of polyfills in ensuring broader compatibility. We'll also correct our configuration file naming to the more recent `babel.config.json`.
 
-### Step 1: Exploring Babel Presets
+#### Babel Presets: A Closer Look
 
-You've already used `@babel/preset-env` in the previous hour. This preset dynamically determines the Babel plugins and **polyfills** needed based on the target environment's supported features.
+Babel presets are essentially bundles of plugins. Each preset is a set of rules for how to transform your JavaScript code. One of the most powerful and commonly used presets is `@babel/preset-env`, which intelligently decides which transformations and polyfills are necessary based on your target environments.
 
-**Polyfills** are pieces of code (usually JavaScript) that provide the functionality which is not supported by older browsers. Essentially, if a JavaScript feature that your code relies on is missing in the user's browser, a polyfill can be used to add support for that feature. This ensures that modern JavaScript code can run on older browsers that do not natively support those features. `@babel/preset-env` is smart enough to only include the polyfills your application needs based on the browsers you target, which keeps your bundle size as small as possible.
+1. **Configuring `@babel/preset-env`**:
+   This preset simplifies the process of ensuring your JavaScript is compatible across different environments. It reads your compatibility targets (e.g., browsers you want to support) and includes the necessary polyfills and syntax transformations.
 
-For a more feature-specific transformation, you could also explore other presets like `@babel/preset-react` for React projects:
+   First, ensure you've installed the preset:
 
-```bash
-npm install --save-dev @babel/preset-react
-```
+   ```bash
+   npm install --save-dev @babel/preset-env
+   ```
 
-To use this preset, update your `webpack.config.js`:
+   Then, configure Babel by creating a `babel.config.json` file in your project's root:
 
-```js
-// Inside module.exports
-module: {
-  rules: [
-    {
-      test: /\.js$/,
-      exclude: /node_modules/,
-      use: {
-        loader: 'babel-loader',
-        options: {
-          presets: ['@babel/preset-env', '@babel/preset-react'],
-        },
-      },
-    },
-    // Your CSS/SCSS loader configuration here
-  ],
-},
-```
+   ```json
+   {
+     "presets": ["@babel/preset-env"]
+   }
+   ```
 
-### Demonstrating Babel Presets in Action
+2. **Understanding Browser Targets and Polyfills**:
+   You can specify which environments your project needs to support using the `browserslist` field in your `package.json`. This is crucial for determining which polyfills are needed.
 
-After configuring our Webpack to use `@babel/preset-env` and possibly other presets like `@babel/preset-react`, let's put this setup to the test with some demo code. This will help us see the practical effects of our configuration and understand how Babel transforms our JavaScript for broader compatibility.
+   ```json
+   "browserslist": [
+     ">0.25%",
+     "not dead"
+   ]
+   ```
 
-Imagine you're using modern JavaScript features like arrow functions, `const`, and `let` declarations, or even JSX if you're working with React. Here's how you might write a simple piece of modern JavaScript code:
+   **Polyfills**: These are snippets of code that add missing features to older browsers. When `@babel/preset-env` is configured, it automatically includes necessary polyfills for the features used in your code based on your `browserslist`.
 
-```js
-// src/index.js
-const greeting = (name) => `Hello, ${name}!`;
+#### Dive into Babel Plugins
 
-const names = ['World', 'React', 'Babel'];
-names.forEach((name) => console.log(greeting(name)));
-```
+While presets are collections of plugins designed for specific environments, individual Babel plugins offer more granular transformations.
 
-If you're using React and have installed `@babel/preset-react`, your `src/index.js` might include JSX:
+1. **Example: Transform Arrow Functions**:
+   To illustrate, let's use a plugin that transforms ES6 arrow functions into function expressions, ensuring compatibility with older JavaScript engines.
 
-```js
-// src/index.js for React
-import React from 'react';
-import ReactDOM from 'react-dom';
+   ```bash
+   npm install --save-dev @babel/plugin-transform-arrow-functions
+   ```
 
-const App = () => (
-  <div>
-    <h1>Hello, Webpack and Babel!</h1>
-  </div>
-);
+   Add this plugin to your `babel.config.json`:
 
-ReactDOM.render(<App />, document.getElementById('root'));
-```
+   ```json
+   {
+     "plugins": ["@babel/plugin-transform-arrow-functions"]
+   }
+   ```
 
-After writing your code, run Webpack to bundle your project:
+#### Practical Demonstration
 
-```bash
-npx webpack
-```
+Let's see Babel in action with an example that will be transformed by our setup.
 
-This command triggers the compilation process, where `babel-loader` processes your `.js` or `.jsx` files using the configurations specified in `webpack.config.js`. Babel, with the help of the presets you've defined, will transpile the modern JavaScript (and JSX, if applicable) down to ES5 code that's compatible with a wider range of browsers.
+1. **Create a JavaScript File**:
+   In `src/example.js`, write some modern JavaScript:
 
-Inspect the output in `dist/bundle.js`. You won't see your original code but instead a transformed version that older browsers can understand. This transformation includes converting arrow functions into regular function expressions, transforming JSX into `React.createElement` calls (for React projects), and potentially more, depending on the features used in your source code.
+   ```js
+   const greet = (name) => `Hello, ${name}!`;
+   console.log(greet('Babel'));
+   ```
 
-This demonstration highlights the power of Babel in conjunction with Webpack to ensure that the cutting-edge JavaScript you write today can be enjoyed by users on older browsers without hassle.
+2. **Transpile the Code**:
+   Run Babel to transpile your `src` directory:
 
-### Step 2: Utilizing Babel Plugins
+   ```bash
+   npx babel src --out-dir lib
+   ```
 
-While presets offer a bundled approach, sometimes you may want to apply a specific transformation or experimental feature not covered by a preset. For example, the `@babel/plugin-transform-arrow-functions` plugin converts arrow functions into regular function declarations.
+3. **Review the Output**:
+   Check `lib/example.js` for the transpiled version. The arrow function should now be a function expression, showing Babel's transformation in action.
 
-Install a specific Babel plugin:
+#### Conclusion
 
-```bash
-npm install --save-dev @babel/plugin-transform-arrow-functions
-```
-
-Then, update your Babel configuration in `webpack.config.js` to include this plugin:
-
-```js
-// Inside module.exports
-module: {
-  rules: [
-    {
-      test: /\.js$/,
-      exclude: /node_modules/,
-      use: {
-        loader: 'babel-loader',
-        options: {
-          presets: ['@babel/preset-env'],
-          plugins: ['@babel/plugin-transform-arrow-functions'],
-        },
-      },
-    },
-  ],
-},
-```
-
-### Step 3: Testing Your Configuration
-
-To see the plugin in action, ensure your `src/index.js` includes an arrow function, then build your project with Webpack:
-
-```bash
-npx webpack
-```
-
-Inspect the output in `dist/bundle.js` to verify that the arrow function has been transformed as expected.
-
-### Conclusion
-
-Babel presets and plugins offer a powerful way to customize how JavaScript is transpiled, catering to specific project needs or future JavaScript features. Understanding and implementing these in your Webpack setup empowers you to write modern, clean, and compatible JavaScript code. As you become more comfortable with these tools, you'll find that they greatly enhance both the development experience and the quality of your projects.
+By leveraging Babel's presets and plugins, and understanding the importance of polyfills, you're equipped to write modern, clean JavaScript without worrying about browser incompatibilities. This setup ensures your applications can reach a wider audience while you enjoy the benefits of the latest JavaScript features.
