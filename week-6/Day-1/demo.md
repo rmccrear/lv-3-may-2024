@@ -102,10 +102,6 @@ Remember, the Firebase SDK acts like the configurations we used last week with W
 
 This hour has set the foundation for integrating Firebase into Next.js applications. In the next session, we'll dive into Firebase Authentication and how to implement a basic
 
-```
-
-```
-
 <!-- ! Hour 2 -->
 
 ## Day 1, Hour 2: Introduction to Firebase Authentication
