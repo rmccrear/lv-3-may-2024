@@ -32,34 +32,11 @@
 
 ## Week 5: Webpack and Babel in Modern Web Development
 
-- Day 1: Introduction to Build Tools and Webpack
-
-  - Overview of Webpack and its role in modern web development.
-  - Setting up a new project with Webpack.
-  - Demonstrating how Webpack bundles JavaScript files.
-
-- Day 2: Webpack for Optimizing Web Applications
-
-  - Configuring Webpack to optimize HTML, CSS, and JavaScript output for faster download times.
-  - Introduction to Webpack loaders and plugins.
-  - Using Webpack to create a production-ready build.
-
-- Day 3: Introduction to Babel and JavaScript Transpilation
-
-  - Explaining the need for JavaScript transpilation and how Babel addresses this need.
-  - Setting up Babel in a project alongside Webpack.
-  - Demonstrating Babel's JavaScript transpilation using an online REPL.
-
-- Day 4: Advanced Babel and Webpack Integration
-
-  - Configuring Babel with Webpack to transpile ES6+ JavaScript to browser-compatible JavaScript.
-  - Using loaders in Webpack for handling SASS precompiling and integrating with Babel for JS transpilation.
-  - Optimizing project builds with Babel and Webpack configurations for better performance.
-
-- Day 5: Practical Application and Review
-  - Applying knowledge by integrating Webpack and Babel into an existing Next.js project.
-  - Reviewing the build process of a Next.js application to understand similarities with Webpack and Babel.
-  - Recap of the week's topics with a Q&A session to clarify doubts and reinforce learning.
+- Day 1: Introduction to Webpack, setting up a project, and demonstrating JavaScript file bundling.
+- Day 2: Configuring Webpack for optimizing HTML, CSS, and JavaScript, plus introduction to loaders and plugins.
+- Day 3: Introduction to Babel, setting it up in a project with Webpack, and demonstrating JavaScript transpilation.
+- Day 4: Integrating Babel with Webpack for ES6+ JavaScript transpilation and using loaders for SASS precompiling.
+- Day 5: Applying Webpack and Babel in a Next.js project, reviewing the build process, and Q&A session.
 
 ## Week 6: Firebase Integration in Next.js Applications
 
@@ -69,9 +46,9 @@
 - Day 4: Reading from and writing to Firestore from the Next.js application.
 - Day 5: Best practices for Firebase security and rules.
 
-## Week 7: Capstone Project Development
+## Week 7: Capstone Project Development - Community Market App
 
-- Day 1: Capstone project planning and setup; scope definition.
+- Day 1: Capstone project planning and setup; defining scope for the community market app.
 - Day 2: Starting capstone project with Next.js and Firebase integration.
 - Day 3: Implementing styling with Sass and Tailwind CSS in the capstone project.
 - Day 4: Writing basic tests for the capstone project with Jest.
