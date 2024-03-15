@@ -41,27 +41,21 @@
 - Introduction to Firestore: Understanding its NoSQL structure and how to design a database schema.
 - Setting up Firestore in the Firebase project and integrating it with the Next.js application.
 
+### Hour 2 - 3: Demo Code
+
+- CRUD operations in Firestore: Creating, reading, updating, and deleting documents.
+- No assignment
+
+## Day 4: Review of day 3, more practice, Q&A
+
+### Hour 1: Demo Code
+
+- Setting up Firestore in the Firebase project and integrating it with the Next.js application.
+
 ### Hour 2: Demo Code
 
 - CRUD operations in Firestore: Creating, reading, updating, and deleting documents.
 - Implementing real-time data fetching in Next.js using Firestore.
-
-### Hour 3: Hands-On Practice
-
-- Adapting the Todo application to use Firestore for storing and retrieving todos.
-- **Assignment**: Enhance the Todo application with Firestore, adding features like categorization or prioritization of todos.
-
-## Day 4: Reading from and Writing to Firestore from the Next.js Application
-
-### Hour 1: Demo Code
-
-- Advanced Firestore usage: Querying and filtering data, handling pagination, and data relationships.
-- Securing Firestore access with security rules.
-
-### Hour 2: Demo Code
-
-- Optimizing Firestore reads and writes in Next.js for performance and cost-effectiveness.
-- Using Firestore transactions and batched writes for complex operations.
 
 ### Hour 3: Hands-On Practice
 
