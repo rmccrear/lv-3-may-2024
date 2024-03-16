@@ -1,6 +1,6 @@
-## Optional Stretch Assignment: Building a Web Scraper with Node.js
+# Assignment: Node Practice
 
-### Objective
+## Objective
 
 Your goal is to build a command-line web scraper that utilizes `axios` for fetching web pages and `cheerio` for parsing and extracting elements from the HTML. This project will consolidate your understanding of Node.js, npm packages, and the practical application of modules in a complex scenario.
 

@@ -6,6 +6,8 @@ The purpose of this assignment is to establish a foundational understanding of N
 
 ### Instructions
 
+**Create a Level 3 Organization within GitHub to store all Level 3 repos(Optional)**
+
 #### Part 1: Node.js Installation and Verification
 
 - **Install Node.js**:
