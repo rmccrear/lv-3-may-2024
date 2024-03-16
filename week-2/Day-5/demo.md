@@ -129,4 +129,6 @@ function Layout() {
 }
 ```
 
+<!--* Show deployment steps to Netlify  -->
+
 This basic example ties together our discussions on components, JSX, CSS styling in React, and the concept of a component's lifecycle. By understanding these foundational aspects, you're well-equipped to tackle more complex projects and continue expanding your React and Next.js skills.

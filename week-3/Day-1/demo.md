@@ -174,6 +174,8 @@ Here's how you might use these in a component:
 
 This naming convention aligns with JavaScript's camelCase naming, ensuring consistency across your JSX code.
 
+<!--* Show deployment steps to Netlify  -->
+
 ## Conclusion
 
 Integrating SCSS Modules with the BEM methodology in Next.js projects promotes a modular, scalable approach to styling. By understanding how to effectively use `className` and adapting to JSX's camelCase attributes, you can further refine your components for clarity, reusability, and maintainability. This hour sets the stage for more advanced styling practices and prepares you to tackle dynamic UI challenges with confidence.
