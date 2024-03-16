@@ -1,7 +1,5 @@
 # Hour 1: Integrating Firebase Authentication into the Todo App
 
-<!-- TODO Review these notes and change anything that may not fit.  -->
-
 ## Overview
 
 In this session, we'll introduce Firebase Authentication and integrate it into our Todo application. Firebase Authentication provides easy-to-use APIs and ready-made UI libraries to authenticate users to your app. We'll implement a basic email and password sign-in method.
@@ -12,18 +10,20 @@ Before integrating Firebase Authentication into our app, ensure that you've set 
 
 ### Code Snippet
 
-```
+<!--* From yesterdays demo -- add getAuth import and invoke it-->
+
+```js
 import { initializeApp } from 'firebase/app';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { getAuth } from 'firebase/auth';
 
 // Your web app's Firebase configuration (Replace with your actual config object)
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_AUTH_DOMAIN",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_STORAGE_BUCKET",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: 'YOUR_API_KEY',
+  authDomain: 'YOUR_AUTH_DOMAIN',
+  projectId: 'YOUR_PROJECT_ID',
+  storageBucket: 'YOUR_STORAGE_BUCKET',
+  messagingSenderId: 'YOUR_MESSAGING_SENDER_ID',
+  appId: 'YOUR_APP_ID',
 };
 
 // Initialize Firebase
@@ -37,7 +37,7 @@ We'll create a simple form where new users can sign up by entering their email a
 
 ### Code Snippet for Sign-Up Form
 
-```
+```js
 import React, { useState } from 'react';
 
 const SignUpForm = () => {
@@ -58,11 +58,19 @@ const SignUpForm = () => {
     <form onSubmit={handleSubmit}>
       <label>
         Email:
-        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
       </label>
       <label>
         Password:
-        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
       </label>
       <button type="submit">Sign Up</button>
     </form>
@@ -78,9 +86,9 @@ Next, we'll add functionality for users to sign in using their email and passwor
 
 ### Code Snippet for Sign-In Form
 
-```
+```js
 import React, { useState } from 'react';
-
+import { signInWithEmailAndPassword } from 'firebase/auth';
 const SignInForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -99,11 +107,19 @@ const SignInForm = () => {
     <form onSubmit={handleSubmit}>
       <label>
         Email:
-        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
       </label>
       <label>
         Password:
-        <input type="password" value=password onChange={(e) => setPassword(e.target.value)} />
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
       </label>
       <button type="submit">Sign In</button>
     </form>
@@ -113,7 +129,115 @@ const SignInForm = () => {
 export default SignInForm;
 ```
 
-This module will guide the students through setting up Firebase Authentication, creating user accounts, and signing in with email and password. Ensure you have the Firebase project configured and the necessary Firebase services imported in your application.
+## Appending User Identity to Todos
+
+To associate each todo with the user who created it and ensure users only see their own todos, we'll need to modify the `addTodo` function to include the user's ID. Additionally, we'll adjust the logic for fetching todos to filter by the user's ID.
+
+### Update the `addTodo` Function
+
+Modify the `addTodo` function in your `firestore.js` to include the currently signed-in user's ID with each todo. Ensure that the `auth` object is imported from your Firebase configuration.
+
+```js
+import { db, auth } from '../firebaseConfig'; // Adjust this import as necessary
+import { collection, addDoc } from 'firebase/firestore';
+
+export const addTodo = async (todo) => {
+  // Ensure the user is authenticated
+  if (auth.currentUser) {
+    const userId = auth.currentUser.uid;
+    const docRef = await addDoc(collection(db, 'todos'), {
+      ...todo,
+      userId: userId, // Append the userId to each todo
+    });
+    console.log('Document written with ID: ', docRef.id);
+  } else {
+    console.log('No authenticated user found!');
+  }
+};
+```
+
+### Fetching Todos By User ID
+
+To adjust your fetching logic to only retrieve todos created by the currently signed-in user, you can modify your useEffect hook as follows:
+
+Within the `TodoList.jsx`:
+I commented out the orginal code thats not being changed to make it easier spot the changed code.
+
+```js
+// import React, { useEffect, useState } from 'react';
+// import { collection, onSnapshot, query, where } from 'firebase/firestore';
+// import { auth, db } from '../firebaseConfig';
+// import DeleteTodoButton from './DeleteTodoButton';
+// import UpdateTodo from './UpdateTodo';
+import { onAuthStateChanged } from 'firebase/auth'; // ADD THIS IMPORT
+
+// const TodoList = () => {
+//   const [todos, setTodos] = useState([]);
+
+const [currentUser, setCurrentUser] = useState(null); // ADD THIS STATE
+
+useEffect(() => {
+  // ADD THIS USE EFFECT
+  // Listen for auth state changes
+  const unsubscribeAuth = onAuthStateChanged(auth, (user) => {
+    setCurrentUser(user); // Update state when auth state changes
+  });
+
+  return () => unsubscribeAuth(); // Cleanup auth listener
+}, []);
+
+useEffect(() => {
+  // ADJUST THIS USE EFFECT
+  if (auth.currentUser) {
+    const userId = auth.currentUser.uid;
+    const q = query(collection(db, 'todos'), where('userId', '==', userId));
+
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const todosArray = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setTodos(todosArray);
+    });
+
+    // Cleanup subscription on unmount
+    return () => unsubscribe();
+  } else {
+    console.log('No authenticated user found! Fetching no todos.');
+    setTodos([]); // Optional: clear todos if no user is signed in
+  }
+}, [currentUser]); // CHANGE THIS ARRAY
+
+//   return (
+//     <div>
+//       <h2>Todos</h2>
+//       <ul>
+//         {todos.map((todo) => (
+//           <li key={todo.id}>
+//             <h2>{todo.title}</h2>
+//             <p>{todo.description}</p>
+//             <DeleteTodoButton id={todo.id} />
+//             <UpdateTodo todo={todo} />
+//           </li>
+//         ))}
+//       </ul>
+//     </div>
+//   );
+// };
+
+// export default TodoList;
+```
+
+This modification ensures that the `useEffect` hook:
+
+1. Checks if there is a currently signed-in user via `auth.currentUser`.
+2. Uses a Firestore `query` with a `where` clause to filter todos based on the `userId`.
+3. Subscribes to real-time updates for this filtered list of todos.
+4. Properly cleans up the subscription when the component unmounts or when the signed-in user changes.
+
+Remember, for this to work effectively, each todo must include a `userId` field set to the ID of the user who created it. Also, ensure your Firestore security rules are set to allow users to only read todos where `userId` matches their user ID.
+
+By implementing these changes, your Todo app will now correctly associate todos with the users who created them and ensure that users can only access their own todo items.
 
 <!-- ! Hour 2 -->
 
@@ -129,7 +253,7 @@ Firestore Security Rules play a vital role in protecting your data. They allow y
 
 ### Basic Rules Overview
 
-```
+```sh
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {

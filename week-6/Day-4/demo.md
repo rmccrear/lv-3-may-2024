@@ -23,26 +23,21 @@ First, let's start with creating todos.
 // Same as yesterday
 'use client';
 import React, { useState } from 'react';
-import { db } from '../firebaseConfig';
-import { collection, addDoc } from 'firebase/firestore';
-
+import { addTodo } from '../utils/firestore';
 const TodoForm = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      await addDoc(collection(db, 'todos'), {
-        title,
-        description,
-        completed: false,
-      });
-      setTitle('');
-      setDescription('');
-    } catch (error) {
-      console.error('Error adding todo: ', error);
-    }
+
+    addTodo({
+      title,
+      description,
+      completed: false,
+    });
+    setTitle('');
+    setDescription('');
   };
 
   return (
