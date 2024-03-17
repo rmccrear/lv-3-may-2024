@@ -1,4 +1,4 @@
-# Assignment: Framer Motion Integration Assignment 1
+# Assignment: Styles Assignment 2
 
 ## Objective
 
