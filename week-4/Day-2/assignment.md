@@ -12,7 +12,6 @@ Deepen your proficiency with Jest by tackling complex testing scenarios, includi
 
    - On GitHub, create a repository named `advanced-jest-features`.
    - Initialize it with a `.gitignore` for Node.js and a basic README.md.
-   - Add a brief description: "Advanced testing techniques with Jest."
 
 2. **Local Environment Setup**:
    - Clone `advanced-jest-features` to your local machine.
