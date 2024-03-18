@@ -75,3 +75,100 @@ A common pitfall in rendering dynamic content is accidentally displaying "undefi
 Integrating Jest into a Next.js project and writing basic unit tests for client-side components are foundational skills for ensuring the quality of your web applications. By focusing on simple, targeted tests, we can verify that our components behave as expected, providing a reliable and user-friendly experience. As we progress, we'll explore more advanced testing techniques tailored to Next.js's capabilities.
 
 <!--! Hour 2  -->
+
+## Day 4, Hour 2: Writing Tests for Next.js Components
+
+In this hour, we'll dive deeper into testing Next.js components using Jest and the React Testing Library. We aim to ensure that our components render correctly and respond to user interactions as expected. This session covers testing a simple component and introduces the concepts of testing hooks and event handling in React components.
+
+### Step 1: Testing Component Rendering
+
+We'll start by testing a simple component to ensure it renders the text passed via props.
+
+**Component (`components/WelcomeMessage.js`):**
+
+```jsx
+function WelcomeMessage({ message }) {
+  return <p>{message}</p>;
+}
+
+export default WelcomeMessage;
+```
+
+**Instructions:**
+
+1. Explain the purpose of the `WelcomeMessage` component, which is to display a message passed through props.
+2. Highlight the importance of testing components to ensure they render as expected.
+
+**Test (`components/__tests__/WelcomeMessage.test.js`):**
+
+```js
+import { render, screen } from '@testing-library/react';
+import WelcomeMessage from '../WelcomeMessage';
+
+describe('WelcomeMessage Component', () => {
+  it('renders the message passed as a prop', () => {
+    render(<WelcomeMessage message="Hello, Next.js" />);
+    const messageElement = screen.getByText('Hello, Next.js');
+    expect(messageElement).toBeInTheDocument();
+  });
+});
+```
+
+**Instructions:**
+
+1. Walk through writing the test, explaining each part: `render` method, `screen` object, and the `expect` assertion.
+2. Run the test to show it passing, reinforcing the component behaves as expected.
+
+### Step 2: Testing React Hooks
+
+Next, let's test a component that uses a React hook, specifically `useState`, to toggle visibility of text.
+
+**Component (`components/ToggleText.js`):**
+
+```jsx
+import { useState } from 'react';
+
+function ToggleText() {
+  const [isVisible, setIsVisible] = useState(false);
+
+  return (
+    <div>
+      <button onClick={() => setIsVisible(!isVisible)}>Toggle</button>
+      {isVisible && <p>Now you see me!</p>}
+    </div>
+  );
+}
+
+export default ToggleText;
+```
+
+**Instructions:**
+
+1. Introduce the `ToggleText` component, focusing on how it uses `useState` to control the visibility of text.
+2. Discuss the significance of testing user interactions, like clicks, to ensure the UI updates correctly.
+
+**Test (`components/__tests__/ToggleText.test.js`):**
+
+```js
+import { render, screen, fireEvent } from '@testing-library/react';
+import ToggleText from '../ToggleText';
+
+describe('ToggleText Component', () => {
+  it('toggles the visibility of the text on button click', () => {
+    render(<ToggleText />);
+    const button = screen.getByRole('button', { name: 'Toggle' });
+    fireEvent.click(button);
+    const visibleText = screen.getByText('Now you see me!');
+    expect(visibleText).toBeInTheDocument();
+  });
+});
+```
+
+**Instructions:**
+
+1. Detail the testing process, highlighting the use of `fireEvent` to simulate user clicks.
+2. Emphasize the importance of dynamically testing state changes within components to ensure they react as intended.
+
+### Conclusion
+
+This session focused on practical examples of testing Next.js components with Jest and the React Testing Library. From rendering checks to hook functionality and handling user interactions, these examples form the basis for more complex component tests. Encourage students to explore further testing scenarios that might be relevant to their projects or interests.
