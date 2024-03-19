@@ -1,78 +1,53 @@
 # Week 7: Capstone Project Development - Community Market App
 
-## Day 1: Capstone Project Planning and Setup; Defining Scope for the Community Market App
+## Overview
 
-### Hour 1: Planning and Scope Definition
+This week, students will develop a Community Market Application using Next.js and Firebase, integrating all the concepts learned in the previous weeks. The project will reinforce front-end development skills, Firebase integration, styling with Sass and Tailwind CSS, and basic testing with Jest. By the end of the week, students will have a fully functional application that can be included in their portfolio.
 
-- Introduction to the community market app: objectives, core features, and user stories.
-- Interactive session to define project scope, including functionalities like user profiles, product listings, and messaging.
+## Day 1: Project Planning and Initial Setup
 
-### Hour 2: Project Setup
+- Introduction to the capstone project, defining objectives, core features, and user stories.
+- Setting up the project in Next.js, integrating Firebase for backend services.
+- Establishing project structure, coding standards, and initial Git repository setup.
 
-- Demonstrating project setup in Next.js, integrating Firebase for authentication, and Firestore for data storage.
-- Establishing coding standards and project structure guidelines.
+## Day 2: Firebase Integration and Core Features Development
 
-### Hour 3: Hands-On Practice
+- Implementing Firebase Authentication for user sign-up and login functionalities.
+- Setting up Firestore database, defining data models for products, and implementing CRUD operations for product listings.
 
-- Students will implement the features taught on their own, starting with project setup and initial Firebase integration.
+## Day 3: Styling and User Interface Enhancement
 
-## Day 2: Starting Capstone Project with Next.js and Firebase Integration
+- Introducing CSS Modules and Tailwind CSS for styling, focusing on responsive design and UI components.
+- Applying styling to the application's layout, navigation, forms, and listing components.
 
-### Hour 1: Demo Code
+## Day 4: Adding Advanced Features and Testing
 
-- Explaining Next.js pages and components structure for the app.
-- Firebase Auth integration for user sign-up and login functionalities.
+- Incorporating advanced Firebase features, such as storage for images and real-time updates with Firestore.
+- Introduction to Jest for writing basic unit tests for React components and Firebase service functions.
 
-### Hour 2: Demo Code
+## Day 5: Finalizing the Project and Preparing for Presentation
 
-- Setting up Firestore database and defining data models for posts and comments.
-- Demonstrating CRUD operations on posts using Firestore.
+- Reviewing project progress, prioritizing remaining features, and implementing final touches.
+- Conducting peer reviews, debugging, and refining the application.
+- Preparing a brief presentation or demo of the project for potential inclusion in individual portfolios.
 
-### Hour 3: Hands-On Practice
+## Final Showcase (Next Week)
 
-- Students will implement the features taught on their own, focusing on user authentication and basic post functionalities.
+- Students will have the opportunity to present their Community Market Application during the final showcase.
+- This session will serve as a platform for feedback, discussion, and celebration of the students' hard work and achievements.
 
-## Day 3: Implementing Styling with Sass and Tailwind CSS in the Capstone Project
+## Objectives
 
-### Hour 1: Demo Code
+By the end of this week, students should be able to:
 
-- Introduction to CSS Modules and Tailwind CSS for styling Next.js applications.
-- Best practices for responsive design and theming with Sass and Tailwind.
+- Develop a fully functional web application using Next.js and Firebase.
+- Apply styling with Sass and Tailwind CSS to create a responsive and user-friendly interface.
+- Implement core functionalities, including authentication, data management, and real-time updates.
+- Understand the basics of testing React components and Firebase interactions with Jest.
+- Prepare and present a project that demonstrates their cumulative learning and skills.
 
-### Hour 2: Demo Code
+## Expectations
 
-- Styling the application's layout, navigation, and form components using Sass and Tailwind CSS.
-
-### Hour 3: Hands-On Practice
-
-- Students will implement the features taught on their own, applying styling to their project components.
-
-## Day 4: Writing Basic Tests for the Capstone Project with Jest
-
-### Hour 1: Demo Code
-
-- Introduction to Jest and testing React components in a Next.js application.
-- Writing simple unit tests for components and Firebase service functions.
-
-### Hour 2: Demo Code
-
-- Demonstrating integration tests for user authentication and post management features.
-
-### Hour 3: Hands-On Practice
-
-- Students will implement the features taught on their own, writing tests for at least one component and one service function.
-
-## Day 5: Continuation of Capstone Project Development with Emphasis on Feature Completion
-
-### Hour 1: Demo Code
-
-- Reviewing project progress and identifying remaining core features and enhancements.
-- Strategies for prioritizing feature development and managing project scope.
-
-### Hour 2: Demo Code
-
-- Advanced Firebase features integration, like storage for images and real-time updates with Firestore.
-
-### Hour 3: Hands-On Practice
-
-- Students will implement the features taught on their own, focusing on completing the project's core functionalities and preparing for final presentation.
+- Active participation in project planning and development.
+- Collaboration and peer support through code reviews and debugging sessions.
+- Completion of a portfolio-ready project that integrates the key concepts learned throughout the course.
