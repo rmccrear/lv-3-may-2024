@@ -28,25 +28,35 @@ To integrate Firestore into a Next.js application, demonstrating the ability to 
 2. **Submission**:
    - Submit the URL of your GitHub repository containing your project code, including the `SimpleForm` and `DataDisplay` components. Your `README.md` should accurately describe your work on this assignment.
 
-## Evaluation Rubric
+## Rubric
 
-Your assignment will be graded based on the following criteria, with a total of 25 points:
+Your assignment will be graded based on the following criteria, each worth 5 points for a total of 25 points:
 
-1. **Firestore Initialization (5 points)**:
+1. **Firestore Initialization (5 Points)**
 
-   - **Complete (5 pts)**: Firestore is correctly initialized and configured within the Next.js project.
-   - **Partial (3 pts)**: Firestore is initialized with minor issues in configuration.
-   - **Limited (0 pts)**: Firestore is not correctly initialized or is missing.
+   - **Complete (5 pts):** Firestore is correctly initialized and configured within the Next.js project.
+   - **Partial (3 pts):** Firestore is initialized with minor issues in configuration.
+   - **Limited (0 pts):** Firestore is not correctly initialized or is missing.
 
-2. **Functionality of `SimpleForm` Component (10 points)**:
+2. **Implementation of `SimpleForm` Component (5 Points)**
 
-   - **Complete (5 pts)**: The form correctly adds data to the Firestore collection, with appropriate handling of form submission.
-   - **Partial (3 pts)**: The form adds data to Firestore with some issues in data handling or form submission.
-   - **Limited (0 pts)**: The form does not add data to Firestore or is non-functional.
+   - **Complete (5 pts):** The component effectively adds new data to Firestore, with data validation and feedback to the user upon submission.
+   - **Partial (3 pts):** The component adds data to Firestore but lacks complete data validation or user feedback.
+   - **Limited (0 pts):** The component fails to add data to Firestore or is significantly incomplete.
 
-3. **Functionality of `DataDisplay` Component (10 points)**:
-   - **Complete (5 pts)**: Data from Firestore is correctly fetched and displayed in the application.
-   - **Partial (3 pts)**: Data is fetched from Firestore but with issues in display or data handling.
-   - **Limited (0 pts)**: Data is not fetched or displayed from Firestore.
+3. **Implementation of `DataDisplay` Component (5 Points)**
 
-**Total**: 25 points
+   - **Complete (5 pts):** Data from Firestore is accurately fetched and displayed, with appropriate UI considerations for data presentation.
+   - **Partial (3 pts):** Data is fetched and displayed with minor issues in UI presentation or data fetching efficiency.
+   - **Limited (0 pts):** The component does not fetch or display data correctly, or is substantially incomplete.
+
+4. **Code Quality and Documentation (5 Points)**
+
+   - **Complete (5 pts):** Code is well-organized, and well-documented with clear comments and a thorough README.md.
+   - **Partial (3 pts):** Code and documentation are mostly complete with some areas lacking clarity or organization.
+   - **Limited (0 pts):** Code is poorly organized or documented, with a README.md that does not effectively explain the project.
+
+5. **Submission Completeness (5 Points)**
+   - **Complete (5 pts):** All parts of the assignment are completed and submitted, including all required components and documentation.
+   - **Partial (3 pts):** Most parts of the assignment are completed with minor missing elements.
+   - **Limited (0 pts):** Significant portions of the assignment are incomplete or missing.
