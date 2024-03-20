@@ -33,31 +33,32 @@ To reinforce your understanding of Firebase Authentication within a Next.js appl
 
 Assignments will be graded based on the following criteria, with each criterion worth 5 points for a total of 25 points:
 
-1. **Firebase Email/Password Authentication Implementation (5 Points)**
+**Firebase Email/Password Authentication Implementation (5 Points)**
 
-   - Complete: All features implemented correctly.
-   - Partial: Missing some functionalities or minor issues.
-   - Limited: Significant functionalities missing or incorrect.
+- Complete: All features implemented correctly.
+- Partial: Missing some functionalities or minor issues.
+- Limited: Significant functionalities missing or incorrect.
 
-2. **Google Sign-In Integration and Documentation (5 Points)**
+**Google Sign-In Integration and Documentation (5 Points)**
 
-   - Complete: Integration successful with detailed documentation.
-   - Partial: Integration with incomplete documentation.
-   - Limited: Integration unsuccessful or not attempted.
+- Complete: Integration successful with detailed documentation.
+- Partial: Integration with incomplete documentation.
+- Limited: Integration unsuccessful or not attempted.
 
-3. **User Session Management (5 Points)**
+**User Session Management (5 Points)**
 
-   - Complete: User sessions are correctly managed and persistent.
-   - Partial: User sessions mostly work with some minor issues.
-   - Limited: User sessions are not managed correctly or not implemented.
+- Complete: User sessions are correctly managed and persistent.
+- Partial: User sessions mostly work with some minor issues.
+- Limited: User sessions are not managed correctly or not implemented.
 
-4. **Protected Routes Implementation (5 Points)**
+**Protected Routes Implementation (5 Points)**
 
-   - Complete: Protected routes correctly redirect based on user status.
-   - Partial: Some issues with redirecting or route protection.
-   - Limited: Protected routes not implemented or working incorrectly.
+- Complete: Protected routes correctly redirect based on user status.
+- Partial: Some issues with redirecting or route protection.
+- Limited: Protected routes not implemented or working incorrectly.
 
-5. **Documentation and README.md Completeness (5 Points)**
-   - Complete: README.md is detailed with explanations and screenshots.
-   - Partial: README.md is present but lacks some information or clarity.
-   - Limited: README.md is missing, very incomplete, or unclear.
+**Documentation and README.md Completeness (5 Points)**
+
+- Complete: README.md is detailed with explanations and screenshots.
+- Partial: README.md is present but lacks some information or clarity.
+- Limited: README.md is missing, very incomplete, or unclear.
