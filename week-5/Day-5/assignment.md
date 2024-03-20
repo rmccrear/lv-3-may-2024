@@ -1,4 +1,4 @@
-# Assignment: Recap and Review Assignment 5
+# Assignment:  Webpack Practice
 
 ## Objective
 

@@ -1,4 +1,4 @@
-# Assignment: Firebase Assignment 1 - Setup and Authentication
+# Assignment: Firebase Assignment 1
 
 ## Objective
 
