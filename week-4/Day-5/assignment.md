@@ -1,4 +1,4 @@
-# Assignment: Jest Assignment 5
+# Assignment: Jest Practice
 
 ## Objective
 
