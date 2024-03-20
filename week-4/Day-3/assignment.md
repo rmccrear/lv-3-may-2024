@@ -52,28 +52,28 @@ Expand your testing capabilities by integrating and testing third-party API call
 
 - **Complete (5 pts)**: The `getUser` function is correctly implemented, successfully fetching data from the API.
 - **Partial (3 pts)**: Minor issues in the `getUser` function implementation; fetches data but with some errors.
-- **Limited (1 pt)**: Significant issues with the `getUser` function; fails to fetch data correctly.
+- **Limited (0 pt)**: Significant issues with the `getUser` function; fails to fetch data correctly.
 
 ### Test Coverage and Correctness - 5 points
 
 - **Complete (5 pts)**: Comprehensive test coverage for both success and error scenarios in API calls. All tests pass.
 - **Partial (3 pts)**: Adequate test coverage; most scenarios are covered, but minor issues exist. Most tests pass.
-- **Limited (1 pt)**: Insufficient test coverage; significant scenarios are missing or incorrect. Many tests fail.
+- **Limited (0 pt)**: Insufficient test coverage; significant scenarios are missing or incorrect. Many tests fail.
 
 ### Mocking External API Calls - 5 points
 
 - **Complete (5 pts)**: Successfully mocks external API calls, accurately simulating both success and error responses.
 - **Partial (3 pts)**: Mocks external API calls with minor inaccuracies or omissions in simulating responses.
-- **Limited (1 pt)**: Fails to effectively mock external API calls or simulate accurate responses.
+- **Limited (0 pt)**: Fails to effectively mock external API calls or simulate accurate responses.
 
 ### Async Testing Proficiency - 5 points
 
 - **Complete (5 pts)**: Demonstrates advanced proficiency in testing asynchronous code, using async/await syntax where appropriate.
 - **Partial (3 pts)**: Generally proficient in async testing, but with room for improvement in using async/await syntax effectively.
-- **Limited (1 pt)**: Struggles with async testing, with significant issues in handling or understanding async/await syntax.
+- **Limited (0 pt)**: Struggles with async testing, with significant issues in handling or understanding async/await syntax.
 
 ### Code Quality and Organization - 5 points
 
 - **Complete (5 pts)**: Code is exceptionally well-organized, readable, and follows best practices for Node.js and Jest.
 - **Partial (3 pts)**: Code is mostly well-organized and readable, with minor deviations from best practices.
-- **Limited (1 pt)**: Code lacks organization, readability, or adherence to best practices.
+- **Limited (0 pt)**: Code lacks organization, readability, or adherence to best practices.
