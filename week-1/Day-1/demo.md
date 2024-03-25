@@ -6,7 +6,7 @@
 
 ### Part 1: Installing Node.js
 
-**Narrative**: "Today, we're starting with the basics of backend development using Node.js, a powerful JavaScript runtime. Let's begin by installing Node.js on our machines."
+**Narrative**: "Today, we're starting with the basics of using Node.js, a powerful JavaScript runtime. Let's begin by installing Node.js on our machines."
 
 1. **Navigate to Node.js official website**:
 
