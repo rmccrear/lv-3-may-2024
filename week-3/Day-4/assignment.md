@@ -1,4 +1,4 @@
-# Assignment 4: Building a Recipe Sharing Website with Next.js, Bootstrap, and Tailwind CSS
+# Assignment: Styles Assignment 4
 
 ## Objective
 
@@ -31,7 +31,7 @@ Develop a fully functional Recipe Sharing website using Next.js. This assignment
    - Create the Homepage in `src/app/home/page.js` with:
      - A Hero section featuring a large background image, a welcoming headline, and a search bar for recipes.
      - A Featured Recipes section displaying cards for popular recipes.
-    
+
 3. **Categories Page**:
 
    - Build the Categories page in `src/app/categories/page.js`, listing recipe categories. Use Tailwind CSS for styling cards or list items representing each category.

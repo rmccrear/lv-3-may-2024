@@ -1,4 +1,4 @@
-# Assignment: Advanced Babel and Webpack Integration Assignment 4
+# Assignment: Webpack Assignment 4
 
 ## Objective
 

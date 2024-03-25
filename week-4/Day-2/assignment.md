@@ -1,4 +1,4 @@
-# Assignment: Jest Assignment 2
+0 Assignment: Jest Assignment 2
 
 ## Objective
 
@@ -63,28 +63,28 @@ Deepen your proficiency with Jest by tackling complex testing scenarios, includi
 
 - **Complete (5 pts)**: Both `.then` and `async/await` tests for `fetchData` are correctly implemented and passing.
 - **Partial (3 pts)**: One of the tests for `fetchData` is missing or incorrect, but the other is correctly implemented.
-- **Limited (1 pt)**: Both tests for `fetchData` are incorrectly implemented or missing.
+- **Limited (0 pt)**: Both tests for `fetchData` are incorrectly implemented or missing.
 
 ### Mock Function Implementation - 5 points
 
 - **Complete (5 pts)**: `sendEmail` is correctly mocked; tests verify it is called with the correct parameters.
 - **Partial (3 pts)**: The mock of `sendEmail` is implemented, but tests partially verify it is called with correct parameters.
-- **Limited (1 pt)**: The mock of `sendEmail` is incorrect or missing; tests do not verify correct parameters.
+- **Limited (0 pt)**: The mock of `sendEmail` is incorrect or missing; tests do not verify correct parameters.
 
 ### Test Coverage and Quality - 5 points
 
 - **Complete (5 pts)**: Tests cover all specified scenarios with clear, concise, and correct assertions.
 - **Partial (3 pts)**: Test coverage is adequate, but some scenarios are not tested or assertions are not entirely correct.
-- **Limited (1 pt)**: Poor test coverage; many scenarios are untested or assertions are incorrect.
+- **Limited (0 pt)**: Poor test coverage; many scenarios are untested or assertions are incorrect.
 
 ### Code Quality and Clarity - 5 points
 
 - **Complete (5 pts)**: Code and tests are exceptionally well-written, organized, and easy to understand.
 - **Partial (3 pts)**: Minor issues with code organization or clarity, but generally well-written.
-- **Limited (1 pt)**: Code or tests are poorly organized, difficult to understand, or have significant quality issues.
+- **Limited (0 pt)**: Code or tests are poorly organized, difficult to understand, or have significant quality issues.
 
 ### Documentation in README.md - 5 points
 
 - **Complete (5 pts)**: README.md thoroughly documents how to run tests, the purpose of each function, test rationale, and the use of mocking.
 - **Partial (3 pts)**: README.md is mostly complete but lacks some details on running tests, function purposes, or the rationale behind tests.
-- **Limited (1 pt)**: README.md is incomplete, missing significant information on how to run tests, function purposes, or the rationale behind tests.
+- **Limited (0 pt)**: README.md is incomplete, missing significant information on how to run tests, function purposes, or the rationale behind tests.

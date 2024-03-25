@@ -50,28 +50,28 @@ Enhance your Jest testing skills by focusing on Next.js components. This assignm
 
 - **Complete (5 pts)**: Jest and React Testing Library are correctly configured for Next.js, allowing tests to run smoothly.
 - **Partial (3 pts)**: Minor issues in configuration that do not significantly impact test execution.
-- **Limited (1 pt)**: Significant misconfigurations preventing tests from running correctly.
+- **Limited (0 pt)**: Significant misconfigurations preventing tests from running correctly.
 
 ### WelcomeMessage Component Testing - 5 points
 
 - **Complete (5 pts)**: Tests comprehensively verify that `WelcomeMessage` renders the prop message accurately.
 - **Partial (3 pts)**: Tests cover basic rendering but miss edge cases or more detailed assertions.
-- **Limited (1 pt)**: Tests are incorrect, missing, or fail to accurately validate component rendering.
+- **Limited (0 pt)**: Tests are incorrect, missing, or fail to accurately validate component rendering.
 
 ### ToggleText Component Interaction Testing - 5 points
 
 - **Complete (5 pts)**: Interaction tests accurately assess the visibility toggle feature, including initial state and post-click behavior.
 - **Partial (3 pts)**: Some aspects of interaction are tested, but the coverage is incomplete or lacks precision.
-- **Limited (1 pt)**: Interaction tests are poorly implemented, missing, or fail to capture the component's behavior correctly.
+- **Limited (0 pt)**: Interaction tests are poorly implemented, missing, or fail to capture the component's behavior correctly.
 
 ### Code Quality and Clarity - 5 points
 
 - **Complete (5 pts)**: Code is well-structured, clean, and follows best practices for Next.js and React development.
 - **Partial (3 pts)**: Generally good code quality with minor areas for improvement in structure or practices.
-- **Limited (1 pt)**: Code is difficult to follow, poorly organized, or deviates significantly from recommended practices.
+- **Limited (0 pt)**: Code is difficult to follow, poorly organized, or deviates significantly from recommended practices.
 
 ### Documentation and README - 5 points
 
 - **Complete (5 pts)**: `README.md` clearly explains project setup, test running instructions, and the rationale behind test cases.
 - **Partial (3 pts)**: `README.md` provides basic setup and testing information but lacks detail or clarity.
-- **Limited (1 pt)**: `README.md` is missing, incomplete, or fails to provide necessary setup and testing guidance.
+- **Limited (0 pt)**: `README.md` is missing, incomplete, or fails to provide necessary setup and testing guidance.
