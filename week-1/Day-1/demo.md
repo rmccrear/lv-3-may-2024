@@ -4,6 +4,44 @@
 
 ## Hour 1: Demo Code and Instructions
 
+### Introduction to JavaScript Execution
+
+**Objective**: Understand the role of a runtime/engine in executing JavaScript code.
+
+#### Step 1: The JavaScript File
+
+1. **Create a Simple JavaScript File**:
+
+   - **Activity**: Start by creating a simple JavaScript file named `example.js`. Use a text editor and write a basic script. For example:
+     ```javascript
+     console.log('Hello, world!');
+     ```
+   - **Explain**: "This code, when executed, should display 'Hello, world!' in the console. However, the `.js` file alone is just a text file. It needs a JavaScript engine to execute it."
+
+2. **Understanding JavaScript Engines**:
+   - **Explain**: "A JavaScript engine is a program that understands and executes JavaScript code. Every web browser has its own JavaScript engine, such as V8 in Google Chrome and SpiderMonkey in Firefox. These engines read the JavaScript code, compile it into machine code, and then execute it."
+   - **Visual Aid**: Show a diagram illustrating the JavaScript file being processed by a browser's engine.
+
+#### Step 2: The Need for a Runtime
+
+1. **What Is a Runtime?**:
+
+   - **Explain**: "In the context of JavaScript, a 'runtime' refers to the environment in which JavaScript code is executed. While the engine is the core component that reads and executes the code, the runtime provides additional capabilities and resources that the JavaScript code may need, like handling I/O operations, timers, or HTTP requests."
+   - **Activity**: "Let's compare how a simple JavaScript file is executed in two different runtimes: a web browser and Node.js."
+     - **Browser Runtime**: "When executed in a browser, the JavaScript code can manipulate the web page, respond to user interactions, and perform web-related tasks."
+     - **Node.js Runtime**: "When the same JavaScript file is run in Node.js, it can interact with the file system, perform network operations, and much more. However, it cannot directly manipulate a web page like in the browser environment."
+
+2. **Demonstrating the Difference**:
+   - **Activity**: Execute the `example.js` file in both a browser and Node.js environment.
+     - **In a Browser**: Show how to include the `example.js` file in an HTML file and run it in a browser.
+     - **In Node.js**: Open a terminal, navigate to the directory containing `example.js`, and run it with `node example.js`.
+   - **Explain**: "Notice how in both environments, 'Hello, world!' is displayed. This demonstrates that JavaScript code needs a runtime to be executed, but depending on the runtime, different capabilities are available to the JavaScript code."
+
+#### Conclusion
+
+- **Summarize**: "Today, we've learned that a JavaScript file by itself is inert. It requires a JavaScript engine within a runtime environment to breathe life into it. The runtime not only executes the code but also provides a set of tools and APIs specific to the environment, whether it's a web browser or Node.js."
+- **Next Steps**: "In our next class, we'll dive deeper into how JavaScript interacts with the browser and Node.js environments to perform a variety of tasks."
+
 ### Part 1: Installing Node.js
 
 **Narrative**: "Today, we're starting with the basics of using Node.js, a powerful JavaScript runtime. Let's begin by installing Node.js on our machines."
