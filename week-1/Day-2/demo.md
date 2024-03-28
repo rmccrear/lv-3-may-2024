@@ -76,7 +76,8 @@
 **Narrative**: "After exploring how lodash can simplify array operations, let's shift our focus to creating interactive command-line applications. We'll use the Inquirer.js package, which makes it easy to capture user input in the terminal."
 
 1. **Install Inquirer**:
-   - Command: `npm install inquirer`
+   **NOTE:** To use the require keyword, you have to install version 8. with `npm install --save inquirer@^8.0.0`
+   - Command: `npm install --save inquirer`
    - Explain: "This command installs the Inquirer package and adds it as a dependency in our project. Inquirer is a powerful tool for building a user-friendly command-line interface."
 
 ### Part 2: Building a Simple Script with Inquirer
