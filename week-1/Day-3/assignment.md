@@ -15,7 +15,7 @@ Create a modular Node.js command-line survey tool that collects users' programmi
 - **Local Setup**:
   - Clone the repository and navigate into it.
   - Run `npm init -y` to create a `package.json` file.
-  - Install Inquirer with `npm install inquirer`.
+  - Install Inquirer with `npm install --save inquirer@^8.0.0`.
 
 #### Step 2: Structure Your Survey
 
