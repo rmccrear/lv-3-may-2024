@@ -2,6 +2,41 @@
 
 Today, we embark on understanding one of React's most powerful features for dynamic application development: state management. We will explore the `useState` hook, which allows us to add state to our function components in a clean and efficient way.
 
+## Understanding State in JS
+
+Here is a simple demo that shows state for a counter in commonJS and html, feel free to include a greeting function and have it change the greeting based on the user passed in
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Counter Example</title>
+  </head>
+  <body>
+    <h1>Count: <span id="count">0</span></h1>
+    <button id="incrementBtn">Increment</button>
+
+    <script>
+      // Define the state
+      let count = 0;
+
+      // Function to increment the count
+      function incrementCount() {
+        count += 1; // Increment the count
+        document.getElementById('count').textContent = count; // Update the UI
+      }
+
+      // Add click event listener to the button
+      document
+        .getElementById('incrementBtn')
+        .addEventListener('click', incrementCount);
+    </script>
+  </body>
+</html>
+```
+
 ## Understanding State in React
 
 Think of state in a React application as the current situation of a component. Just like in real life, where your mood can change from happy to sad, a component's state can change in response to interactions. The `useState` hook gives us a way to track these changes.

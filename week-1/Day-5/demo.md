@@ -60,6 +60,35 @@
 
    - Discuss: "This example showcases fetching HTML content using `axios`, parsing it with `cheerio`, and then applying custom logic through a local module, `dataParser`. It exemplifies how to combine external libraries and local modules to create a powerful data extraction tool."
 
+```js
+// dataParser.js designed for generic extraction of headings and links
+function parseData($) {
+  // Initialize an array to store the extracted data
+  const extractedData = [];
+
+  // Extract titles and links by looking for headings (h1, h2, h3, h4, h5, h6) that have direct links inside or nearby
+  $('h1, h2, h3, h4, h5, h6').each((index, element) => {
+    // Extract the heading text
+    const title = $(element).text().trim();
+
+    // Attempt to find an associated link. First, check if the heading itself contains a link.
+    let link = $(element).find('a').attr('href');
+    if (!link) {
+      // If the heading doesn't contain a link, check the next sibling element for a link.
+      link = $(element).next().find('a').attr('href');
+    }
+
+    if (title) {
+      extractedData.push({ title, link: link || 'No link found' });
+    }
+  });
+
+  return extractedData;
+}
+
+module.exports = parseData;
+```
+
 <!--! Hour 2  -->
 
 # Day 5: Review of Node.js and Modules
@@ -106,10 +135,10 @@
        console.log(posts);
      }
 
-     fetchBlogPosts('https://example-blog.com');
+     fetchBlogPosts('https://example.com');
      ```
 
-   - Explain: "In this example, `$('.post')` selects each blog post. For each post, we extract the title, author, and the first paragraph, showcasing `cheerio`'s ability to traverse and manipulate the DOM efficiently."
+- Explain: "In this example, `$('.post')` selects each blog post. For each post, we extract the title, author, and the first paragraph, showcasing `cheerio`'s ability to traverse and manipulate the DOM efficiently."
 
 ### Step 3: Handling Pagination and Dynamic Content
 
