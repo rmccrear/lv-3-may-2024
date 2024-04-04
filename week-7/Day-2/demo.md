@@ -280,12 +280,18 @@ const AddItemModal = ({ show, handleClose }) => {
   const [category, setCategory] = useState('');
   const [condition, setCondition] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Here, you would handle the addition of the new item.
-    // For demonstration, we're just logging to the console.
-    console.log({ title, description, price, category, condition });
-    handleClose(); // Close the modal
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password,
+      );
+      console.log('Signed up with:', userCredential.user);
+    } catch (error) {
+      console.error('Error signing up:', error.message);
+    }
   };
 
   return (
