@@ -62,11 +62,11 @@ Within the `src/` directory of your Next.js project, you'll find several key com
 
   - **`layout.js`**: Defines a layout that can be shared across different routes. It's akin to the framework of your house, providing a consistent structure and appearance.
 
-- **Global Styles**: The `app/` directory also contains `global.css`, which applies styles globally across your application. If you're familiar with the 7-1 pattern from SASS, you might choose to organize your CSS files similarly here, enhancing modularity and maintainability.
+- **Global Styles**: The `app/` directory also contains `global.css`, which applies styles globally across your application. If you're familiar with the 7-1 pattern from SASS, you might choose to organize your CSS files similarly here, enhancing modularity and maintainability. Notably, placing an `icon.png` or `favicon.ico` in this directory automatically sets it as the website's favicon, streamlining the process of customizing your site's browser icon.
 
 ## The `public/` Directory
 
-The `public/` directory serves as the home for static assets such as images, fonts, and icons. Notably, placing an `icon.png` or `favicon.ico` in this directory automatically sets it as the website's favicon, streamlining the process of customizing your site's browser icon.
+The `public/` directory serves as the home for static assets such as images, fonts, and icons.
 
 ## Cleaning Up and Customization
 
