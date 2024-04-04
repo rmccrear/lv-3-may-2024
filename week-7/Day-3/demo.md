@@ -30,8 +30,15 @@ Create a function within your `AddItemModal` component to handle adding new item
 import { db } from './firebaseConfig'; // Import your Firebase config file
 import { collection, addDoc } from 'firebase/firestore';
 
+const auth = getAuth();
+const userId = auth.currentUser ? auth.currentUser.uid : null;
 const handleSubmit = async (e) => {
   e.preventDefault();
+  // Prevent submission if there's no logged in user
+  if (!userId) {
+    console.error('No user logged in');
+    return;
+  }
   try {
     const docRef = await addDoc(collection(db, 'items'), {
       title,
@@ -39,9 +46,10 @@ const handleSubmit = async (e) => {
       price,
       category,
       condition,
+      userId,
     });
     console.log('Document written with ID:', docRef.id);
-    handleClose(); // Close the modal
+    handleClose();
   } catch (error) {
     console.error('Error adding document:', error);
   }
