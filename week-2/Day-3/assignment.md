@@ -10,6 +10,7 @@ This assignment aims to deepen your understanding of the `useEffect` hook in Rea
 
 1. **Create a New Component**:
 
+   - install `axios` with `npm i axios`
    - In your project's `components` directory, create a file named `StarWarsCharacter.js`.
    - This component will be responsible for fetching data about a specific Star Wars character from the SWAPI.
 
