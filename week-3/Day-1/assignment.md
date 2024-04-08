@@ -16,7 +16,7 @@ The goal of this assignment is to develop a Next.js application using advanced s
 2. **Implement the 7-1 Sass Architecture**:
 
    - Organize your Sass files following the 7-1 architecture pattern within a `styles/` directory.
-   - Set up a main Sass file (`styles.scss`) to import all Sass partials, and include this file in `_app.js` or `_app.tsx` for global styles.
+   - Set up a main Sass file (`styles.scss`) to import all Sass partials, and include this file in `layout.js` for global styles.
 
 3. **Apply SCSS Modules with BEM**:
    - For each component (e.g., `Header`, `UserProfile`), create a SCSS module file. Utilize the BEM methodology for class naming within these files.
