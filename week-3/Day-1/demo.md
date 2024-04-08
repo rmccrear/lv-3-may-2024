@@ -20,7 +20,7 @@ The 7-1 architecture pattern divides your Sass files into seven folders, plus on
 
 ### Single Import in Next.js
 
-In a Next.js project, you can integrate the 7-1 pattern by creating a `styles/` directory at the root. Inside, structure your Sass files following the 7-1 pattern, then import your main Sass file (`styles.scss`) into your Next.js project, typically in `_app.js` or `_app.tsx` for global scope.
+In a Next.js project, you can integrate the 7-1 pattern by creating a `styles/` directory at the root. Inside, structure your Sass files following the 7-1 pattern, then import your main Sass file (`styles.scss`) into your Next.js project, typically in `layout.js` for global scope.
 
 ```jsx
 // In _app.js or _app.tsx
@@ -137,8 +137,8 @@ import styles from './Button.module.scss';
 
 function Button({ primary, disabled, children }) {
   const buttonClass = `
-    ${styles.button} 
-    ${primary ? styles.button__primary : ''} 
+    ${styles.button}
+    ${primary ? styles.button__primary : ''}
     ${disabled ? styles.button__disabled : ''}
   `;
 
