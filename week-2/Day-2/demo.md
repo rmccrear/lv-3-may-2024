@@ -16,7 +16,7 @@ Here is a simple demo that shows state for a counter in commonJS and html, feel 
   </head>
   <body>
     <h1>Count: <span id="count">0</span></h1>
-    <button id="incrementBtn">Increment</button>
+    <button id="incrementBtn">Increment</button> 
 
     <script>
       // Define the state

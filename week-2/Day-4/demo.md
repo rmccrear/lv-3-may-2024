@@ -18,14 +18,10 @@ function NavigationMenu() {
     <nav>
       <ul>
         <li>
-          <Link href="/home">
-            <a>Home</a>
-          </Link>
+          <Link href="/home">Home</Link>
         </li>
         <li>
-          <Link href="/about">
-            <a>About</a>
-          </Link>
+          <Link href="/about">About</Link>
         </li>
       </ul>
     </nav>
