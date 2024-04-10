@@ -27,7 +27,7 @@ Explore the integration of animations in a Next.js application using Framer Moti
    - In each component, use a `motion.div` wrapper from Framer Motion to enclose an `<Image>` tag for displaying your selected image. Set up animations for transitions or while hovering. Examples of animations include scaling up on hover, fading in on load, or rotating slightly to catch the viewer's attention.
 
 3. **Integrate Components into Your Main Page**:
-   - Import and use your animated components in the `index.js` page. Arrange them in a visually pleasing layout using CSS Grid or Flexbox.
+   - Import and use your animated components in the `page.js` page. Arrange them in a visually pleasing layout using CSS Grid or Flexbox.
 
 ### Part 3: Deploying Your Project
 
