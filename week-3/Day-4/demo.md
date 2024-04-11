@@ -46,7 +46,10 @@ import { Navbar, Nav } from 'react-bootstrap';
 
 const NavigationBar = () => {
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar
+      bg="light"
+      expand="lg"
+    >
       <Navbar.Brand href="/">Pet Adoption</Navbar.Brand>
       <Nav className="ml-auto">
         <Nav.Link href="/adopt">Adopt</Nav.Link>
@@ -131,7 +134,10 @@ import { Navbar, Nav } from 'react-bootstrap';
 
 const NavigationBar = () => {
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar
+      bg="light"
+      expand="lg"
+    >
       <Navbar.Brand href="/">Pet Adoption</Navbar.Brand>
       <Nav className="ml-auto">
         <Nav.Link href="/adopt">Adopt</Nav.Link>
@@ -176,17 +182,71 @@ Building upon our initial setup, this hour is dedicated to enhancing our Pet Ado
 
 Responsive design is crucial for ensuring your website is accessible and user-friendly across all devices. Bootstrap and Tailwind CSS both offer utilities to help us achieve this with minimal effort.
 
-
 ### Example: Tailwind CSS for a Responsive Layout
 
 Tailwind CSS provides utility classes that make building responsive layouts straightforward. For instance, to adjust the layout of your homepage based on screen size, you can use the following in `src/app/page.js`:
 
 ```jsx
-<div className="container mx-auto px-4">
-  {/* Content here will be centered and responsive */}
-</div>
+import NavigationBar from './NavigationBar';
+
+import PetCard from './PetCard';
+
+export default function Home() {
+  const pics = [1, 2, 3, 4, 5, 6]; // each pic from unsplash in the public folder named 1.png 2.png etc...
+  const names = ['Bill', 'Bob', 'Banana', 'Kitten', 'Ron', 'Ricky']; // sames in another array as a way to show another approach to accessing arrays in map
+  return (
+    <main className="">
+      <NavigationBar />
+      <h1 className="text-center">Find a pet to adopt!</h1>
+      <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mx-20">
+        {pics.map((pic, index) => (
+          <PetCard
+            title={names[index]}
+            key={pic}
+            img={pic + '.png'}
+          />
+        ))}
+      </section>
+    </main>
+  );
+}
 ```
 
+```js
+'use client';
+
+import Card from 'react-bootstrap/Card';
+import ListGroup from 'react-bootstrap/ListGroup';
+
+export default function PetCard({ img, title }) {
+  // KitchenSink card on docs
+  return (
+    <Card className="max-w-sm rounded overflow-hidden shadow-lg">
+      <Card.Img
+        className="h-64 object-cover "
+        variant="top"
+        src={img}
+      />
+      <Card.Body>
+        <Card.Title>{title}</Card.Title>
+        <Card.Text>
+          Some quick example text to build on the card title and make up the
+          bulk of the card's content.
+        </Card.Text>
+      </Card.Body>
+      <ListGroup className="list-group-flush">
+        <ListGroup.Item>Cras justo odio</ListGroup.Item>
+        <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
+        <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
+      </ListGroup>
+      <Card.Body>
+        <Card.Link href="#">Card Link</Card.Link>
+        <Card.Link href="#">Another Link</Card.Link>
+      </Card.Body>
+    </Card>
+  );
+}
+```
 
 ## Creating Additional Pages
 
@@ -237,4 +297,3 @@ export default function ContactPage() {
 ## Conclusion
 
 In this hour, we've taken significant steps in building our Pet Adoption website by completing core components and ensuring our site is responsive and accessible. By utilizing Bootstrap for components like the navbar and Tailwind CSS for layout responsiveness, we've laid a solid foundation for a professional, user-friendly website.
-
