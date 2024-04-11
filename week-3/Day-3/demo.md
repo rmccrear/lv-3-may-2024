@@ -19,10 +19,10 @@ Integrating React Bootstrap into your Next.js project is straightforward. Start 
 npm install react-bootstrap bootstrap
 ```
 
-After installation, include Bootstrap's CSS in your project. It's recommended to import it globally in your `_app.js` file to make it available across all pages:
+After installation, include Bootstrap's CSS in your project. It's recommended to import it globally in your `layout.js` file to make it available across all pages:
 
 ```jsx
-// pages/_app.js
+// pages/layout.js
 import 'bootstrap/dist/css/bootstrap.min.css';
 ```
 
@@ -39,7 +39,11 @@ import { Navbar, Nav } from 'react-bootstrap';
 
 function NavigationBar() {
   return (
-    <Navbar bg="dark" variant="dark" expand="lg">
+    <Navbar
+      bg="dark"
+      variant="dark"
+      expand="lg"
+    >
       <Navbar.Brand href="#home">Next.js Project</Navbar.Brand>
       <Nav className="ml-auto">
         <Nav.Link href="#features">Features</Nav.Link>
@@ -60,7 +64,10 @@ import { Card, Button } from 'react-bootstrap';
 function WelcomeCard() {
   return (
     <Card style={{ width: '18rem' }}>
-      <Card.Img variant="top" src="placeholder-image.jpg" />
+      <Card.Img
+        variant="top"
+        src="placeholder-image.jpg"
+      />
       <Card.Body>
         <Card.Title>Welcome to Our Project</Card.Title>
         <Card.Text>
@@ -126,3 +133,5 @@ In this example, we've used Tailwind's utility classes to style the card, includ
 ## Conclusion
 
 Tailwind CSS offers an innovative approach to styling that complements Next.js's component-driven architecture. By leveraging utility classes, developers can efficiently prototype and build complex, responsive designs. This session introduced Tailwind CSS's integration into Next.js and showcased its utility-first styling approach through a practical example, setting the stage for more advanced design implementations in the coming hours.
+
+if more time is needed use tailblocks and show how to convert the vanilla html into React components
