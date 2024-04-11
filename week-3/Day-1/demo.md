@@ -23,7 +23,7 @@ The 7-1 architecture pattern divides your Sass files into seven folders, plus on
 In a Next.js project, you can integrate the 7-1 pattern by creating a `styles/` directory at the root. Inside, structure your Sass files following the 7-1 pattern, then import your main Sass file (`styles.scss`) into your Next.js project, typically in `layout.js` for global scope.
 
 ```jsx
-// In _app.js or _app.tsx
+// In layout.js
 import '../styles/styles.scss';
 ```
 
@@ -174,7 +174,7 @@ Here's how you might use these in a component:
 
 This naming convention aligns with JavaScript's camelCase naming, ensuring consistency across your JSX code.
 
-<!--* Show deployment steps to Netlify  -->
+## <!--! Show deployment steps to Netlify  -->
 
 ## Conclusion
 
