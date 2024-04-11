@@ -127,7 +127,45 @@ function TailwindCard() {
   );
 }
 ```
+```md
+# TailwindCSS Classes Explanation
 
+## `max-w-sm`
+- Sets the maximum width of the card to a small predefined size.
+
+## `rounded`
+- Applies a slight rounding to the corners of the card.
+
+## `overflow-hidden`
+- Prevents any child elements from overflowing the boundaries of the card. This is useful for maintaining the rounded corner appearance.
+
+## `shadow-lg`
+- Applies a large shadow to the card, giving it a raised look.
+
+## `bg-white`
+- Sets the background color of the card to white.
+
+## `px-6`
+- Applies padding along the x-axis (left and right) of the card content, with a size of 6.
+
+## `py-4`
+- Applies padding along the y-axis (top and bottom) of the card content, with a size of 4.
+
+## `font-bold`
+- Makes the font weight bold, typically used for the title to make it stand out.
+
+## `text-xl`
+- Sets the font size of the title to an extra-large size.
+
+## `mb-2`
+- Applies a margin at the bottom of the title, creating space between the title and the description.
+
+## `text-gray-700`
+- Colors the text with a specific shade of gray, making the description visually distinct but still readable.
+
+## `text-base`
+- Sets the font size of the description text to the base size, which is the default size for body text in TailwindCSS.
+```
 In this example, we've used Tailwind's utility classes to style the card, including its layout, padding, margins, shadows, and typography. Tailwind's responsive design utilities also make it easy to adapt your components to different screen sizes.
 
 ## Conclusion
