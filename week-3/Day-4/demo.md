@@ -176,28 +176,6 @@ Building upon our initial setup, this hour is dedicated to enhancing our Pet Ado
 
 Responsive design is crucial for ensuring your website is accessible and user-friendly across all devices. Bootstrap and Tailwind CSS both offer utilities to help us achieve this with minimal effort.
 
-### Example: Using Bootstrap for a Responsive Navbar
-
-Bootstrap's navbar component automatically includes responsive features. Here's a reminder on how to implement it in `src/app/components/Navbar.js`:
-
-```jsx
-import { Navbar, Nav } from 'react-bootstrap';
-
-const NavigationBar = () => {
-  return (
-    <Navbar bg="light" expand="lg" collapseOnSelect>
-      <Navbar.Brand href="/">Pet Adoption</Navbar.Brand>
-      <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="ml-auto">
-          <Nav.Link href="/adopt">Adopt</Nav.Link>
-          <Nav.Link href="/about">About Us</Nav.Link>
-        </Nav>
-      </Navbar.Collapse>
-    </Navbar>
-  );
-};
-```
 
 ### Example: Tailwind CSS for a Responsive Layout
 
@@ -208,6 +186,7 @@ Tailwind CSS provides utility classes that make building responsive layouts stra
   {/* Content here will be centered and responsive */}
 </div>
 ```
+
 
 ## Creating Additional Pages
 
