@@ -80,7 +80,7 @@ This session introduced you to the basics of unit testing and Jest. By understan
 
 <!--! Hour 2 -->
 
-# Week 4, Day 1, Hour 2: Writing Your First Tests with Jest
+## Week 4, Day 1, Hour 2: Writing Your First Tests with Jest
 
 After familiarizing ourselves with the basics of Jest and the importance of unit testing, this hour is dedicated to putting theory into practice. We'll be writing our first tests in Jest, focusing on testing simple JavaScript functions. This hands-on approach aims to solidify your understanding of Jest's testing syntax and the concept of assertions.
 
