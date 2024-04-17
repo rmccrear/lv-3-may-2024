@@ -46,10 +46,7 @@ import { Navbar, Nav } from 'react-bootstrap';
 
 const NavigationBar = () => {
   return (
-    <Navbar
-      bg="light"
-      expand="lg"
-    >
+    <Navbar bg="light" expand="lg">
       <Navbar.Brand href="/">Pet Adoption</Navbar.Brand>
       <Nav className="ml-auto">
         <Nav.Link href="/adopt">Adopt</Nav.Link>
@@ -134,10 +131,7 @@ import { Navbar, Nav } from 'react-bootstrap';
 
 const NavigationBar = () => {
   return (
-    <Navbar
-      bg="light"
-      expand="lg"
-    >
+    <Navbar bg="light" expand="lg">
       <Navbar.Brand href="/">Pet Adoption</Navbar.Brand>
       <Nav className="ml-auto">
         <Nav.Link href="/adopt">Adopt</Nav.Link>
@@ -200,11 +194,7 @@ export default function Home() {
       <h1 className="text-center">Find a pet to adopt!</h1>
       <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mx-20">
         {pics.map((pic, index) => (
-          <PetCard
-            title={names[index]}
-            key={pic}
-            img={pic + '.png'}
-          />
+          <PetCard title={names[index]} key={pic} img={pic + '.png'} />
         ))}
       </section>
     </main>
@@ -222,11 +212,7 @@ export default function PetCard({ img, title }) {
   // KitchenSink card on docs
   return (
     <Card className="max-w-sm rounded overflow-hidden shadow-lg">
-      <Card.Img
-        className="h-64 object-cover "
-        variant="top"
-        src={img}
-      />
+      <Card.Img className="h-64 object-cover " variant="top" src={img} />
       <Card.Body>
         <Card.Title>{title}</Card.Title>
         <Card.Text>
@@ -267,27 +253,6 @@ export default function AboutPage() {
       <main className="container mx-auto px-4">
         <h1>About Us</h1>
         <p>This is what we do and why we do it.</p>
-      </main>
-    </div>
-  );
-}
-```
-
-### Contact Page
-
-Similarly, for the Contact page in `src/app/contact/page.js`:
-
-```jsx
-// src/app/contact/page.js
-import NavigationBar from '../components/Navbar';
-
-export default function ContactPage() {
-  return (
-    <div>
-      <NavigationBar />
-      <main className="container mx-auto px-4">
-        <h1>Contact Us</h1>
-        <p>How to reach us...</p>
       </main>
     </div>
   );

@@ -161,11 +161,13 @@ jest.mock('../api'); // Path to the module being mocked
 const { fetchData } = require('../api');
 
 // Implementing a mock function
-fetchData.mockImplementation(() => Promise.resolve('mock data'));
+fetchData.mockImplementation(() => Promise.resolve('mock data')); // keeps track of how many times the function was called, and with what paramters
 
 test('fetches mock data', async () => {
-  const data = await fetchData();
+  const data = await fetchData("a random string");
   expect(data).toBe('mock data');
+  // pass reference to the mocked function to see what it was called with
+  expect(fetchData).toHaveBeenCalledWith("a random string")
 });
 ```
 
