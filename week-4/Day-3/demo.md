@@ -20,10 +20,6 @@ Assuming you've already set up Jest in your Node.js project from previous sessio
 
 Consider a basic `Calculator` class with methods for addition, subtraction, multiplication, and division.
 
-### Step 1: Create the Class
-
-First, define the `Calculator` class with its methods:
-
 ```js
 // calculator.js
 class Calculator {
@@ -47,10 +43,6 @@ class Calculator {
 
 module.exports = Calculator;
 ```
-
-### Step 2: Write Tests for Each Method
-
-Create a test file for the `Calculator` class and write tests covering each method's expected behavior:
 
 ```js
 // calculator.test.js
@@ -85,7 +77,55 @@ describe('Calculator', () => {
 });
 ```
 
-In this setup, `beforeEach` is used to create a fresh instance of the `Calculator` class for each test, ensuring test isolation and consistency.
+## Introduction to Mocking API Calls with Jest
+
+Before we dive deeper into class testing, let's explore how to test functions that perform API calls using Jest. This will be demonstrated by mocking requests to a Pokémon API.
+
+### Setting Up for API Testing
+
+Create `pokemonApi.js` and `pokemonApi.test.js` to demonstrate how to mock API calls with Jest.
+
+```js
+// pokemonApi.js
+const axios = require('axios');
+
+const getPokemon = async (pokemonName) => {
+  try {
+    const response = await axios.get(
+      `https://pokeapi.co/api/v2/pokemon/${pokemonName}`,
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+module.exports = { getPokemon };
+```
+
+```js
+// pokemonApi.test.js
+const { getPokemon } = require('./pokemonApi');
+const axios = require('axios');
+
+jest.mock('axios');
+
+describe('getPokemon', () => {
+  test('successfully retrieves Pikachu data', async () => {
+    const mockPokemon = { id: 25, name: 'pikachu' };
+    axios.get.mockResolvedValue({ data: mockPokemon });
+
+    const result = await getPokemon('pikachu');
+    expect(result).toEqual(mockPokemon);
+  });
+
+  test('handles errors for network issues or Pokémon not found', async () => {
+    axios.get.mockRejectedValue(new Error('Network error'));
+
+    await expect(getPokemon('pikachu')).rejects.toThrow('Network error');
+  });
+});
+```
 
 ## Conclusion
 
