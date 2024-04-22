@@ -41,6 +41,51 @@ To harness the power of Webpack in our project, we need to install two key piece
 
 The Webpack CLI provides a set of tools to facilitate interaction with Webpack from the command line. This includes initializing configurations, running the build process, and more. The CLI makes it easier to integrate Webpack into your development workflow, allowing you to execute bundling and other tasks directly from your terminal.
 
+### Why we use it:
+
+Open your terminal and create a new directory for your project, then navigate into it:
+
+```bash
+mkdir webpack-demo
+cd webpack-demo
+```
+
+Initialize a new npm project:
+
+```bash
+npm init -y
+```
+
+Create an HTML file for your app without Webpack. This example demonstrates what happens when you try to use a Lodash method without Webpack:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Simple App Without Webpack</title>
+  </head>
+  <body>
+    <div id="content">Initial Text</div>
+    <script src="src/index.js"></script>
+    <!-- Include your JS file -->
+  </body>
+</html>
+```
+
+Next, create the JavaScript file mentioned in the script tag. This script will attempt to use Lodash without bundling:
+
+```js
+// src/index.js
+document.getElementById('content').innerText = 'Updated Text';
+
+// Trying to use Lodash without Webpack
+import _ from 'lodash'; // This will cause an error since Lodash isn't installed or bundled
+const newText = _.toUpper('some text');
+document.getElementById('content').innerText = newText;
+```
+
+Now, open the HTML file in a browser. This should produce an error because the code imports Lodash, but without Webpack, the dependencies are not bundled. The result is a "Module not found" error or a similar message indicating a missing import. This illustrates the problem of not using a module bundler like Webpack.
+
 #### Installing Webpack and Webpack CLI
 
 Run the following command in your terminal to install both Webpack and the Webpack CLI as development dependencies:
