@@ -80,6 +80,7 @@ document.getElementById('content').innerText = 'Updated Text';
 
 // Trying to use Lodash without Webpack
 import _ from 'lodash'; // This will cause an error since Lodash isn't installed or bundled
+// Spend some time trying to link to lodash manually by moving into the node_modules and show what happens when you hit
 const newText = _.toUpper('some text');
 document.getElementById('content').innerText = newText;
 ```
