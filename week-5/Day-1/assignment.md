@@ -15,6 +15,7 @@ This assignment will help you understand Webpack by creating a simple web applic
 
 2. **HTML Structure**:
 
+   - In your terminal run the command `npm i lodash`
    - Create a `dist/index.html` file with the following content:
 
      ```html
