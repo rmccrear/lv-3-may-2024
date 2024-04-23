@@ -158,7 +158,7 @@ Now, let's transpile our modern JavaScript to something more universally compati
    To transpile your `src/index.js`, run:
 
    ```bash
-   npx babel src --out-dir lib
+   ./node_modules/.bin/babel src --out-dir lib
    ```
 
    This command reads the JavaScript files in `src/`, transpiles them using the configuration defined in `.babelrc`, and outputs the result to `lib/`.
