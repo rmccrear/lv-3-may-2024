@@ -39,7 +39,7 @@ The goal of this assignment is to deepen your understanding of Webpack loaders a
    - Import `styles.css` in your `src/index.js` file.
 
 2. **HTML Setup**:
-   - Link your bundled JavaScript file in `dist/index.html`.
+   - Link your bundled JavaScript file in `index.html`.
 
 ### Part 4: Install and Configure MiniCssExtractPlugin
 

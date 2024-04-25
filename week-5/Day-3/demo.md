@@ -185,11 +185,6 @@ Babel presets are essentially bundles of plugins. Each preset is a set of rules 
 1. **Configuring `@babel/preset-env`**:
    This preset simplifies the process of ensuring your JavaScript is compatible across different environments. It reads your compatibility targets (e.g., browsers you want to support) and includes the necessary polyfills and syntax transformations.
 
-   First, ensure you've installed the preset:
-
-   ```bash
-   npm install --save-dev @babel/preset-env
-   ```
 
    Then, configure Babel by creating a `babel.config.json` file in your project's root:
 
