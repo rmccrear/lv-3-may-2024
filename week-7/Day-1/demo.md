@@ -24,23 +24,20 @@ cd community-market-app
 npm install react-bootstrap bootstrap axios
 ```
 
-- Update `README.md` with the project's description, including new splash page features.
-- Ensure Bootstrap CSS is included in your project by modifying `_app.js`:
-
 ```
 import 'bootstrap/dist/css/bootstrap.min.css';
 ```
 
 ### Structuring the Project
 
-- Discuss the project structure, emphasizing the separation of components (`components` directory), pages (`pages` directory), and utilities (`utils` directory).
+- Discuss the project structure, emphasizing the separation of components (`components` directory), pages (`app` directory), and utilities (`utils` directory).
 - Stress the importance of consistent naming conventions and organization for scalability.
 
 ## Part 3: Developing the Splash Page Components
 
 ### Local News Component
 
-- Detail the setup for the `LocalNews` component, utilizing `axios` for asynchronous data fetching from the News API, and managing state with React's `useState` and `useEffect`.
+- Detail the setup for the `LocalNews` and `NewsCard` components, utilizing `axios` for asynchronous data fetching from the News API, and managing state with React's `useState` and `useEffect`.
 - Implement error handling for API requests and discuss optimizing the user experience by handling loading states.
 
 ### Navigation Bar
@@ -67,6 +64,42 @@ echo "NEXT_PUBLIC_NEWS_API_KEY=your_api_key_here" > .env.local
 ### Assembling Components on the Splash Page
 
 - Ensure the `LocalNews`, `NavArea`, and `Sponsors` components are correctly integrated into the splash page, creating a cohesive and functional layout.
+
+```js
+import React from 'react';
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+
+const NewsCard = ({ article }) => {
+  return (
+    <Card
+      className="mb-4 shadow-lg mx-auto"
+      style={{ width: '380px' }}
+    >
+      <Card.Img
+        variant="top"
+        src={article.image}
+        alt="News Image"
+        className="h-48 w-full object-cover"
+      />
+      <Card.Body>
+        <Card.Title className="font-bold">{article.title}</Card.Title>
+        <Card.Text className="text-sm">{article.description}</Card.Text>
+        <Button
+          variant="primary"
+          href={article.url}
+          target="_blank"
+          className="mt-2"
+        >
+          Read More
+        </Button>
+      </Card.Body>
+    </Card>
+  );
+};
+
+export default NewsCard;
+```
 
 ```js
 import React, { useEffect, useState } from 'react';
@@ -135,42 +168,6 @@ const NavArea = () => {
 };
 
 export default NavArea;
-```
-
-```js
-import React from 'react';
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
-
-const NewsCard = ({ article }) => {
-  return (
-    <Card
-      className="mb-4 shadow-lg mx-auto"
-      style={{ width: '380px' }}
-    >
-      <Card.Img
-        variant="top"
-        src={article.image}
-        alt="News Image"
-        className="h-48 w-full object-cover"
-      />
-      <Card.Body>
-        <Card.Title className="font-bold">{article.title}</Card.Title>
-        <Card.Text className="text-sm">{article.description}</Card.Text>
-        <Button
-          variant="primary"
-          href={article.url}
-          target="_blank"
-          className="mt-2"
-        >
-          Read More
-        </Button>
-      </Card.Body>
-    </Card>
-  );
-};
-
-export default NewsCard;
 ```
 
 ```js
