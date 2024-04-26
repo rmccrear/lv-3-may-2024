@@ -19,7 +19,7 @@ The goal of this assignment is to deepen your understanding of Webpack loaders a
 
 3. **Project Structure**:
    - Create a `src` directory with an `index.js` file and a `styles.css` file inside it.
-   - Also, create a `dist` directory and inside it an `index.html` file.
+   - Also, an `index.html` file.
 
 ### Part 2: Configure Loaders
 
@@ -39,7 +39,7 @@ The goal of this assignment is to deepen your understanding of Webpack loaders a
    - Import `styles.css` in your `src/index.js` file.
 
 2. **HTML Setup**:
-   - Link your bundled JavaScript file in `dist/index.html`.
+   - Link your bundled JavaScript file in `index.html`.
 
 ### Part 4: Install and Configure MiniCssExtractPlugin
 
