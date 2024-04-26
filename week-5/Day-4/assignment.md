@@ -25,8 +25,8 @@ Enhance your JavaScript application by integrating advanced Babel and Webpack co
    - Enable the `splitChunks` optimization in your Webpack configuration.
 
 2. **Babel Configuration**:
-   - Set up a `babel.config.json` file to use `@babel/preset-env`.
-   - Ensure your Babel setup is compatible with Webpack's code splitting feature.
+
+   - Set up babel as a loader within the webpack
 
 ### Part 3: Implementing Features
 
