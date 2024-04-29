@@ -38,25 +38,26 @@ Local storage provides a way to store data on the client's browser. It's great f
    Create a `firebaseConfig.js` file to initialize Firebase and Firestore. Replace the configuration object with your project's settings.
 
    ```js
-   import firebase from 'firebase/app';
-   import 'firebase/firestore';
+   import { initializeApp } from 'firebase/app';
+   import { getFirestore } from 'firebase/firestore';
 
+   // Your web app's Firebase configuration
    const firebaseConfig = {
-     apiKey: 'YOUR_API_KEY',
-     authDomain: 'YOUR_AUTH_DOMAIN',
-     projectId: 'YOUR_PROJECT_ID',
-     storageBucket: 'YOUR_STORAGE_BUCKET',
-     messagingSenderId: 'YOUR_MESSAGING_SENDER_ID',
-     appId: 'YOUR_APP_ID',
+     apiKey: 'AIzaSyC6EvK2AaZmTVH5IUgIdgY1bS-example',
+     authDomain: 'example-stand-f0343.firebaseapp.com',
+     projectId: 'example-stand-f0343',
+     storageBucket: 'example-stand-f0343.appspot.com',
+     messagingSenderId: '476457416155',
+     appId: '1:476457416155:web:216dea7a1e39f6e17fe3fe',
    };
 
-   if (!firebase.apps.length) {
-     firebase.initializeApp(firebaseConfig);
-   } else {
-     firebase.app(); // if already initialized, use that one
-   }
+   // Initialize Firebase
+   const app = initializeApp(firebaseConfig);
 
-   export const db = firebase.firestore();
+   // Get a reference to the Firestore service
+   const db = getFirestore(app);
+
+   export { db };
    ```
 
 ## Understanding Firestore Security Rules
@@ -71,20 +72,20 @@ By default, your Firestore security rules might look something like this:
 rules_version = '2';
 
 service cloud.firestore {
-  match /databases/{database}/documents {
-    // This rule allows anyone with your Firestore database reference to view, edit,
-    // and delete all data in your Firestore database. It is useful for getting
-    // started, but it is configured to expire after 30 days because it
-    // leaves your app open to attackers. At that time, all client
-    // requests to your Firestore database will be denied.
-    //
-    // Make sure to write security rules for your app before that time, or else
-    // all client requests to your Firestore database will be denied until you update
-    // your rules.
-    match /{document=**} {
-      allow read, write: if request.time < timestamp.date(2024, 4, 14);
-    }
-  }
+match /databases/{database}/documents {
+ // This rule allows anyone with your Firestore database reference to view, edit,
+ // and delete all data in your Firestore database. It is useful for getting
+ // started, but it is configured to expire after 30 days because it
+ // leaves your app open to attackers. At that time, all client
+ // requests to your Firestore database will be denied.
+ //
+ // Make sure to write security rules for your app before that time, or else
+ // all client requests to your Firestore database will be denied until you update
+ // your rules.
+ match /{document=**} {
+   allow read, write: if request.time < timestamp.date(2024, 4, 14);
+ }
+}
 }
 ```
 
