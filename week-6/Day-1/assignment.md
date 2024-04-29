@@ -14,7 +14,6 @@ Leverage Firebase to enhance a Next.js application with real-time capabilities a
 
 3. **Firebase Configuration**:
    - Create a `firebaseConfig.js` file in your project. Store your Firebase project's configuration in this file.
-   - Initialize Firebase in your application. Refer to the demo code on creating an `initFirebase.js` file. Ensure it checks for an existing Firebase instance before initialization.
 
 ### Part 2: Implementing Authentication
 

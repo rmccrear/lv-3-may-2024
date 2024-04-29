@@ -40,60 +40,32 @@ Think of it like an "on-switch" for features.
 
 2. **Add Firebase configuration**: Go back to the Firebase Console, navigate to your project settings, and find your project's configuration. Copy the configuration object and paste it into `firebaseConfig.js`:
 
-   ```js
-   // src/firebaseConfig.js
-   const firebaseConfig = {
-     apiKey: 'API_KEY',
-     authDomain: 'PROJECT_ID.firebaseapp.com',
-     projectId: 'PROJECT_ID',
-     storageBucket: 'PROJECT_ID.appspot.com',
-     messagingSenderId: 'SENDER_ID',
-     appId: 'APP_ID',
-     measurementId: 'G-MEASUREMENT_ID',
-   };
-
-   export default firebaseConfig;
-   ```
-
-3. **Initialize Firebase**: Create an `initFirebase.js` file in the same directory. Discuss how this file will check for an existing Firebase instance to prevent initializing Firebase more than once.
-
-After installing the Firebase SDK, the next step involves initializing Firebase in our Next.js project. This is crucial for setting up the connection between our client-side application and Firebase's services. Here's a detailed explanation of how to initialize Firebase:
-
-"3. **Initialize Firebase**: To establish the link between your Next.js application and Firebase, we'll create a dedicated file for initialization. Let's call this file `initFirebase.js` and place it within our Firebase configuration directory. This setup ensures that we encapsulate all Firebase-related configurations in one spot, making our codebase cleaner and more maintainable.
-
-In `initFirebase.js`, we'll include logic to check if Firebase has been initialized already. This is an important step because Firebase only needs to be initialized once during the lifecycle of our application. Attempting to initialize it multiple times can lead to errors or unexpected behavior. Here's how you might implement this:
 https://firebase.google.com/docs/web/setup#initialize_the_sdk
 
 ```js
 // Import the functions you need from the SDKs you need
-import { initializeApp, getApp, getApps } from 'firebase/app';
-// TODO: Add your Firebase configuration
+import { initializeApp } from 'firebase/app';
+import { getAuth, GoogleAuthProvider } from 'firebase/auth';
+
+const provider = new GoogleAuthProvider();
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: 'your-api-key',
-  authDomain: 'your-project-auth-domain',
-  projectId: 'your-project-id',
-  storageBucket: 'your-storage-bucket',
-  messagingSenderId: 'your-messaging-sender-id',
-  appId: 'your-app-id',
+  apiKey: 'AIzaSyC6EvK2AaZmTVH5IUgIdgY1bS-example',
+  authDomain: 'example-stand-f0343.firebaseapp.com',
+  projectId: 'example-stand-f0343',
+  storageBucket: 'example-stand-f0343.appspot.com',
+  messagingSenderId: '476457416155',
+  appId: '1:476457416155:web:216dea7a1e39f6e17fe3fe',
 };
 
 // Initialize Firebase
-const initFirebase = () => {
-  // Check if there aren't any Firebase instances already initialized
-  if (!getApps().length) {
-    // If no instance exists, initialize Firebase with the config object
-    initializeApp(firebaseConfig);
-  }
-};
-
-export default initFirebase;
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+export { auth, provider };
 ```
-
-This code snippet checks for any existing Firebase app instances by calling `getApps()`. If the returned array is empty, it means Firebase has not been initialized yet, and it's safe to proceed with initialization using our firebaseConfig object. This pattern ensures our Firebase app is a singleton throughout our application, preventing duplicate instances and the issues they could cause.
-
-By abstracting our Firebase initialization into initFirebase.js, we also make our code more modular and easier to read. Other parts of our application that require Firebase services can now simply import and execute initFirebase without worrying about the underlying initialization logic."
-
-Remember, the Firebase SDK acts like the configurations we used last week with Webpack and Babel. It abstracts away the complexity and lets us interact with Firebase services using simple, straightforward JavaScript code. This approach streamlines our development process, letting us focus on building features rather than the intricacies of communicating with the backend.
 
 ### Conclusion
 
@@ -112,90 +84,125 @@ In this hour, we're diving into Firebase Authentication. We'll learn how to set 
 
 Firebase Authentication provides a lot of options out of the box, including email/password, OAuth providers (Google, Facebook, Twitter, etc.), and phone authentication.
 
-1. **Enable Authentication Methods**: Go to the Firebase Console, select your project, and navigate to the "Authentication" section. Here, you'll see a tab labeled "Sign-in method". Enable the methods you plan to use. For this demo, we're enabling Google Sign-In.
-
-2. **Install Firebase in Your Next.js Project** (if not done already):
-   ```bash
-   npm install firebase
-   ```
-
-### Step 2: Implement Google Sign-In
-
-Now, let's integrate Google Sign-In into our Next.js application. This process involves creating authentication instances and using them to sign in with a popup or redirect method.
-
-1. **Create an Authentication Module**:
-   Create a new file named `firebaseAuth.js` in your project's utilities directory or wherever you prefer to keep your Firebase modules.
-
-   ```js
-   import { firebase } from './initFirebase'; // Assuming you have an initFirebase.js as created previously
-   import 'firebase/auth';
-
-   // Get a reference to the auth service
-   const auth = firebase.auth();
-
-   // Function to sign in with Google
-   export const signInWithGoogle = () => {
-     const provider = new firebase.auth.GoogleAuthProvider();
-     auth
-       .signInWithPopup(provider)
-       .then((result) => {
-         // Handle the signed-in user information
-         console.log(result.user);
-       })
-       .catch((error) => {
-         // Handle errors here
-         console.error(error);
-       });
-   };
-   ```
-
-   This code snippet demonstrates how to create a GoogleAuthProvider instance and use it to sign in with a popup. You can handle the signed-in user's information or errors accordingly.
+This code snippet demonstrates how to create a GoogleAuthProvider instance and use it to sign in with a popup. You can handle the signed-in user's information or errors accordingly.
 
 2. **Implement the Sign-In Button**:
    In your component or page where you want to display the sign-in button, import and use the `signInWithGoogle` function.
 
-   ```js
-   import React from 'react';
-   import { signInWithGoogle } from '../path/to/firebaseAuth';
+```jsx
+'use client';
+import { signInWithPopup } from 'firebase/auth';
+import React from 'react';
+import { auth, provider } from '../../firebaseConfig';
 
-   const SignInButton = () => {
-     return <button onClick={signInWithGoogle}>Sign in with Google</button>;
-   };
+export default function GoogleSignIn() {
+  const handleGoogleSignIn = async () => {
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+      console.log('User signed in:', user.displayName);
+    } catch (error) {
+      console.error('Error signing in:', error);
+    }
+  };
 
-   export default SignInButton;
-   ```
+  return <button onClick={handleGoogleSignIn}>Sign in with Google</button>;
+}
+```
 
-   Replace `'../path/to/firebaseAuth'` with the actual path to your `firebaseAuth.js` file. This component creates a button that, when clicked, triggers the Google Sign-In process.
+#### Add in state management and conditional rendering:
+
+```jsx
+'use client';
+import { signInWithPopup } from 'firebase/auth';
+import React, { useState } from 'react';
+import { auth, provider } from '../../firebaseConfig';
+
+export default function GoogleSignIn() {
+  const [user, setUser] = useState(null);
+  const handleGoogleSignIn = async () => {
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+      console.log('User signed in:', user.displayName);
+      setUser(user);
+    } catch (error) {
+      setUser(null);
+      console.error('Error signing in:', error);
+    }
+  };
+
+  return (
+    <>
+      <button onClick={handleGoogleSignIn}>Sign in with Google</button>
+      {user && <p>Welcome back, {user.displayName}</p>}
+      {!user && <p>Click the button above to sign in!</p>}
+    </>
+  );
+}
+```
 
 ### Step 3: Handling User Sessions
 
 Firebase Authentication integrates with Next.js to manage user sessions. Let's briefly discuss how to detect and react to authentication state changes, such as logging in and out.
 
-1. **Observe Authentication State**:
-   In your `initFirebase.js` or a similar setup file, add an observer for changes to the user's sign-in state.
+```jsx
+'use client';
+import { onAuthStateChanged, signInWithPopup, signOut } from 'firebase/auth';
+import React, { useEffect, useState } from 'react';
 
-   ```js
-   import { useEffect } from 'react';
-   import { firebase } from './initFirebase';
+import { auth, provider } from '../../firebaseConfig';
 
-   export const useAuth = () => {
-     useEffect(() => {
-       const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
-         if (user) {
-           // User is signed in
-           console.log('User signed in: ', user);
-         } else {
-           // User is signed out
-           console.log('User signed out');
-         }
-       });
+export default function GoogleSignIn() {
+  const [userObject, setUser] = useState(null);
 
-       return () => unsubscribe();
-     }, []);
-   };
-   ```
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(user); // Set the user object when authenticated
+      } else {
+        setUser(null); // Clear the user object when not authenticated
+      }
+    });
 
-   This hook (`useAuth`) listens for changes in the authentication state (e.g., user logs in or out) and logs the user state. You can expand this to set user state within your application.
+    return () => unsubscribe(); // Cleanup subscription on component unmount
+  }, []);
+
+  const handleGoogleSignIn = async () => {
+    try {
+      const result = await signInWithPopup(auth, provider);
+      setUser(result.user); // Store user object after successful sign-in
+      console.log('User signed in:', result.user.displayName);
+    } catch (error) {
+      setUser(null); // Clear state on sign-in error
+      console.error('Error signing in:', error);
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth); // Logout using Firebase
+      setUser(null); // Clear the user state after logout
+      console.log('User logged out');
+    } catch (error) {
+      console.error('Error during logout:', error);
+    }
+  };
+
+  return (
+    <>
+      {!userObject ? (
+        <button onClick={handleGoogleSignIn}>Sign in with Google</button>
+      ) : (
+        <>
+          <p>Welcome back, {userObject.displayName}!</p>
+          <button onClick={handleLogout}>Logout</button>
+        </>
+      )}
+    </>
+  );
+}
+```
 
 ### Conclusion
 
