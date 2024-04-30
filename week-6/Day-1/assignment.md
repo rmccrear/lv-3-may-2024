@@ -24,7 +24,7 @@ Leverage Firebase to enhance a Next.js application with real-time capabilities a
    - Use the `firebaseAuth.js` module from the demo code as a reference.
 
 2. **Session Handling**:
-   - Implement functionality to observe the user's authentication state (signed in/out). Use the `useAuth` hook pattern provided in the demo code.
+
    - Display the user's name on the application's main page upon successful sign-in. If signed out, show a message indicating the user is not signed in.
 
 ### Part 3: Documentation and Submission
