@@ -121,44 +121,26 @@ In this hour, we'll integrate CRUD operations in Firestore within a Next.js proj
 
 #### Step 1: Creating Documents in Firestore
 
-Create a function to add documents to your Firestore collection:
-
-- **Location**: `src/app/utils/firestore.js`
-  <!-- Copied from docs -->
-
-  ```js
-  import { collection, addDoc } from 'firebase/firestore';
-
-  // Add a new document with a generated id.
-  const docRef = await addDoc(collection(db, 'cities'), {
-    name: 'Tokyo',
-    country: 'Japan',
-  });
-  console.log('Document written with ID: ', docRef.id);
-  ```
-
-```js
-import { db } from '../firebaseConfig';
-import { collection, addDoc } from 'firebase/firestore';
-// convert to this:
-export const addTodo = async (todo) => {
-  const docRef = await addDoc(collection(db, 'todos'), todo);
-  console.log('Document written with ID: ', docRef.id);
-};
-```
-
 #### Add a React component to create Todo
+
+- **Reference**: [Add a Document](https://firebase.google.com/docs/firestore/manage-data/add-data#add_a_document)
 
 - **Location**: Create a new component `src/app/components/TodoForm.jsx`
 
 ```jsx
 'use client';
+import { addDoc, collection } from 'firebase/firestore';
 import React, { useState } from 'react';
-import { addTodo } from '../utils/firestore';
+import { db } from '../../firebaseConfig';
 
 const TodoForm = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+
+  const addTodo = async (todo) => {
+    const docRef = await addDoc(collection(db, 'todos'), todo);
+    console.log('Document written with ID: ', docRef.id);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -205,20 +187,21 @@ const TodoForm = () => {
 export default TodoForm;
 ```
 
-- **Reference**: [Add a Document](https://firebase.google.com/docs/firestore/manage-data/add-data#add_a_document)
-
 Encourage to explore docs and build apps that use other methods of adding things.
 
 #### Step 2: Reading Documents from Firestore
+
+- **Reference**: [Read Data](https://firebase.google.com/docs/firestore/query-data/get-data#get_all_documents_in_a_collection)
 
 To fetch all items from your Firestore collection and render them in your React component, you can use the Firestore modular SDK. Here's how you can implement this in a component with a `useEffect` hook:
 
 - **Location**: Create a new component `src/app/components/TodoList.jsx`
 
 ```jsx
+'use client';
 import React, { useEffect, useState } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
-import { db } from '../firebaseConfig';
+import { db } from '../../firebaseConfig';
 
 const TodoList = () => {
   const [todos, setTodos] = useState([]);
@@ -254,8 +237,6 @@ const TodoList = () => {
 export default TodoList;
 ```
 
-- **Reference**: [Read Data](https://firebase.google.com/docs/firestore/query-data/get-data#get_all_documents_in_a_collection)
-
 <!--! Hour 3  -->
 
 #### Step 3: Updating Documents in Firestore
@@ -263,20 +244,6 @@ export default TodoList;
 To update specific documents in your Firestore collection, utilize the Firestore modular SDK's `doc` and `updateDoc` methods. Here's a practical example within a React component:
 
 - **Location**: `src/app/utils/firestore.js`
-
-  ```js
-  import { doc, updateDoc } from 'firebase/firestore'; // Add to existing import
-
-  export const updateTodo = async (id, updatedData) => {
-    const todoRef = doc(db, 'todos', id);
-    try {
-      await updateDoc(todoRef, updatedData);
-      console.log('Document successfully updated!');
-    } catch (error) {
-      console.error('Error updating document: ', error);
-    }
-  };
-  ```
 
   Create a new component to update a todo item's title and description. This component will use the `updateTodo` function from your utility functions to perform the update operation in Firestore.
 
@@ -290,6 +257,14 @@ const UpdateTodo = ({ todo }) => {
   const [title, setTitle] = useState(todo.title);
   const [description, setDescription] = useState(todo.description);
 
+const updateTodo = async (id, updatedData) => {
+    const todoRef = doc(db, 'todos', id);
+    try {
+      await updateDoc(todoRef, updatedData);
+      console.log('Document successfully updated!');
+    } catch (error) {
+      console.error('Error updating document: ', error);
+    }
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
