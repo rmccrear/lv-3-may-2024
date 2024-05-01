@@ -37,7 +37,7 @@ Ensure you've set up Firebase in your Next.js project. Refer to previous instruc
    import React, { useState, useEffect } from 'react';
    import { onAuthStateChanged, signInWithPopup, signOut } from 'firebase/auth';
    import { auth, googleProvider } from '../lib/firebaseConfig'; // Adjust path as needed
-   import { useRouter } from 'next/router'; // For redirecting after logout
+   import { useRouter } from 'next/navigation';   // For redirecting after logout
 
    const GoogleSignIn = () => {
      const [user, setUser] = useState(null);
