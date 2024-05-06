@@ -1,6 +1,10 @@
 # Day 1: Splash Page Components and Setup
 
-The journey begins with setting up the foundational components for our Community Market App's splash page. This initial phase involves the creation of a visually appealing and informative landing page, incorporating local news, navigation, and sponsors, establishing a community-centric marketplace.
+Welcome! This week, we’re starting a guided project using Next.js, with Firebase for authentication and Firestore as our database. Each day begins with an hour of setup, followed by two hours where you'll develop your project independently while I offer support.
+
+We’ll kick off today by setting up your project environment and creating a wireframe. I've prepared a basic wireframe to guide you, but I encourage you to design your own to envision your app’s layout and functionality.
+
+Our aim is to build an application that is not only functional but visually appealing. Focus on clean code and user-friendly design. Let’s dive in and make the most of this project!
 
 ## Part 1: Project Overview and Initial Planning
 
@@ -72,10 +76,7 @@ import Button from 'react-bootstrap/Button';
 
 const NewsCard = ({ article }) => {
   return (
-    <Card
-      className="mb-4 shadow-lg mx-auto"
-      style={{ width: '380px' }}
-    >
+    <Card className="mb-4 shadow-lg mx-auto" style={{ width: '380px' }}>
       <Card.Img
         variant="top"
         src={article.image}
@@ -113,7 +114,7 @@ export default function LocalNews() {
     async function fetchNews() {
       try {
         const response = await axios.get(
-          'https://gnews.io/api/v4/search?q=pittsburgh&category=general&apikey=80509269cd1bb9e61e52877670327c69&lang=en',
+          'https://gnews.io/api/v4/search?q=pittsburgh&category=general&apikey=80509269cd1bb9e61e52877670327c69&lang=en'
         );
         setNews(response.data.articles);
       } catch (error) {
@@ -128,10 +129,7 @@ export default function LocalNews() {
       <h2 className="d-flex justify-content-center">In the Know: Local News</h2>
       <div className="d-flex gap-5 flex-wrap">
         {news.map((article, index) => (
-          <NewsCard
-            key={index}
-            article={article}
-          />
+          <NewsCard key={index} article={article} />
         ))}
       </div>
     </section>
@@ -148,10 +146,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 const NavArea = () => {
   return (
     <>
-      <Navbar
-        expand="lg"
-        className="bg-body-tertiary"
-      >
+      <Navbar expand="lg" className="bg-body-tertiary">
         <Container>
           <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -237,10 +232,7 @@ const Sponsors = () => {
       <h2 className="d-flex justify-content-center">Meet Our Sponsors</h2>
       <div className="d-flex flex-wrap justify-center gap-4 p-5">
         {sponsors.map((sponsor, index) => (
-          <div
-            key={index}
-            className="text-center"
-          >
+          <div key={index} className="text-center">
             <Image
               width={150}
               height={150}

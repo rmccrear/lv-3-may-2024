@@ -87,7 +87,8 @@ Next, we'll add functionality for users to sign in using their email and passwor
 ### Code Snippet for Sign-In Form
 
 ```js
-import React, { useState } from 'react';
+'use client';
+import { useState } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 const SignInForm = () => {
   const [email, setEmail] = useState('');
@@ -98,6 +99,8 @@ const SignInForm = () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       console.log('User signed in!');
+      setEmail('');
+      setPassword('');
     } catch (error) {
       console.error('Error signing in:', error);
     }
