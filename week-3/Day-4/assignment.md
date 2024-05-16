@@ -73,9 +73,3 @@ Create a simple, yet elegant recipe webpage utilizing Tailwind CSS for layout an
 - **Complete (5 pts)**: The webpage is successfully deployed on Netlify with comprehensive documentation. The submission includes a clear overview of the project, the development process, any challenges encountered, and the Netlify deployment URL.
 - **Partial (3 pts)**: The webpage is deployed, but the documentation is lacking detail or clarity. The deployment URL is provided but may not be well-integrated within the context of the documentation.
 - **Limited (0 pts)**: Issues with deployment on Netlify; inadequate or missing documentation. Essential details or the deployment URL are absent.
-
-### Overall Submission - 5 points
-
-- **Complete (5 pts)**: The submission exceeds expectations in all areas, demonstrating outstanding design, functionality, content quality, and deployment success.
-- **Partial (3 pts)**: The submission meets most requirements with competency, but there is room for improvement in one or more areas.
-- **Limited (0 pts)**: The submission fails to meet several requirements and is deficient in one or more critical areas.
