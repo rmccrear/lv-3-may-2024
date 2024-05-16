@@ -37,7 +37,7 @@ Ensure you've set up Firebase in your Next.js project. Refer to previous instruc
    import React, { useState, useEffect } from 'react';
    import { onAuthStateChanged, signInWithPopup, signOut } from 'firebase/auth';
    import { auth, googleProvider } from '../lib/firebaseConfig'; // Adjust path as needed
-   import { useRouter } from 'next/navigation';   // For redirecting after logout
+   import { useRouter } from 'next/navigation'; // For redirecting after logout
 
    const GoogleSignIn = () => {
      const [user, setUser] = useState(null);
@@ -140,7 +140,7 @@ const EmailPasswordSignUp = () => {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
-        password,
+        password
       );
       console.log('User registered:', userCredential.user);
 
@@ -152,10 +152,7 @@ const EmailPasswordSignUp = () => {
   };
 
   return (
-    <form
-      className="m-5"
-      onSubmit={handleSignUp}
-    >
+    <form className="m-5" onSubmit={handleSignUp}>
       <input
         className="m-5 text-black"
         type="email"
@@ -232,6 +229,7 @@ export default EmailPasswordSignIn;
 'use client';
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { onAuthStateChanged } from 'next/auth';
 import { auth } from '../../../firebaseConfig';
 // Adjust path
 
@@ -240,7 +238,7 @@ const ProtectedPage = () => {
   const router = useRouter();
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (!user) {
         router.push('/'); // Redirect if user not authenticated
       } else {
