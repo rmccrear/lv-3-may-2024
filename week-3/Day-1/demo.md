@@ -1,181 +1,185 @@
-# Week 3, Day 1, Hour 1: Review of Sass and 7-1 Architecture in Next.js
+# Week 3, Day 1: Introduction to Webpack
 
-Kicking off our journey into advanced styling with Next.js, let's start with a refresher on Sass (Syntactically Awesome Style Sheets) and specifically dive into the 7-1 architecture pattern. This architecture facilitates a modular and scalable approach to managing styles in your projects.
+Welcome to Day 1 of Week 3! Today, we will introduce Webpack, set up a project, and demonstrate JavaScript file bundling.
 
-## Quick Review of Sass
+## Objectives
 
-Sass is a preprocessor that adds power and elegance to the basic CSS language. It allows you to use variables, nested rules, mixins, functions, and more, all within a well-organized framework.
+- Understand the purpose and benefits of using Webpack.
+- Set up a basic Webpack project.
+- Demonstrate how to bundle JavaScript files using Webpack.
 
-## Understanding the 7-1 Architecture Pattern
+## Instructor Notes
 
-The 7-1 architecture pattern divides your Sass files into seven folders, plus one main file to import all other files into your project. Here's a quick breakdown:
+### Introduction to Webpack
 
-- **Base/**: Contains global styles, such as resets.
-- **Components/**: For each UI component.
-- **Layout/**: Contains styling for larger layout components (e.g., header, footer).
-- **Pages/**: Page-specific styling.
-- **Themes/**: Different themes for your application.
-- **Abstracts/**: Holds Sass tools, helpers, variables, and mixins.
-- **Vendors/**: For all third-party CSS.
+- Explain what Webpack is and why it is used in modern web development.
+  - Webpack is a module bundler that allows you to bundle JavaScript files and other assets for usage in a browser.
+  - Benefits include modular development, efficient bundling, and support for various asset types.
 
-### Single Import in Next.js
+### Setting Up a Webpack Project
 
-In a Next.js project, you can integrate the 7-1 pattern by creating a `styles/` directory at the root. Inside, structure your Sass files following the 7-1 pattern, then import your main Sass file (`styles.scss`) into your Next.js project, typically in `layout.js` for global scope.
+- Guide students through setting up a basic Webpack project from scratch.
 
-```jsx
-// In layout.js
-import '../styles/styles.scss';
-```
+### Demonstrating JavaScript File Bundling
 
-Ensure you have `sass` installed in your Next.js project:
+- Show how Webpack can bundle multiple JavaScript files into a single file.
+
+## Hourly Breakdown
+
+### Hour 1: Introduction to Webpack
+
+- **Objectives**:
+  - Understand the purpose and benefits of using Webpack.
+- **Teaching Ideas**:
+  - Explain Webpack:
+    - Webpack is a static module bundler for modern JavaScript applications.
+    - It builds a dependency graph, mapping every module your project needs and bundling them into one or more bundles.
+  - Benefits of using Webpack:
+    - Efficient module bundling.
+    - Support for JavaScript and non-JavaScript files.
+    - Code splitting for better performance.
+
+### Hour 2: Setting Up a Basic Webpack Project
+
+- **Objectives**:
+  - Set up a basic Webpack project.
+- **Teaching Ideas**:
+
+  - Create a new project directory:
+
+    ```bash
+    mkdir webpack-demo
+    cd webpack-demo
+    ```
+
+  - Initialize a new npm project:
+
+    ```bash
+    npm init -y
+    ```
+
+  - Install Webpack and Webpack CLI as development dependencies:
+
+    ```bash
+    npm install --save-dev webpack webpack-cli
+    ```
+
+  - Create the following project structure:
+
+    ```
+    webpack-demo/
+    ├── dist/
+    ├── src/
+    │   └── index.js
+    ├── package.json
+    └── webpack.config.js
+    ```
+
+  - Create a basic `webpack.config.js` file:
+
+    ```js
+    const path = require('path');
+
+    module.exports = {
+      entry: './src/index.js',
+      output: {
+        filename: 'bundle.js',
+        path: path.resolve(__dirname, 'dist'),
+      },
+    };
+    ```
+
+- **Objectives**:
+  - Demonstrate how to bundle JavaScript files using Webpack.
+- **Teaching Ideas**:
+
+  - Create a simple `index.js` file in the `src` directory:
+
+    ```js
+    function component() {
+      const element = document.createElement('div');
+      element.innerHTML = 'Hello, Webpack!';
+      return element;
+    }
+
+    document.body.appendChild(component());
+    ```
+
+  - Add a script to `package.json` to run Webpack:
+
+    ```json
+    "scripts": {
+        "build": "webpack"
+    }
+    ```
+
+  - Run Webpack to create the bundle:
+
+    ```bash
+    npm run build
+    ```
+
+  - Explain the output in the `dist` directory:
+    - The bundled file (`bundle.js`) contains the code from `src/index.js`.
+
+### Practical Exercise
+
+- Have students follow along and set up their own Webpack project.
+- Assist students in running Webpack to bundle their JavaScript files.
+- Encourage students to modify their `index.js` file and observe the changes in the bundled output.
+
+## Code Snippets
 
 ```bash
-npm install --save-dev sass
+# Create project directory and initialize npm
+mkdir webpack-demo
+cd webpack-demo
+npm init -y
+
+# Install Webpack and Webpack CLI
+npm install --save-dev webpack webpack-cli
 ```
 
-## Best Practices for Organizing Styles
+```js
+// webpack.config.js
+const path = require('path');
 
-- **Modularity**: Keep your styles modular by separating them into logical files and folders. This makes it easier to maintain and update your styles.
-- **Consistency**: Use consistent naming conventions across your Sass files to make it easier to understand and manage your styles.
-- **Global Variables**: Utilize Sass variables for theme colors, fonts, and other constants to ensure consistency and ease of changes.
-
-### Example Directory Structure
-
-Here's how your `styles/` directory might look following the 7-1 pattern:
-
-```
-styles/
-|
-|-- abstracts/
-|   |-- _variables.scss    // Sass Variables
-|   |-- _mixins.scss       // Sass Mixins
-|
-|-- base/
-|   |-- _reset.scss        // Reset/Normalize
-|   |-- _typography.scss   // Typography rules
-|
-|-- components/
-|   |-- _buttons.scss      // Buttons
-|   |-- _carousel.scss     // Carousel
-|
-|-- layout/
-|   |-- _header.scss       // Header
-|   |-- _footer.scss       // Footer
-|   |-- _grid.scss         // Grid system
-|
-|-- pages/
-|   |-- _home.scss         // Home specific styles
-|   |-- _about.scss        // About specific styles
-|
-|-- themes/
-|   |-- _theme.scss        // Default theme
-|
-|-- vendors/
-|   |-- _bootstrap.scss    // Bootstrap overrides
-|
-`-- styles.scss            // Main Sass file importing all above
+module.exports = {
+  entry: './src/index.js',
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist'),
+  },
+};
 ```
 
-In `styles.scss`, you'd import each Sass partial:
+```js
+// src/index.js
+function component() {
+  const element = document.createElement('div');
+  element.innerHTML = 'Hello, Webpack!';
+  return element;
+}
 
-```scss
-// styles.scss
-@import 'abstracts/variables';
-@import 'abstracts/mixins';
-
-@import 'base/reset';
-@import 'base/typography';
-
-// Continue importing other files
+document.body.appendChild(component());
 ```
 
-This setup provides a robust foundation for styling your Next.js application, leveraging the power of Sass within a structured, maintainable architecture.
-
-<!--! Hour 2  -->
-
-# Week 3, Day 1, Hour 2: Implementing SCSS Modules and BEM in Next.js
-
-In this hour, we dive deeper into the integration of SCSS Modules in Next.js, highlighting the BEM (Block Element Modifier) methodology and how it complements Next.js's modular design. Additionally, we'll touch upon using `className` and the conversion of some HTML attributes from hyphenated to camelCase in JSX.
-
-## SCSS Modules in Next.js
-
-SCSS Modules provide a way to include component-level styles in your Next.js application, ensuring that styles are locally scoped by default. This means that styles defined in a module are not leaked into other parts of your application, aligning perfectly with the component-based architecture of React and Next.js.
-
-### Why BEM with SCSS Modules?
-
-BEM stands for Block, Element, Modifier. It's a naming convention that makes your CSS more readable and understandable. With SCSS Modules, each React component can be treated as a "Block," making it easier to manage and understand your component's styling. This approach minimizes conflicts and enhances reusability.
-
-### Creating a SCSS Module
-
-To create a SCSS module for a component:
-
-1. Create a new file named `ComponentName.module.scss`.
-2. Define your styles using BEM conventions within this file.
-
-```scss
-// Button.module.scss
-.button {
-  &__primary {
-    background-color: blue;
-    color: white;
-  }
-
-  &__disabled {
-    background-color: grey;
-    color: darkgray;
-  }
+```json
+// Add build script to package.json
+"scripts": {
+    "build": "webpack"
 }
 ```
 
-### Using SCSS Modules in Components
-
-Import your `.module.scss` file into your component and use the styles with `className`.
-
-```jsx
-import React from 'react';
-import styles from './Button.module.scss';
-
-function Button({ primary, disabled, children }) {
-  const buttonClass = `
-    ${styles.button}
-    ${primary ? styles.button__primary : ''}
-    ${disabled ? styles.button__disabled : ''}
-  `;
-
-  return (
-    <button className={buttonClass} disabled={disabled}>
-      {children}
-    </button>
-  );
-}
+```bash
+# Run Webpack to create the bundle
+npm run build
 ```
-
-This setup allows you to keep your CSS modular and scoped to each component, following the BEM methodology within the context of Next.js's component-based structure.
-
-## Understanding `className` and JSX Attribute Naming
-
-In React and Next.js, `className` is used instead of the `class` attribute in HTML to apply CSS classes. This change is due to `class` being a reserved word in JavaScript. Similarly, attributes that typically include hyphens in HTML are written in camelCase in JSX.
-
-### Examples of Attribute Conversion
-
-- `class` becomes `className`
-- `onclick` becomes `onClick`
-- `data-test-id` becomes `dataTestId`
-
-Here's how you might use these in a component:
-
-```jsx
-<div className="container">
-  <button onClick={handleClick} dataTestId="uniqueId">
-    Click Me
-  </button>
-</div>
-```
-
-This naming convention aligns with JavaScript's camelCase naming, ensuring consistency across your JSX code.
-
-## <!--! Show deployment steps to Netlify  -->
 
 ## Conclusion
 
-Integrating SCSS Modules with the BEM methodology in Next.js projects promotes a modular, scalable approach to styling. By understanding how to effectively use `className` and adapting to JSX's camelCase attributes, you can further refine your components for clarity, reusability, and maintainability. This hour sets the stage for more advanced styling practices and prepares you to tackle dynamic UI challenges with confidence.
+- Summarize the key points covered:
+  - Webpack is a powerful tool for bundling JavaScript and other assets.
+  - Setting up a basic Webpack project involves configuring an entry point and output.
+  - Webpack can efficiently bundle multiple JavaScript files into a single file.
+- Encourage students to explore more advanced Webpack features in their own time.

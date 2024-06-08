@@ -1,94 +1,53 @@
-# Week 5: Webpack and Babel in Modern Web Development
+# Week 5: Capstone Project Development - Community Market App
 
-## Day 1: Introduction to Build Tools and Webpack
+## Overview
 
-### Hour 1: Demo Code
+This week, students will develop a Community Market Application using Next.js and Firebase, integrating all the concepts learned in the previous weeks. The project will reinforce front-end development skills, Firebase integration, styling with Sass and Tailwind CSS, and basic testing with Jest. By the end of the week, students will have a fully functional application that can be included in their portfolio.
 
-- Overview of Webpack and its role in modern web development.
-- Setting up a new project with Webpack.
-- Demonstrating how Webpack bundles JavaScript files.
+## Day 1: Project Planning and Initial Setup
 
-### Hour 2: Demo Code
+- Introduction to the capstone project, defining objectives, core features, and user stories.
+- Setting up the project in Next.js, integrating Firebase for backend services.
+- Establishing project structure, coding standards, and initial Git repository setup.
 
-- Exploring Webpack configuration: entry, output, loaders, and plugins.
-- Basic Webpack setup for handling CSS and image assets.
+## Day 2: Firebase Integration and Core Features Development
 
-### Hour 3: Hands-On Practice
+- Implementing Firebase Authentication for user sign-up and login functionalities.
+- Setting up Firestore database, defining data models for products, and implementing CRUD operations for product listings.
 
-- Setting up a simple Webpack project from scratch.
-- Bundling multiple JavaScript files into a single bundle.
-- **Assignment**: Add CSS and image handling to the Webpack configuration.
+## Day 3: Styling and User Interface Enhancement
 
-## Day 2: Webpack for Optimizing Web Applications
+- Introducing CSS Modules and Tailwind CSS for styling, focusing on responsive design and UI components.
+- Applying styling to the application's layout, navigation, forms, and listing components.
 
-### Hour 1: Demo Code
+## Day 4: Adding Advanced Features and Testing
 
-- Introduction to Webpack loaders and plugins.
-- Using Webpack to manage environment variables and development modes.
+- Incorporating advanced Firebase features, such as storage for images and real-time updates with Firestore.
+- Introduction to Jest for writing basic unit tests for React components and Firebase service functions.
 
-### Hour 2: Demo Code
+## Day 5: Finalizing the Project and Preparing for Presentation
 
-- Configuring Webpack to optimize HTML, CSS, and JavaScript output for faster download times.
-- Introduction to code splitting and lazy loading with Webpack.
+- Reviewing project progress, prioritizing remaining features, and implementing final touches.
+- Conducting peer reviews, debugging, and refining the application.
+- Preparing a brief presentation or demo of the project for potential inclusion in individual portfolios.
 
-### Hour 3: Hands-On Practice
+## Final Showcase (Next Week)
 
-- Implementing code splitting in a Webpack project.
-- Configuring Webpack for production builds with optimizations.
-- Use a loader to bring in 7-1 SASS from your template repo.
-- **Assignment**: Optimize an existing Webpack project for better performance.
+- Students will have the opportunity to present their Community Market Application during the final showcase.
+- This session will serve as a platform for feedback, discussion, and celebration of the students' hard work and achievements.
 
-## Day 3: Introduction to Babel and JavaScript Transpilation
+## Objectives
 
-### Hour 1: Demo Code
+By the end of this week, students should be able to:
 
-- Explaining the need for JavaScript transpilation and how Babel addresses this need.
-- Setting up Babel in a project alongside Webpack.
-- Configuring Babel for the latest JavaScript features.
+- Develop a fully functional web application using Next.js and Firebase.
+- Apply styling with Sass and Tailwind CSS to create a responsive and user-friendly interface.
+- Implement core functionalities, including authentication, data management, and real-time updates.
+- Understand the basics of testing React components and Firebase interactions with Jest.
+- Prepare and present a project that demonstrates their cumulative learning and skills.
 
-### Hour 2: Demo Code
+## Expectations
 
-- Introduction to Babel presets and plugins.
-- Demonstrating Babel's JavaScript transpilation using practical examples.
-
-### Hour 3: Hands-On Practice
-
-- Integrating Babel with a Webpack project.
-- Writing modern JavaScript and transpiling it for broader browser compatibility.
-- **Assignment**: Set up Babel in a Webpack project and transpile ES6+ code to ES5.
-
-## Day 4: Advanced Babel and Webpack Integration
-
-### Hour 1: Demo Code
-
-- Configuring Babel with Webpack to transpile ES6+ JavaScript to browser-compatible JavaScript.
-- Using Webpack loaders for handling CSS precompiling (e.g., SASS) and integrating with Babel for JS transpilation.
-
-### Hour 2: Demo Code
-
-- Advanced optimization techniques with Webpack and Babel for faster build times and smaller bundles.
-- Exploring dynamic imports and tree shaking for efficient bundling.
-
-### Hour 3: Hands-On Practice
-
-- Building a complex Webpack and Babel setup for a large-scale project.
-- Analyzing and optimizing the build output for performance improvements.
-- **Assignment**: Enhance an existing project with advanced Webpack and Babel configurations.
-
-## Day 5: Practical Application and Review
-
-### Hour 1: Review
-
-- Recap of the week’s topics with a Q&A session to clarify any doubts.
-- Highlighting best practices in using Webpack and Babel for web development.
-
-### Hour 2: Advanced Testing Concepts (Overview)
-
-- Brief discussion on integration tests and test coverage without deep diving into implementation.
-
-### Hour 3: Hands-On Practice
-
-- Completing pending assignments and improving projects based on feedback.
-- Peer review session for sharing strategies and learning from each other’s approaches.
-
-This week's content is aimed at building proficiency in using Webpack and Babel, essential tools for modern web development, covering from basic setups to advanced configurations suitable for beginners.
+- Active participation in project planning and development.
+- Collaboration and peer support through code reviews and debugging sessions.
+- Completion of a portfolio-ready project that integrates the key concepts learned throughout the course.

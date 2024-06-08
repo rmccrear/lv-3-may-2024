@@ -1,82 +1,64 @@
-# Week 6: Firebase Integration in Next.js Applications
+# Week 6: Capstone Project Finalization and Deployment
 
-## Day 1: Introduction to Firebase and Its Services
+## Day 1: Final Development Push, Focusing on Polishing Features
 
-### Hour 1: Demo Code
+### Hour 1: Final Development Strategies
 
-- Overview of Firebase: Understanding its capabilities and how it can be integrated into Next.js projects.
-- Setting up Firebase in a Next.js project: Creating a Firebase project, installing Firebase SDK, and initializing Firebase.
+- Strategies for effective final development sprints: prioritizing bug fixes, feature completion, and UI polish.
+- Emphasizing the importance of user experience and interface design in the final push.
 
-### Hour 2: Demo Code
+### Hour 2: Code Optimization
 
-- Introduction to Firebase Authentication: Setting up authentication methods (e.g., Google Sign-In).
-- Implementing a basic authentication flow in Next.js: Login, logout, and handling user sessions.
-
-### Hour 3: Hands-On Practice
-
-- Integrating Firebase Authentication into the Todo application.
-- **Assignment**: Add Google Sign-In to the Todo application and handle user authentication states.
-
-## Day 2: Integrating Firebase Auth for User Authentication in Next.js
-
-### Hour 1: Demo Code
-
-- Deep dive into Firebase Auth: Exploring other authentication methods (e.g., Email/Password, Facebook Login).
-- Enhancing authentication flows with email verification and password reset functionalities.
-
-### Hour 2: Demo Code
-
-- Implementing private and protected routes in Next.js based on authentication status.
-- Using Firebase Auth hooks (e.g., `useAuthState`) to manage user sessions across the application.
+- Best practices for optimizing Next.js and Firebase applications for performance and scalability.
+- Techniques for reducing load times, optimizing images, and ensuring mobile responsiveness.
 
 ### Hour 3: Hands-On Practice
 
-- Students implement additional authentication methods and secure routes in their Next.js applications.
-- **Assignment**: Create a user profile page that displays information only after authentication.
+- Students focus on finalizing their capstone projects, implementing last-minute features and polishing existing functionalities.
+- **Assignment**: Conduct a thorough review of the project for any bugs or UI inconsistencies and address them.
 
-## Day 3: Building Firestore Database Structure for the Todo Application
+## Day 2: Peer Reviews and Code Revisions Based on Feedback
 
-### Hour 1: Demo Code
+### Hour 1: Organizing Peer Reviews
 
-- Introduction to Firestore: Understanding its NoSQL structure and how to design a database schema.
-- Setting up Firestore in the Firebase project and integrating it with the Next.js application.
+- Introduction to the peer review process: objectives, giving constructive feedback, and evaluating projects critically.
+- Organizing students into pairs or small groups for peer reviews.
 
-### Hour 2 - 3: Demo Code
+### Hour 2: Peer Review Session
 
-- CRUD operations in Firestore: Creating, reading, updating, and deleting documents.
-- No assignment
-
-## Day 4: Review of day 3, more practice, Q&A
-
-### Hour 1: Demo Code
-
-- Setting up Firestore in the Firebase project and integrating it with the Next.js application.
-
-### Hour 2: Demo Code
-
-- CRUD operations in Firestore: Creating, reading, updating, and deleting documents.
-- Implementing real-time data fetching in Next.js using Firestore.
+- Students present their projects to their peers, showcasing key features and discussing challenges faced during development.
+- Peer feedback session, focusing on usability, design, code quality, and feature completeness.
 
 ### Hour 3: Hands-On Practice
 
-- Implementing advanced Firestore features in the Todo application.
-- **Assignment**: Add functionality to filter todos by status (e.g., completed, pending) using Firestore queries.
+- Implementing feedback received during peer reviews to refine and improve the capstone projects.
+- **Assignment**: Make revisions based on peer feedback, focusing on improving usability and code quality.
 
-## Day 5: Best Practices for Firebase Security and Rules
+## Day 3: Finalizing Tests and Ensuring Code Quality
 
-### Hour 1: Demo Code
+### Hour 1: Testing and Quality Assurance
 
-- Overview of Firebase security rules: Structuring rules for authentication, validation, and data access control.
-- Writing and testing Firestore security rules to protect data integrity and privacy.
+- Reviewing testing coverage and ensuring all features are adequately tested.
+- Introduction to additional tools for code quality assurance (e.g., ESLint, Prettier).
 
-### Hour 2: Demo Code
+### Hour 2: Continuous Integration and Deployment
 
-- Best practices for using Firebase in production: Monitoring, error handling, and optimizing Firebase usage to reduce costs.
-- Introduction to Firebase Extensions for extending Firebase capabilities with pre-packaged solutions.
+- Setting up continuous integration workflows with GitHub Actions for automated testing and deployment.
+- Finalizing deployment configurations and preparing for production.
 
 ### Hour 3: Hands-On Practice
 
-- Applying security rules to the Firestore database used in the Todo application.
-- **Assignment**: Review and refactor Firebase integration in the Todo application for optimization and security.
+- Students ensure their projects have comprehensive test coverage and integrate continuous integration tools.
+- **Assignment**: Set up a CI/CD pipeline for the capstone project, automating tests and deployment processes.
 
-This week aims to equip students with the skills needed to integrate Firebase services into their Next.js applications, focusing on authentication, Firestore database management, and securing applications with Firebase rules. The practical assignments encourage students to apply these concepts in a real-world project, enhancing their understanding and proficiency with Firebase.
+## Day 4: Preparing for Deployment and Resolving Deployment Issues
+
+### Hour 1: Deployment Overview
+
+- Overview of deployment strategies for Next.js applications, focusing on platforms like Vercel, Netlify, and Firebase Hosting.
+- Pre-deployment checklist: SEO considerations, accessibility, and mobile responsiveness.
+
+### Hour 2: Deployment Workshop
+
+- Live demo of deploying a Next.js application to a hosting platform.
+- Trou

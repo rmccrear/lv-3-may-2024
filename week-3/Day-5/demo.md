@@ -1,185 +1,392 @@
-# Day 5, Hour 1: Review and Practice by Building a Sweets Storefront Website
+# Week 3, Day 5: Review of Webpack, Babel, and Jest
 
-Today, we embark on a comprehensive review session by building a Sweets Storefront Website from scratch. This practical exercise will encompass the core concepts we've discussed throughout the week, including Sass, CSS Modules, React Bootstrap, and Tailwind CSS. The goal is to demonstrate how to approach a project integrating these technologies in a Next.js environment, providing a clear example for you to follow and learn from.
+Welcome to Day 5 of Week 3! Today, we will review the key concepts and skills covered throughout the week, focusing on Webpack, Babel, and Jest. This will reinforce your understanding and ensure you are comfortable with these tools.
 
-## Project Overview
+## Objectives
 
-The "Sweets Storefront" website will feature three main pages:
+- Review the key concepts and skills related to Webpack.
+- Review the key concepts and skills related to Babel.
+- Review the key concepts and skills related to Jest.
+- Provide a comprehensive understanding of how these tools work together in modern web development.
 
-1. **Home Page**: Highlighting featured sweets and the brand's story.
-2. **Products Page**: Showcasing a gallery of candies and cookies.
-3. **Contact Page**: Offering details on how to visit or get in touch with the store.
+## Instructor Notes
 
-## Initial Setup
+### Review of Webpack
 
-Before we start coding, ensure your Next.js project is set up to support both Bootstrap and Tailwind CSS. For this session, we'll assume Tailwind CSS is already configured through the Next.js setup process, and we'll focus on incorporating React Bootstrap.
+- Recap the purpose and benefits of using Webpack.
+- Review setting up a basic Webpack project and configuring it.
+- Reinforce how to bundle JavaScript files with Webpack.
 
-### Integrating React Bootstrap
+### Review of Babel
+
+- Recap the purpose and benefits of using Babel.
+- Review setting up Babel in a Webpack project.
+- Reinforce how Babel transpiles modern JavaScript to ensure compatibility with older browsers.
+
+### Review of Jest
+
+- Recap the purpose and benefits of using Jest.
+- Review setting up Jest in a project.
+- Reinforce how to write and run basic unit tests with Jest.
+
+## Hourly Breakdown
+
+### Hour 1: Review of Webpack and Babel
+
+- **Objectives**:
+  - Reinforce the key concepts and skills related to Webpack and Babel.
+- **Teaching Ideas**:
+
+  - Review Webpack:
+
+    - Purpose: Module bundler for JavaScript applications.
+    - Benefits: Efficient module bundling, support for various asset types.
+    - Setting up a project:
+      ```bash
+      mkdir webpack-demo
+      cd webpack-demo
+      npm init -y
+      npm install --save-dev webpack webpack-cli
+      ```
+    - Basic configuration:
+
+      ```js
+      const path = require('path');
+
+      module.exports = {
+        entry: './src/index.js',
+        output: {
+          filename: 'bundle.js',
+          path: path.resolve(__dirname, 'dist'),
+        },
+      };
+      ```
+
+    - Demonstrating JavaScript file bundling:
+
+      ```js
+      function component() {
+        const element = document.createElement('div');
+        element.innerHTML = 'Hello, Webpack!';
+        return element;
+      }
+
+      document.body.appendChild(component());
+      ```
+
+      ```bash
+      npm run build
+      ```
+
+  - Review Babel:
+
+    - Purpose: JavaScript compiler for using next-generation JavaScript, today.
+    - Benefits: Ensures compatibility with older browsers.
+    - Setting up Babel in a Webpack project:
+
+      ```bash
+      npm install --save-dev babel-loader @babel/core @babel/preset-env
+      ```
+
+      ```js
+      const path = require('path');
+
+      module.exports = {
+        entry: './src/index.js',
+        output: {
+          filename: 'bundle.js',
+          path: path.resolve(__dirname, 'dist'),
+        },
+        module: {
+          rules: [
+            {
+              test: /\.js$/,
+              exclude: /node_modules/,
+              use: {
+                loader: 'babel-loader',
+                options: {
+                  presets: ['@babel/preset-env'],
+                },
+              },
+            },
+          ],
+        },
+      };
+      ```
+
+    - Demonstrating JavaScript transpilation:
+
+      ```js
+      const arrowFunction = () => {
+        console.log('Hello, Babel!');
+      };
+
+      arrowFunction();
+      ```
+
+      ```bash
+      npm run build
+      ```
+
+### Hour 2: Review of Jest
+
+- **Objectives**:
+  - Reinforce the key concepts and skills related to Jest.
+- **Teaching Ideas**:
+
+  - Review Jest:
+
+    - Purpose: JavaScript testing framework for ensuring code correctness.
+    - Benefits: Simple setup, comprehensive testing features.
+    - Setting up Jest:
+      ```bash
+      npm install --save-dev jest
+      ```
+      ```json
+      "scripts": {
+          "test": "jest"
+      }
+      ```
+    - Writing and running basic unit tests:
+
+      ```js
+      // src/sum.js
+      function sum(a, b) {
+        return a + b;
+      }
+
+      module.exports = sum;
+      ```
+
+      ```js
+      // src/sum.test.js
+      const sum = require('./sum');
+
+      test('adds 1 + 2 to equal 3', () => {
+        expect(sum(1, 2)).toBe(3);
+      });
+      ```
+
+      ```bash
+      npm test
+      ```
+
+    - Testing client-side JavaScript in Next.js:
+
+      ```bash
+      npx create-next-app jest-next-demo
+      cd jest-next-demo
+      npm install --save-dev jest @testing-library/react @testing-library/jest-dom babel-jest
+      ```
+
+      ```json
+      "jest": {
+          "testEnvironment": "jsdom",
+          "setupFilesAfterEnv": ["<rootDir>/jest.setup.js"]
+      },
+      "scripts": {
+          "test": "jest"
+      }
+      ```
+
+      ```js
+      // jest.setup.js
+      import '@testing-library/jest-dom';
+      ```
+
+      ```js
+      // components/Greeting.js
+      function Greeting({ name }) {
+        return <h1>Hello, {name}!</h1>;
+      }
+
+      export default Greeting;
+      ```
+
+      ```js
+      // components/Greeting.test.js
+      import { render, screen } from '@testing-library/react';
+      import Greeting from './Greeting';
+
+      test('renders greeting with name', () => {
+        render(<Greeting name="John" />);
+        expect(screen.getByText('Hello, John!')).toBeInTheDocument();
+      });
+      ```
+
+      ```bash
+      npm test
+      ```
+
+### Practical Exercise
+
+- Have students review their own projects and ensure they are comfortable with the setup and usage of Webpack, Babel, and Jest.
+- Encourage students to create a small project that integrates all three tools, reinforcing their understanding.
+
+## Code Snippets
 
 ```bash
-npm install react-bootstrap bootstrap
+# Setting up a basic Webpack project
+mkdir webpack-demo
+cd webpack-demo
+npm init -y
+npm install --save-dev webpack webpack-cli
 ```
 
-After installation, import Bootstrap's CSS in your global styles file (`src/app/global.css`):
+```js
+// Basic Webpack configuration
+const path = require('path');
 
-```css
-@import '~bootstrap/dist/css/bootstrap.min.css';
-```
-
-## Building the Home Page
-
-Let's begin with the Home Page, leveraging React Bootstrap for the navigation bar and Tailwind CSS for custom styling elements like the featured sweets section.
-
-### Navigation Bar
-
-Create a `NavigationBar` component in `src/app/components/NavigationBar.js`:
-
-```jsx
-import { Navbar, Nav } from 'react-bootstrap';
-
-export default function NavigationBar() {
-  return (
-    <Navbar bg="light" expand="lg">
-      <Navbar.Brand href="/">Sweets Storefront</Navbar.Brand>
-      <Nav className="ml-auto">
-        <Nav.Link href="/products">Products</Nav.Link>
-        <Nav.Link href="/contact">Contact</Nav.Link>
-      </Nav>
-    </Navbar>
-  );
-}
-```
-
-### Featured Sweets Section
-
-In `src/app/page.js`, introduce a section for featured sweets, applying Tailwind CSS for styling:
-
-```jsx
-import NavigationBar from './components/NavigationBar';
-
-export default function HomePage() {
-  return (
-    <div className="container mx-auto p-4">
-      <NavigationBar />
-      <div className="mt-8">
-        <h2 className="text-2xl font-bold">Featured Sweets</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {/* Dynamic list of featured sweets */}
-        </div>
-      </div>
-    </div>
-  );
-}
-```
-
-## Products and Contact Pages
-
-Repeat a similar process for the Products and Contact pages, creating separate components for each section and utilizing both React Bootstrap and Tailwind CSS for layout and styling. Ensure your components are placed appropriately within the `src/app/` directory, following the Next.js routing conventions.
-
-## Review and Key Takeaways
-
-- **Project Structure**: Organize your project files within the `src/app/` directory, utilizing a modular approach for components and styles.
-- **Styling with Bootstrap and Tailwind CSS**: Leverage the strengths of both Bootstrap (for component structure) and Tailwind CSS (for custom styling and responsiveness).
-- **Responsive Design**: Use utility classes from both styling frameworks to ensure your website is responsive and accessible across different devices.
-
-This hands-on buildout serves as a practical review of integrating styling frameworks within a Next.js project, reinforcing the concepts covered throughout the week. By walking through the development of the Sweets Storefront Website, you gain a clearer understanding of how to apply these technologies in your future projects.
-
-<!--! Hour 2  -->
-
-# Day 5, Hour 2: Completing the Sweets Storefront Website
-
-In this hour, we'll focus on finalizing our Sweets Storefront Website, adding the finishing touches to ensure a fully functional, responsive, and visually appealing site. We'll complete the Products and Contact pages, integrate responsive design features, and discuss how to maintain consistency across the site using React Bootstrap and Tailwind CSS.
-
-## Completing the Products Page
-
-The Products Page will showcase the sweets available in the storefront. We'll use a combination of React Bootstrap for the layout and Tailwind CSS for custom styling.
-
-### Step 1: Layout with React Bootstrap
-
-In `src/app/products/page.js`, create a grid layout to display product cards. Each card will use Bootstrap's Card component for consistency.
-
-```jsx
-import { Card, Button } from 'react-bootstrap';
-import NavigationBar from '../components/NavigationBar';
-
-const products = [
-  {
-    id: 1,
-    name: 'Candy',
-    description: 'Sweet and colorful.',
-    imageUrl: '/candy.jpg',
+module.exports = {
+  entry: './src/index.js',
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist'),
   },
-  // Add more products as needed
-];
+};
+```
 
-export default function ProductsPage() {
-  return (
-    <div className="container mx-auto p-4">
-      <NavigationBar />
-      <h1 className="text-2xl font-bold my-4">Our Products</h1>
-      <div className="grid md:grid-cols-3 gap-4">
-        {products.map((product) => (
-          <Card key={product.id} className="h-100">
-            <Card.Img variant="top" src={product.imageUrl} />
-            <Card.Body>
-              <Card.Title>{product.name}</Card.Title>
-              <Card.Text>{product.description}</Card.Text>
-              <Button variant="primary">Learn More</Button>
-            </Card.Body>
-          </Card>
-        ))}
-      </div>
-    </div>
-  );
+```js
+// Demonstrating JavaScript file bundling
+function component() {
+  const element = document.createElement('div');
+  element.innerHTML = 'Hello, Webpack!';
+  return element;
+}
+
+document.body.appendChild(component());
+```
+
+```bash
+# Setting up Babel in a Webpack project
+npm install --save-dev babel-loader @babel/core @babel/preset-env
+```
+
+```js
+// Webpack configuration with Babel
+const path = require('path');
+
+module.exports = {
+  entry: './src/index.js',
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist'),
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env'],
+          },
+        },
+      },
+    ],
+  },
+};
+```
+
+```js
+// Demonstrating JavaScript transpilation
+const arrowFunction = () => {
+  console.log('Hello, Babel!');
+};
+
+arrowFunction();
+```
+
+```bash
+# Setting up Jest
+npm install --save-dev jest
+```
+
+```json
+// Adding test script to package.json
+"scripts": {
+    "test": "jest"
 }
 ```
 
-### Step 2: Custom Styling with Tailwind CSS
+```js
+// Writing a simple unit test with Jest
+// src/sum.js
+function sum(a, b) {
+  return a + b;
+}
 
-Utilize Tailwind CSS to enhance the visual appeal and responsiveness of the Products Page. Tailwind's utility classes can be applied directly to React Bootstrap components for custom spacing, typography, and layout adjustments.
+module.exports = sum;
+```
 
-## Building the Contact Page
+```js
+// src/sum.test.js
+const sum = require('./sum');
 
-The Contact Page provides visitors with information on how to reach the storefront. This page will include a simple contact form and store information.
+test('adds 1 + 2 to equal 3', () => {
+  expect(sum(1, 2)).toBe(3);
+});
+```
 
-### Implementing the Contact Form
+```bash
+# Running the test
+npm test
+```
 
-For the form layout, you can use React Bootstrap's Form components for structure and Tailwind CSS for styling.
+```bash
+# Setting up Jest in a Next.js project
+npx create-next-app jest-next-demo
+cd jest-next-demo
+npm install --save-dev jest @testing-library/react @testing-library/jest-dom babel-jest
+```
 
-In `src/app/contact/page.js`:
-
-```jsx
-import { Form, Button } from 'react-bootstrap';
-import NavigationBar from '../components/NavigationBar';
-
-export default function ContactPage() {
-  return (
-    <div className="container mx-auto p-4">
-      <NavigationBar />
-      <h1 className="text-2xl font-bold my-4">Contact Us</h1>
-      <Form>
-        <Form.Group controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control type="email" placeholder="Enter email" />
-        </Form.Group>
-        <Form.Group controlId="formBasicMessage">
-          <Form.Label>Message</Form.Label>
-          <Form.Control as="textarea" rows={3} />
-        </Form.Group>
-        <Button variant="primary" type="submit">
-          Submit
-        </Button>
-      </Form>
-    </div>
-  );
+```json
+// Adding Jest configuration and test script to package.json
+"jest": {
+    "testEnvironment": "jsdom",
+    "setupFilesAfterEnv": ["<rootDir>/jest.setup.js"]
+},
+"scripts": {
+    "test": "jest"
 }
 ```
 
-## Ensuring Site-wide Consistency and Responsiveness
+```js
+// jest.setup.js
+import '@testing-library/jest-dom';
+```
 
-- **Consistency**: Use React Bootstrap components as the foundation for your site's layout and interface elements, ensuring a consistent look and feel.
-- **Responsiveness**: Apply Tailwind CSS utility classes to fine-tune and enhance the responsiveness of your site. Ensure that your layout, typography, and interactive elements adapt gracefully across devices.
+```js
+// Writing a simple component and test
+// components/Greeting.js
+function Greeting({ name }) {
+  return <h1>Hello, {name}!</h1>;
+}
+
+export default Greeting;
+```
+
+```js
+// components/Greeting.test.js
+import { render, screen } from '@testing-library/react';
+import Greeting from './Greeting';
+
+test('renders greeting with name', () => {
+  render(<Greeting name="John" />);
+  expect(screen.getByText('Hello, John!')).toBeInTheDocument();
+});
+```
+
+```bash
+# Running the tests
+npm test
+```
 
 ## Conclusion
 
-By completing the Products and Contact pages, we've brought our Sweets Storefront Website to life. This session not only solidified our understanding of integrating React Bootstrap and Tailwind CSS in a Next.js project but also demonstrated practical approaches to building responsive and user-friendly web experiences. As we move into the final hour of practice and Q&A, remember that the skills you've developed this week are foundational to becoming a proficient web developer in today's dynamic tech landscape.
+- Summarize the key points covered:
+  - Webpack, Babel, and Jest are essential tools in modern web development.
+  - Each tool serves a specific purpose and integrates seamlessly into the development workflow.
+  - Reviewing these tools ensures a solid understanding of their setup and usage.
+- Encourage students to apply these tools in their own projects and explore advanced features.

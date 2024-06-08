@@ -1,186 +1,210 @@
-# Week 4, Day 4, Hour 1: Basic Unit Testing in Next.js with Jest
+## Day 4, Hour 1: Setting Up Real-Time Firestore in React
 
-Welcome to the introduction of unit testing within a Next.js project, focusing on client-side code. Today, we'll delve into setting up Jest for Next.js and crafting simple tests to ensure components render correctly and display the intended content. We will follow the manual configuration instructions as described in the official Next.js documentation under `docs/testing/jest`.
+This session covers setting up Firestore for real-time updates in a React application. We'll replicate the initial setup from Day 3 and introduce components that subscribe to real-time updates.
 
-## Setting Up Jest for Next.js
+### Setting Up Firestore
 
-First, we’ll start a new Next.js application as we have done in previous assignments. Then, we’ll proceed with setting up Jest by following the manual setup instructions provided in the official Next.js documentation.
+Just like in Day 3, start by setting up Firestore in your Next.js project.
 
-### Installation
+1. **Install Firebase SDK**:
+   Check Day 3 for instructions, Use the same `firebase.js` as yesterday
 
-Ensure Jest and necessary testing libraries are added to your project:
+### Creating Components for Real-Time CRUD Operations
 
-```sh
-npm install --save-dev jest babel-jest @testing-library/react @testing-library/jest-dom
-```
+We will create components similar to Day 3 but with real-time data synchronization.
 
-### Configure Jest
+#### Step 1: Creating a Document with Real-Time Updates
 
-After installation, generate a `jest.config.js` file at the root of your project by running:
+First, let's start with creating todos.
 
-```sh
-npm init jest@latest
-```
+- **Location**: `src/app/components/TodoForm.jsx`
 
-Select "JavaScript" for the configuration file type and accept the default options. Once generated, replace the contents of `jest.config.js` with the following:
+```jsx
+// Same as yesterday
+'use client';
+import React, { useState } from 'react';
+import { addTodo } from '../utils/firestore';
+const TodoForm = () => {
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
 
-```js
-const nextJest = require('next/jest');
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-const createJestConfig = nextJest({
-  dir: './',
-});
+    addTodo({
+      title,
+      description,
+      completed: false,
+    });
+    setTitle('');
+    setDescription('');
+  };
 
-const customJestConfig = {
-  testEnvironment: 'jest-environment-jsdom',
+  return (
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label htmlFor="title">Title</label>
+        <input
+          type="text"
+          id="title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          required
+        />
+      </div>
+      <div>
+        <label htmlFor="description">Description</label>
+        <input
+          type="text"
+          id="description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          required
+        />
+      </div>
+      <button type="submit">Add Todo</button>
+    </form>
+  );
 };
 
-module.exports = createJestConfig(customJestConfig);
+export default TodoForm;
 ```
 
-**Note:** We will skip sections in the documentation regarding:
-
-- Optionally adding a snapshot test
-- Optional custom matchers extension
-- Handling Absolute Imports and Module Path Aliases
-
-## Writing Basic Tests
-
-### Example: Testing Text Content
-
-```js
-import Link from 'next/link';
-
-export default function Home() {
-  return (
-    <div>
-      <h1>Home</h1>
-      <Link href="/about">About</Link>
-    </div>
-  );
-}
-```
-
-In the nest file
-
-```js
-import '@testing-library/jest-dom';
-import { render, screen } from '@testing-library/react';
-import Page from '@/app/page';
-
-describe('Page', () => {
-  it('renders a heading', () => {
-    render(<Page />);
-
-    const heading = screen.getByRole('heading', { level: 1 });
-
-    expect(heading).toBeInTheDocument();
-  });
-});
-```
-
-Explore these docs:
-https://testing-library.com/docs/queries/about
-
-## Conclusion
-
-Today's session focused on the basic setup and initial testing strategies within a Next.js project using Jest. These foundational skills will enhance the reliability and quality of your web applications by ensuring that components function as intended.
+In the next hour, we'll continue with reading, updating, and deleting documents with real-time updates.
 
 <!--! Hour 2  -->
 
-## Day 4, Hour 2: Writing Tests for Next.js Components
+## Day 4, Hour 2: Real-Time Data Operations in Firestore
 
-In this hour, we'll dive deeper into testing Next.js components using Jest and the React Testing Library. We aim to ensure that our components render correctly and respond to user interactions as expected. This session covers testing a simple component and introduces the concepts of testing hooks and event handling in React components.
+In this hour, we'll enhance our React app with the ability to perform CRUD operations with real-time updates from Firestore.
 
-### Step 1: Testing Component Rendering
+### Step 2: Reading Documents in Real-Time
 
-We'll start by testing a simple component to ensure it renders the text passed via props.
+Modify the `TodoList` component to subscribe to real-time updates from the Firestore database.
 
-**Component (`components/WelcomeMessage.js`):**
-
-```jsx
-function WelcomeMessage({ message }) {
-  return <p>{message}</p>;
-}
-
-export default WelcomeMessage;
-```
-
-**Instructions:**
-
-1. Explain the purpose of the `WelcomeMessage` component, which is to display a message passed through props.
-2. Highlight the importance of testing components to ensure they render as expected.
-
-**Test (`components/__tests__/WelcomeMessage.test.js`):**
-
-```js
-import { render, screen } from '@testing-library/react';
-import WelcomeMessage from '../WelcomeMessage';
-
-describe('WelcomeMessage Component', () => {
-  it('renders the message passed as a prop', () => {
-    render(<WelcomeMessage message="Hello, Next.js" />);
-    const messageElement = screen.getByText('Hello, Next.js');
-    expect(messageElement).toBeInTheDocument();
-  });
-});
-```
-
-**Instructions:**
-
-1. Walk through writing the test, explaining each part: `render` method, `screen` object, and the `expect` assertion.
-2. Run the test to show it passing, reinforcing the component behaves as expected.
-
-### Step 2: Testing React Hooks
-
-Next, let's test a component that uses a React hook, specifically `useState`, to toggle visibility of text.
-
-**Component (`components/ToggleText.js`):**
+- **Location**: `src/app/components/TodoList.jsx`
 
 ```jsx
-import { useState } from 'react';
+// This is different for live updates
+import React, { useEffect, useState } from 'react';
+import { collection, onSnapshot } from 'firebase/firestore';
+import { db } from '../firebaseConfig';
+import DeleteTodoButton from './DeleteTodoButton';
+import UpdateTodoForm from './UpdateTodoForm';
 
-function ToggleText() {
-  const [isVisible, setIsVisible] = useState(false);
+const TodoList = () => {
+  const [todos, setTodos] = useState([]);
+
+  useEffect(() => {
+    // onSnapshot: when finished listening for data returns a function named "unsubscribe" This is why we name the variable unsubscribe.
+    const unsubscribe = onSnapshot(collection(db, 'todos'), (snapshot) => {
+      const todosArray = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setTodos(todosArray);
+    });
+
+    return () => unsubscribe(); // This variable isn't calling the onSnapshot method (we didnt pass reference, we invoked it), its calling the method thats returned by the onSnapshot method to stop listening.
+  }, []);
 
   return (
     <div>
-      <button onClick={() => setIsVisible(!isVisible)}>Toggle</button>
-      {isVisible && <p>Now you see me!</p>}
+      <h2>Todos</h2>
+      <ul>
+        {todos.map((todo) => (
+          <li key={todo.id}>
+            <h3>{todo.title}</h3>
+            <p>{todo.description}</p>
+            <UpdateTodoForm todo={todo} />
+            <DeleteTodoButton id={todo.id} />
+          </li>
+        ))}
+      </ul>
     </div>
   );
-}
+};
 
-export default ToggleText;
+export default TodoList;
 ```
 
-**Instructions:**
+### Step 3: Updating Documents in Real-Time
 
-1. Introduce the `ToggleText` component, focusing on how it uses `useState` to control the visibility of text.
-2. Discuss the significance of testing user interactions, like clicks, to ensure the UI updates correctly.
+Next, let's adjust the `UpdateTodoForm` component to update todos in real-time.
 
-**Test (`components/__tests__/ToggleText.test.js`):**
+- **Location**: `src/app/components/UpdateTodoForm.jsx`
 
-```js
-import { render, screen, fireEvent } from '@testing-library/react';
-import ToggleText from '../ToggleText';
+```jsx
+import React, { useState } from 'react';
+import { doc, updateDoc } from 'firebase/firestore';
+import { db } from '../firebaseConfig';
 
-describe('ToggleText Component', () => {
-  it('toggles the visibility of the text on button click', () => {
-    render(<ToggleText />);
-    const button = screen.getByRole('button', { name: 'Toggle' });
-    fireEvent.click(button);
-    const visibleText = screen.getByText('Now you see me!');
-    expect(visibleText).toBeInTheDocument();
-  });
-});
+const UpdateTodoForm = ({ todo }) => {
+  const [title, setTitle] = useState(todo.title);
+  const [description, setDescription] = useState(todo.description);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const todoRef = doc(db, 'todos', todo.id);
+
+    try {
+      await updateDoc(todoRef, {
+        title,
+        description,
+      });
+    } catch (error) {
+      console.error('Error updating todo: ', error);
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        placeholder="Title"
+      />
+      <input
+        type="text"
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+        placeholder="Description"
+      />
+      <button type="submit">Update</button>
+    </form>
+  );
+};
+
+export default UpdateTodoForm;
 ```
 
-**Instructions:**
+### Step 4: Deleting Documents in Real-Time
 
-1. Detail the testing process, highlighting the use of `fireEvent` to simulate user clicks.
-2. Emphasize the importance of dynamically testing state changes within components to ensure they react as intended.
+Finally, update the `DeleteTodoButton` component to reflect deletions in real-time.
 
-### Conclusion
+- **Location**: `src/app/components/DeleteTodoButton.jsx`
 
-This session focused on practical examples of testing Next.js components with Jest and the React Testing Library. From rendering checks to hook functionality and handling user interactions, these examples form the basis for more complex component tests. Encourage students to explore further testing scenarios that might be relevant to their projects or interests.
+```jsx
+import React from 'react';
+import { doc, deleteDoc } from 'firebase/firestore';
+import { db } from '../firebaseConfig';
+
+const DeleteTodoButton = ({ id }) => {
+  const handleDelete = async () => {
+    const todoRef = doc(db, 'todos', id);
+
+    try {
+      await deleteDoc(todoRef);
+    } catch (error) {
+      console.error('Error deleting todo: ', error);
+    }
+  };
+
+  return <button onClick={handleDelete}>Delete</button>;
+};
+
+export default DeleteTodoButton;
+```
+
+This setup ensures that your application reflects updates to the Firestore database in real-time. Changes made to todo items, whether they are additions, updates, or deletions, will immediately be visible in the UI without needing to refresh the page.

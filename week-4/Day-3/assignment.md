@@ -1,79 +1,62 @@
-# Assignment: Jest Assignment 3
+# Assignment: Firebase Assignment 3
 
 ## Objective
 
-Expand your testing capabilities by integrating and testing third-party API calls in a Node.js application using Jest. This assignment focuses on creating mock functions to simulate API calls, allowing you to test your application's response to various scenarios such as successful data retrieval and error handling.
+To integrate Firestore into a Next.js application, demonstrating the ability to add new data to Firestore and display this data within the application. This exercise focuses on initializing Firestore, simple data modeling, and executing create and read operations.
 
 ## Instructions
 
-### Part 1: Setup Your Testing Environment
+### Part 1: Firestore Setup
 
-1. **Repository Creation**:
+1. **Initialize Firestore** in your Next.js project according to the provided demo code instructions. Ensure Firestore is correctly configured in a `firebaseConfig.js` file.
 
-   - Create a GitHub repository named `jest-api-mock-testing`.
-   - Initialize it with a `.gitignore` file for Node.js and a README.md file.
+### Part 2: Adding Data to Firestore
 
-2. **Clone and Prepare**:
-   - Clone the repository to your local machine.
-   - Inside the project directory, run `npm init -y` to generate a `package.json` file.
-   - Install Jest by running `npm install --save-dev jest`.
+1. **Develop a `SimpleForm` Component**: This component should include input fields for at least two pieces of data (e.g., a user's name and message). Implement the functionality to add a new document to a Firestore collection upon form submission. You may name the collection as you wish, such as `messages`.
 
-### Part 2: Implement and Test API Integration
+### Part 3: Displaying Data from Firestore
 
-1. **API Integration Function**:
+1. **Create a `DataDisplay` Component**: This component is responsible for fetching documents from the Firestore collection used in `SimpleForm` and displaying the data in a list or another appropriate format.
 
-   - Implement a function `getUser` in `userApi.js` that fetches user data from a placeholder API: `https://jsonplaceholder.typicode.com/users/1`.
+### Part 4: Documentation and Submission
 
-2. **Write Tests for `getUser`**:
-   - In `userApi.test.js`, write tests for the `getUser` function to simulate:
-     - Successful data retrieval.
-     - Error handling for network issues or user not found.
+1. **Logging and README.md**:
 
-### Part 3: Mocking External API Calls
+   - Ensure successful document additions to Firestore are confirmed via console logging (e.g., "Document added with ID: XYZ").
+   - Update the `README.md` file with a brief explanation of your integration process, challenges encountered, and their resolutions.
 
-1. **Mocking Setup**:
-   - Utilize Jest's mocking capabilities to intercept and mock the API calls made by `getUser`.
-   - Ensure your mock simulates both success and failure scenarios effectively.
-
-### Part 4: Error Handling and Async Testing
-
-1. **Advanced Testing**:
-   - Write tests that specifically check how your application handles and recovers from errors during API calls.
-   - Use Jest's async/await support to manage asynchronous testing cleanly.
-
-## Submission
-
-- **Push Your Code**: Ensure all code changes, including your API integration and tests, are pushed to your `jest-api-mock-testing` repository.
-- **README.md**: Update the README.md with instructions for installing dependencies, running tests, and a brief explanation of your testing approach.
+2. **Submission**:
+   - Submit the URL of your GitHub repository containing your project code, including the `SimpleForm` and `DataDisplay` components. Your `README.md` should accurately describe your work on this assignment.
 
 ## Rubric
 
-### API Integration Implementation - 5 points
+Your assignment will be graded based on the following criteria, each worth 5 points for a total of 25 points:
 
-- **Complete (5 pts)**: The `getUser` function is correctly implemented, successfully fetching data from the API.
-- **Partial (3 pts)**: Minor issues in the `getUser` function implementation; fetches data but with some errors.
-- **Limited (0 pt)**: Significant issues with the `getUser` function; fails to fetch data correctly.
+1. **Firestore Initialization (5 Points)**
 
-### Test Coverage and Correctness - 5 points
+   - **Complete (5 pts):** Firestore is correctly initialized and configured within the Next.js project.
+   - **Partial (3 pts):** Firestore is initialized with minor issues in configuration.
+   - **Limited (0 pts):** Firestore is not correctly initialized or is missing.
 
-- **Complete (5 pts)**: Comprehensive test coverage for both success and error scenarios in API calls. All tests pass.
-- **Partial (3 pts)**: Adequate test coverage; most scenarios are covered, but minor issues exist. Most tests pass.
-- **Limited (0 pt)**: Insufficient test coverage; significant scenarios are missing or incorrect. Many tests fail.
+2. **Implementation of `SimpleForm` Component (5 Points)**
 
-### Mocking External API Calls - 5 points
+   - **Complete (5 pts):** The component effectively adds new data to Firestore, with data validation and feedback to the user upon submission.
+   - **Partial (3 pts):** The component adds data to Firestore but lacks complete data validation or user feedback.
+   - **Limited (0 pts):** The component fails to add data to Firestore or is significantly incomplete.
 
-- **Complete (5 pts)**: Successfully mocks external API calls, accurately simulating both success and error responses.
-- **Partial (3 pts)**: Mocks external API calls with minor inaccuracies or omissions in simulating responses.
-- **Limited (0 pt)**: Fails to effectively mock external API calls or simulate accurate responses.
+3. **Implementation of `DataDisplay` Component (5 Points)**
 
-### Async Testing Proficiency - 5 points
+   - **Complete (5 pts):** Data from Firestore is accurately fetched and displayed, with appropriate UI considerations for data presentation.
+   - **Partial (3 pts):** Data is fetched and displayed with minor issues in UI presentation or data fetching efficiency.
+   - **Limited (0 pts):** The component does not fetch or display data correctly, or is substantially incomplete.
 
-- **Complete (5 pts)**: Demonstrates advanced proficiency in testing asynchronous code, using async/await syntax where appropriate.
-- **Partial (3 pts)**: Generally proficient in async testing, but with room for improvement in using async/await syntax effectively.
-- **Limited (0 pt)**: Struggles with async testing, with significant issues in handling or understanding async/await syntax.
+4. **Code Quality and Documentation (5 Points)**
 
-### Code Quality and Organization - 5 points
+   - **Complete (5 pts):** Code is well-organized, and well-documented with clear comments and a thorough README.md.
+   - **Partial (3 pts):** Code and documentation are mostly complete with some areas lacking clarity or organization.
+   - **Limited (0 pts):** Code is poorly organized or documented, with a README.md that does not effectively explain the project.
 
-- **Complete (5 pts)**: Code is exceptionally well-organized, readable, and follows best practices for Node.js and Jest.
-- **Partial (3 pts)**: Code is mostly well-organized and readable, with minor deviations from best practices.
-- **Limited (0 pt)**: Code lacks organization, readability, or adherence to best practices.
+5. **Submission Completeness (5 Points)**
+   - **Complete (5 pts):** All parts of the assignment are completed and submitted, including all required components and documentation.
+   - **Partial (3 pts):** Most parts of the assignment are completed with minor missing elements.
+   - **Limited (0 pts):** Significant portions of the assignment are incomplete or missing.

@@ -1,217 +1,406 @@
-# Week 4, Day 3, Hour 1: Testing Classes in JavaScript with Jest
+## Day 3, Hour 1: Introduction to Firestore and Database Basics
 
-As we venture further into the realm of testing with Jest, this session focuses on a key aspect of JavaScript programming—classes. Testing classes and their methods presents a unique set of challenges and opportunities for ensuring our code's reliability and functionality. This hour will introduce the basics of testing JavaScript classes using Jest, providing you with the foundation to write comprehensive tests for class methods.
+Today, we're diving into databases, focusing on Firestore, a NoSQL database from Firebase. We'll compare SQL and NoSQL databases, discuss schemas, and the difference between local storage and databases. Finally, we'll set up a simple Firestore database for a basic application.
 
-## Introduction to Testing Classes
+### Understanding Databases
 
-Classes in JavaScript provide a means to encapsulate and organize code. They are syntactical sugar over JavaScript's existing prototype-based inheritance and offer a way to create objects and handle inheritance more comfortably.
+Databases are structured systems for storing, retrieving, and managing data. There are two main types: SQL (relational) and NoSQL (non-relational).
+Here is a spreadsheet with examples showing the difference, and a snippet of SQL code to aggregate all the tables into one JOINED table (not required with nosql since its in JSON. Scroll down to see the JSON)
+https://docs.google.com/spreadsheets/d/1rMVb5NAfZBKqa_rP9AV9DQF6ZK_Zj7U0w2Dx3u3Nwjw/edit#gid=140950084
 
-### Why Test Class Methods?
+- **SQL databases** use structured query language (SQL) for defining and manipulating data. They are organized into tables and are great for complex queries.
+- **NoSQL databases**, like Firestore, are more flexible in terms of data structure, allowing for nested and varied data types. They're ideal for scalable applications and rapid development.
 
-- **Reliability**: Ensure each method performs as expected under various conditions.
-- **Maintenance**: Facilitate easier code maintenance and refactoring by catching breaks immediately.
-- **Documentation**: Serve as live documentation for how class methods are supposed to work.
+### What is a Schema?
 
-## Setting Up Jest for Testing Classes
+A schema in a database is like a blueprint for data. It defines the structure of the data, much like a class in JavaScript defines the structure and behavior of an object. A schema specifies the fields in documents and their data types, ensuring data consistency.
 
-Assuming you've already set up Jest in your Node.js project from previous sessions, let's proceed to write tests for a simple class. If you need to review the setup process, please refer to Hour 1 of Day 1.
+Most NOSQL databases do not require a Schema like SQL does, but you can create logic to check for certain conditions if required. It would be like form validation.
 
-## Writing Unit Tests for Class Methods
+### Local Storage vs. Database
 
-Consider a basic `Calculator` class with methods for addition, subtraction, multiplication, and division.
+Local storage provides a way to store data on the client's browser. It's great for saving small pieces of data but lacks the security, structure, and capacity of a database. Databases, on the other hand, are stored on servers, offering more storage, security, and data management features, making them suitable for dynamic applications that require data persistence and real-time updates.
 
-```js
-// calculator.js
-class Calculator {
-  add(a, b) {
-    return a + b;
-  }
+### Setting Up Firestore in Your Next.js Project
 
-  subtract(a, b) {
-    return a - b;
-  }
+1. **Create a Firebase Project**: If you haven't already, go to the Firebase Console, create a new project, and add your Next.js application to it.
 
-  multiply(a, b) {
-    return a * b;
-  }
+2. **Enable Firestore**: Navigate to the "Firestore Database" section in the Firebase Console and click "Create database". Choose "Start in test mode" for now.
 
-  divide(a, b) {
-    if (b === 0) throw new Error('Division by zero');
-    return a / b;
-  }
+3. **Install Firebase SDK**:
+   Ensure Firebase is installed in your Next.js project. If not, run:
+
+   ```bash
+   npm install firebase
+   ```
+
+4. **Initialize Firestore**:
+   Create a `firebaseConfig.js` file to initialize Firebase and Firestore. Replace the configuration object with your project's settings.
+
+   ```js
+   import { initializeApp } from 'firebase/app';
+   import { getFirestore } from 'firebase/firestore';
+
+   // Your web app's Firebase configuration
+   const firebaseConfig = {
+     apiKey: 'AIzaSyC6EvK2AaZmTVH5IUgIdgY1bS-example',
+     authDomain: 'example-stand-f0343.firebaseapp.com',
+     projectId: 'example-stand-f0343',
+     storageBucket: 'example-stand-f0343.appspot.com',
+     messagingSenderId: '476457416155',
+     appId: '1:476457416155:web:216dea7a1e39f6e17fe3fe',
+   };
+
+   // Initialize Firebase
+   const app = initializeApp(firebaseConfig);
+
+   // Get a reference to the Firestore service
+   const db = getFirestore(app);
+
+   export { db };
+   ```
+
+## Understanding Firestore Security Rules
+
+When you initialize a new Firestore database in test mode, Firebase sets up default security rules that allow open access to the database. This setup is designed to help you get started quickly, but it's important to understand what these rules mean and how to evolve them for your application's security.
+
+### Default Test Mode Rules
+
+By default, your Firestore security rules might look something like this:
+
+```sh
+rules_version = '2';
+
+service cloud.firestore {
+match /databases/{database}/documents {
+ // This rule allows anyone with your Firestore database reference to view, edit,
+ // and delete all data in your Firestore database. It is useful for getting
+ // started, but it is configured to expire after 30 days because it
+ // leaves your app open to attackers. At that time, all client
+ // requests to your Firestore database will be denied.
+ //
+ // Make sure to write security rules for your app before that time, or else
+ // all client requests to your Firestore database will be denied until you update
+ // your rules.
+ match /{document=**} {
+   allow read, write: if request.time < timestamp.date(2024, 4, 14);
+ }
 }
-
-module.exports = Calculator;
+}
 ```
 
-```js
-// calculator.test.js
-const Calculator = require('./calculator');
+### Key Takeaways
 
-describe('Calculator', () => {
-  let calculator;
+- **Open Access for Testing**: The default rules grant read and write access to everyone. This is fine for initial development and testing but not suitable for a production environment.
+- **Expiration Date**: Note the expiration date set within the rule (`timestamp.date(2024, 4, 14)`). After this date, all client requests to read or write will be denied unless you update your rules.
+- **Security Implications**: While these open rules are convenient for development, they leave your database vulnerable to unauthorized access. Before moving to production, you'll need to implement more restrictive rules based on your app's requirements.
 
-  beforeEach(() => {
-    calculator = new Calculator();
-  });
+### Next Steps
 
-  it('adds two numbers', () => {
-    expect(calculator.add(1, 2)).toBe(3);
-  });
+Before the expiration date, you should define more specific security rules to protect your data. Firestore rules can control access based on authentication, validate data types, and more. For a test app, ensure you update these rules to avoid losing access or exposing sensitive information.
 
-  it('subtracts two numbers', () => {
-    expect(calculator.subtract(5, 2)).toBe(3);
-  });
+This introduction to Firestore security rules is just the beginning. As you develop your application, consider diving deeper into [Firestore's security rules documentation](https://firebase.google.com/docs/firestore/security/get-started) to learn how to tailor rules to your specific needs.
 
-  it('multiplies two numbers', () => {
-    expect(calculator.multiply(2, 3)).toBe(6);
-  });
+### Creating a Simple Firestore Schema
 
-  it('divides two numbers', () => {
-    expect(calculator.divide(6, 2)).toBe(3);
-  });
+Imagine you're building a todo application. Each todo item might have a title, description, and completion status. In Firestore, you would create a collection named `todos`, and each todo item would be a document within this collection with the specified fields.
 
-  it('throws an error when dividing by zero', () => {
-    expect(() => calculator.divide(5, 0)).toThrow('Division by zero');
-  });
-});
-```
+### Conclusion
 
-## Introduction to Mocking API Calls with Jest
+We've introduced Firestore and the basics of databases, covering the differences between SQL and NoSQL, the concept of schemas, and the advantages of using databases over local storage. Next, we'll dive into performing CRUD operations in Firestore, bringing these concepts into practice.
 
-Before we dive deeper into class testing, let's explore how to test functions that perform API calls using Jest. This will be demonstrated by mocking requests to a Pokémon API.
+Remember, when designing your database schema or deciding between local storage and a database, consider your application's needs, data complexity, and growth potential.
 
-### Setting Up for API Testing
+<!--! Hour 2  -->
 
-Create `pokemonApi.js` and `pokemonApi.test.js` to demonstrate how to mock API calls with Jest.
+## Day 3, Hour 2: CRUD Operations in Firestore with Documentation References
 
-```js
-// pokemonApi.js
-const axios = require('axios');
+In this hour, we'll integrate CRUD operations in Firestore within a Next.js project, enhancing our app with dynamic data interaction capabilities. Each step is detailed below, including references to Firestore documentation for a deeper understanding.
 
-const getPokemon = async (pokemonName) => {
-  try {
-    const response = await axios.get(
-      `https://pokeapi.co/api/v2/pokemon/${pokemonName}`,
-    );
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
+### CRUD Operations
+
+#### Step 1: Creating Documents in Firestore
+
+#### Add a React component to create Todo
+
+- **Reference**: [Add a Document](https://firebase.google.com/docs/firestore/manage-data/add-data#add_a_document)
+
+- **Location**: Create a new component `src/app/components/TodoForm.jsx`
+
+```jsx
+'use client';
+import { addDoc, collection } from 'firebase/firestore';
+import React, { useState } from 'react';
+import { db } from '../../firebaseConfig';
+
+const TodoForm = () => {
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+
+  const addTodo = async (todo) => {
+    const docRef = await addDoc(collection(db, 'todos'), todo);
+    console.log('Document written with ID: ', docRef.id);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await addTodo({
+        title: title,
+        description: description,
+      });
+      console.log('Todo added successfully');
+      setTitle('');
+      setDescription('');
+    } catch (error) {
+      console.error('Error adding document: ', error);
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label htmlFor="title">Title</label>
+        <input
+          type="text"
+          id="title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          required
+        />
+      </div>
+      <div>
+        <label htmlFor="description">Description</label>
+        <input
+          type="text"
+          id="description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          required
+        />
+      </div>
+      <button type="submit">Add Todo</button>
+    </form>
+  );
 };
 
-module.exports = { getPokemon };
+export default TodoForm;
 ```
 
-```js
-// pokemonApi.test.js
-const { getPokemon } = require('./pokemonApi');
-const axios = require('axios');
+Encourage to explore docs and build apps that use other methods of adding things.
 
-jest.mock('axios');
+#### Step 2: Reading Documents from Firestore
 
-describe('getPokemon', () => {
-  test('successfully retrieves Pikachu data', async () => {
-    const mockPokemon = { id: 25, name: 'pikachu' };
-    axios.get.mockResolvedValue({ data: mockPokemon });
+- **Reference**: [Read Data](https://firebase.google.com/docs/firestore/query-data/get-data#get_all_documents_in_a_collection)
 
-    const result = await getPokemon('pikachu');
-    expect(result).toEqual(mockPokemon);
-  });
+To fetch all items from your Firestore collection and render them in your React component, you can use the Firestore modular SDK. Here's how you can implement this in a component with a `useEffect` hook:
 
-  test('handles errors for network issues or Pokémon not found', async () => {
-    axios.get.mockRejectedValue(new Error('Network error'));
+- **Location**: Create a new component `src/app/components/TodoList.jsx`
 
-    await expect(getPokemon('pikachu')).rejects.toThrow('Network error');
-  });
-});
+```jsx
+'use client';
+import React, { useEffect, useState } from 'react';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../../firebaseConfig';
+
+const TodoList = () => {
+  const [todos, setTodos] = useState([]);
+
+  useEffect(() => {
+    const fetchTodos = async () => {
+      const querySnapshot = await getDocs(collection(db, 'todos'));
+      const todosArray = [];
+      querySnapshot.forEach((doc) => {
+        // Pushing document data and id into an array
+        todosArray.push({ id: doc.id, ...doc.data() });
+      });
+      setTodos(todosArray);
+    };
+
+    fetchTodos();
+  }, []);
+
+  return (
+    <div>
+      <h2>Todos</h2>
+      <ul>
+        {todos.map((todo) => (
+          <li key={todo.id}>
+            {todo.title} - {todo.completed ? 'Completed' : 'Pending'}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default TodoList;
 ```
 
-## Conclusion
+<!--! Hour 3  -->
 
-Testing classes in JavaScript is an essential skill for ensuring the correctness and reliability of your object-oriented code. By following the principles outlined in this session, you can write effective unit tests for your classes, ensuring each method behaves as expected under various conditions. Remember, the key to effective class testing is understanding the behavior of each method and its interactions within the class.
+#### Step 3: Updating Documents in Firestore
 
-<!-- ! Hour 2 -->
+To update specific documents in your Firestore collection, utilize the Firestore modular SDK's `doc` and `updateDoc` methods. Here's a practical example within a React component:
 
-# Week 4, Day 3, Hour 2: Building and Testing a Complex Class in JavaScript with Jest
+- **Location**: `src/app/utils/firestore.js`
 
-After learning the basics of testing simple class methods, let's move on to a more complex example. This hour, we will construct a class that represents a real-world object with multiple methods and demonstrate how to comprehensively test it using Jest. Our example will be a shopping cart class that can add items, remove items, and calculate the total cost, showcasing the intricacies of testing more complex behaviors.
+  Create a new component to update a todo item's title and description. This component will use the `updateTodo` function from your utility functions to perform the update operation in Firestore.
 
-## Building a Complex Class
+- **Location**: `src/app/components/UpdateTodo.jsx`
 
-Consider a `ShoppingCart` class that includes methods for adding items, removing items, and calculating the total price. Each item in the cart will have a name, price, and quantity.
+```jsx
+import React, { useState } from 'react';
+import { updateTodo } from '../utils/firestore';
 
-### Step 1: Define the Class
+const UpdateTodo = ({ todo }) => {
+  const [title, setTitle] = useState(todo.title);
+  const [description, setDescription] = useState(todo.description);
 
-First, we create the `ShoppingCart` class:
+const updateTodo = async (id, updatedData) => {
+    const todoRef = doc(db, 'todos', id);
+    try {
+      await updateDoc(todoRef, updatedData);
+      console.log('Document successfully updated!');
+    } catch (error) {
+      console.error('Error updating document: ', error);
+    }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await updateTodo(todo.id, {
+        title,
+        description,
+      });
+      console.log('Todo updated successfully');
+    } catch (error) {
+      console.error('Error updating todo: ', error);
+    }
+  };
 
-```js
-// ShoppingCart.js
-class ShoppingCart {
-  constructor() {
-    this.items = [];
-  }
+  return (
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label htmlFor="title">Title</label>
+        <input
+          type="text"
+          id="title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          required
+        />
+      </div>
+      <div>
+        <label htmlFor="description">Description</label>
+        <input
+          type="text"
+          id="description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          required
+        />
+      </div>
+      <button type="submit">Update Todo</button>
+    </form>
+  );
+};
 
-  addItem(item) {
-    this.items.push(item);
-  }
-
-  removeItem(itemName) {
-    this.items = this.items.filter((item) => item.name !== itemName);
-  }
-
-  calculateTotal() {
-    return this.items.reduce((total, item) => {
-      return total + item.price * item.quantity;
-    }, 0);
-  }
-}
-
-module.exports = ShoppingCart;
+export default UpdateTodo;
 ```
 
-### Step 2: Implement the Test Cases
+Incorporate this component into your application where you manage todo items. This will enable users to update the title and description of existing todos.
 
-Now, we'll write Jest tests for each method of the `ShoppingCart` class, ensuring each functionality is correctly implemented and interacts as expected with other parts of the class.
+**Location** Inside the TodoList component:
 
-```js
-// ShoppingCart.test.js
-const ShoppingCart = require('./ShoppingCart');
-
-describe('ShoppingCart', () => {
-  let cart;
-
-  beforeEach(() => {
-    cart = new ShoppingCart();
-  });
-
-  it('adds items to the cart', () => {
-    cart.addItem({ name: 'Apple', price: 1.0, quantity: 3 });
-    expect(cart.items.length).toBe(1);
-  });
-
-  it('removes items from the cart', () => {
-    cart.addItem({ name: 'Banana', price: 0.5, quantity: 4 });
-    cart.removeItem('Banana');
-    expect(cart.items.length).toBe(0);
-  });
-
-  it('calculates the total price of items in the cart', () => {
-    cart.addItem({ name: 'Apple', price: 1.0, quantity: 3 });
-    cart.addItem({ name: 'Banana', price: 0.5, quantity: 4 });
-    expect(cart.calculateTotal()).toBe(5.0);
-  });
-
-  it('handles adding and removing multiple items', () => {
-    cart.addItem({ name: 'Apple', price: 1.0, quantity: 3 });
-    cart.addItem({ name: 'Banana', price: 0.5, quantity: 4 });
-    cart.removeItem('Apple');
-    cart.addItem({ name: 'Orange', price: 0.75, quantity: 2 });
-    expect(cart.calculateTotal()).toBe(3.5);
-  });
-});
+```jsx
+return (
+  <div>
+    <h2>Todos</h2>
+    <ul>
+      {todos.map((todo) => (
+        <li key={todo.id}>
+          <h2>{todo.title}</h2>
+          <p>{todo.description}</p>
+          <UpdateTodo todo={todo} /> ADD THIS LINE
+        </li>
+      ))}
+    </ul>
+  </div>
+);
 ```
 
-## Conclusion
+- **Reference**: [Update a Document](https://firebase.google.com/docs/firestore/manage-data/add-data#update-data)
 
-This session has introduced you to the challenges and techniques involved in building and testing a complex class using Jest. By designing a `ShoppingCart` class and writing tests for its various methods, you have practiced ensuring that your classes work correctly under different scenarios and interact properly with their internal state. Remember, comprehensive testing is crucial for building reliable applications, especially as the complexity of your classes and methods increases.
+#### Step 4: Deleting Documents from Firestore
+
+Deleting documents from your Firestore collection can be achieved using the `doc` and `deleteDoc` methods from the Firestore modular SDK. Implement it as follows:
+
+- **Location**: `src/app/utils/firestore.js`
+
+  ```js
+  import { doc, deleteDoc } from 'firebase/firestore'; // Add to existing imports
+
+  export const deleteTodo = async (id) => {
+    const todoRef = doc(db, 'todos', id);
+    try {
+      await deleteDoc(todoRef);
+      console.log('Document successfully deleted!');
+    } catch (error) {
+      console.error('Error removing document: ', error);
+    }
+  };
+  ```
+
+- **Reference**: [Delete a Document](https://firebase.google.com/docs/firestore/manage-data/delete-data)
+  Create a new component that acts as a button for deleting a todo item. This button will be used inside each list item (`<li>`) to provide a way to delete todos directly from your list.
+
+- **Location**: `src/app/components/DeleteTodoButton.jsx`
+
+```jsx
+import React from 'react';
+import { deleteTodo } from '../utils/firestore';
+
+const DeleteTodoButton = ({ id }) => {
+  const handleDelete = async () => {
+    try {
+      await deleteTodo(id);
+      console.log('Todo deleted successfully');
+      // Optionally, trigger a state update to refresh the list
+    } catch (error) {
+      console.error('Error deleting todo: ', error);
+    }
+  };
+
+  return <button onClick={handleDelete}>Delete</button>;
+};
+
+export default DeleteTodoButton;
+```
+
+To integrate this button into your todo list, modify your `TodoList.jsx` component to include the `DeleteTodoButton` component inside each list item. Ensure you pass the `id` of the todo as a prop to `DeleteTodoButton`.
+
+Here's an example modification to your existing `TodoList` component:
+
+```jsx
+// Within TodoList.jsx, include the DeleteTodoButton component
+import DeleteTodoButton from './DeleteTodoButton';
+
+// Inside your map function, nest DeleteTodoButton inside each <li>
+return (
+  <div>
+    <h2>Todos</h2>
+    <ul>
+      {todos.map((todo) => (
+        <li key={todo.id}>
+          <h2>{todo.title}</h2>
+          <p>{todo.description}</p>
+          <DeleteTodoButton id={todo.id} /> // ADD THIS LINE
+          <UpdateTodo todo={todo} />
+        </li>
+      ))}
+    </ul>
+  </div>
+);
+```
+
+This setup allows each todo item in your list to have an associated delete button. When clicked, the button will call the `deleteTodo` function to remove the item from Firestore, leveraging the modular SDK's functionality.

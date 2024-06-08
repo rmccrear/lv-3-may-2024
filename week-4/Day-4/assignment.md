@@ -1,77 +1,68 @@
-# Assignment: Jest Assignment 4
+# Assignment: Firebase Assignment 4
 
 ## Objective
 
-Enhance your Jest testing skills by focusing on Next.js components. This assignment requires you to write tests for two specific components, ensuring they render correctly and interact as expected within a Next.js application. By completing this task, you'll gain hands-on experience with testing in the context of a modern React framework.
+Enhance your Firebase and Next.js integration skills by recreating a project similar to Firebase Assignment 3, this time incorporating real-time data listening with Firestore. This assignment focuses on understanding and implementing live data synchronization within a Next.js application.
 
 ## Instructions
 
-### Part 1: Project Setup
+### Part 1: Initialize a New Next.js Project with Firestore
 
-1. **Create a Next.js Application**:
+1. **Create a New Next.js Project**: Use `create-next-app` to initiate a new project setup.
+2. **Setup Firebase and Firestore**: Install Firebase, set up a new Firebase project in the Firebase Console, and initialize Firebase in your Next.js project as shown in previous assignments.
 
-   - Use `create-next-app` to generate a new Next.js project.
+### Part 2: Implement Real-Time Data Addition and Display
 
-2. **Install Dependencies**:
+1. **Develop a `RealTimeForm` Component**:
 
-   - Install Jest and React Testing Library with `npm install --save-dev jest babel-jest @testing-library/react @testing-library/jest-dom`.
+   - This component should include input fields relevant to your chosen data model (e.g., a user's name and message).
+   - Implement functionality to add new documents to a Firestore collection upon form submission. This collection can be named according to your data model, such as `realTimeMessages`.
 
-3. **Configure Jest for Next.js**:
-   - Create `jest.config.js` in the project root with the provided settings from the demo.
-   - Add `jest.setup.js` as specified, importing `@testing-library/jest-dom`.
+2. **Create a `RealTimeDisplay` Component**:
+   - This component is responsible for displaying documents from your Firestore collection.
+   - Use Firestore's `onSnapshot` to subscribe to real-time updates from your collection, ensuring that any additions, updates, or deletions are instantly reflected in your application's UI.
 
-### Part 2: Component Implementation and Testing
+### Part 3: Documentation and Submission
 
-1. **WelcomeMessage Component**:
+1. **Provide Detailed Code Comments**: Explain your code, especially the parts implementing real-time updates with Firestore's `onSnapshot`.
+2. **Update README.md**:
 
-   - Implement `WelcomeMessage.js` in the `components` directory, rendering a paragraph with a message passed via props.
-   - Write a test in `WelcomeMessage.test.js` under `components/__tests__` to verify that the component correctly displays the message.
+   - Describe the process of setting up Firestore for real-time updates in your new Next.js project.
+   - Include any challenges encountered during the implementation of real-time data operations and how they were resolved.
 
-2. **ToggleText Component**:
-   - Create `ToggleText.js` in the `components` directory. This component should include a button that toggles the visibility of a text message on click, utilizing the `useState` hook.
-   - In `ToggleText.test.js`, write tests to ensure:
-     - The text is not visible initially.
-     - Clicking the button makes the text visible.
+3. **Submission**:
+   - Push your project to a GitHub repository.
+   - Submit the URL of your repository, ensuring it contains the `RealTimeForm` and `RealTimeDisplay` components along with a detailed `README.md`.
 
-### Part 3: Test Execution and Validation
+## Evaluation Rubric
 
-- Run your tests using `npm test` to ensure they pass based on the criteria described.
-- Verify that each component behaves as expected, both initially and after user interaction.
+Each criterion is worth 5 points, for a total of 25 points:
 
-## Submission
+1. **Firestore Real-Time Setup (5 points)**:
 
-- **Repository Creation**: Push your completed project to a GitHub repository named `jest-nextjs-assignment-4`.
-- **Documentation**: Update the `README.md` with setup instructions and a brief description of your testing approach.
-- **Submit the URL of your GitHub repository**.
+   - Complete: Successfully initialized Firestore and implemented real-time listening in the Next.js project.
+   - Partial: Firestore is initialized, and real-time listening is implemented but with minor issues.
+   - Limited: Failed to initialize Firestore for real-time listening or significant issues present.
 
-## Rubric
+2. **Functionality of `RealTimeForm` Component (5 points)**:
 
-### Jest and React Testing Library Integration - 5 points
+   - Complete: The component effectively adds new data to Firestore in real-time.
+   - Partial: Adds data to Firestore but not reflecting in real-time accurately.
+   - Limited: Fails to add data to Firestore or real-time functionality not implemented.
 
-- **Complete (5 pts)**: Jest and React Testing Library are correctly configured for Next.js, allowing tests to run smoothly.
-- **Partial (3 pts)**: Minor issues in configuration that do not significantly impact test execution.
-- **Limited (0 pt)**: Significant misconfigurations preventing tests from running correctly.
+3. **Functionality of `RealTimeDisplay` Component (5 points)**:
 
-### WelcomeMessage Component Testing - 5 points
+   - Complete: Accurately displays real-time data updates from Firestore.
+   - Partial: Displays data from Firestore but with issues in real-time synchronization.
+   - Limited: Does not display real-time data updates from Firestore correctly.
 
-- **Complete (5 pts)**: Tests comprehensively verify that `WelcomeMessage` renders the prop message accurately.
-- **Partial (3 pts)**: Tests cover basic rendering but miss edge cases or more detailed assertions.
-- **Limited (0 pt)**: Tests are incorrect, missing, or fail to accurately validate component rendering.
+4. **Code Quality and Comments (5 points)**:
 
-### ToggleText Component Interaction Testing - 5 points
+   - Complete: Code is well-organized, clearly commented, especially on real-time aspects.
+   - Partial: Mostly organized and commented but lacks clarity on real-time implementation.
+   - Limited: Poor organization or lack of comments, unclear real-time data handling.
 
-- **Complete (5 pts)**: Interaction tests accurately assess the visibility toggle feature, including initial state and post-click behavior.
-- **Partial (3 pts)**: Some aspects of interaction are tested, but the coverage is incomplete or lacks precision.
-- **Limited (0 pt)**: Interaction tests are poorly implemented, missing, or fail to capture the component's behavior correctly.
-
-### Code Quality and Clarity - 5 points
-
-- **Complete (5 pts)**: Code is well-structured, clean, and follows best practices for Next.js and React development.
-- **Partial (3 pts)**: Generally good code quality with minor areas for improvement in structure or practices.
-- **Limited (0 pt)**: Code is difficult to follow, poorly organized, or deviates significantly from recommended practices.
-
-### Documentation and README - 5 points
-
-- **Complete (5 pts)**: `README.md` clearly explains project setup, test running instructions, and the rationale behind test cases.
-- **Partial (3 pts)**: `README.md` provides basic setup and testing information but lacks detail or clarity.
-- **Limited (0 pt)**: `README.md` is missing, incomplete, or fails to provide necessary setup and testing guidance.
+5. **Documentation in README.md (5 points)**:
+   - Complete: README clearly documents the real-time Firestore setup and challenges resolved.
+   - Partial: README documents the project but lacks detail on real-time implementation or challenges.
+   - Limited: Incomplete README, missing documentation on real-time Firestore integration.

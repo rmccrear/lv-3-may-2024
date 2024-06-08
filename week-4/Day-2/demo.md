@@ -1,209 +1,260 @@
-# Week 4, Day 2, Hour 1: Deepening Understanding of Jest with More Complex Tests
+## Day 2, Hour 1: Simplifying Firebase Authentication in Next.js
 
-Building on the foundational knowledge of Jest we established on Day 1, today's focus shifts towards writing more complex tests and introducing the testing of asynchronous code in Node.js. This hour is crucial for understanding how Jest handles asynchronous operations, a common aspect of real-world applications.
+In this session, we simplify our Firebase Authentication integration by using `useState` and `useEffect`. This approach manages authentication state without introducing complex patterns, making it easier for beginners to understand Firebase Authentication in Next.js.
 
-## Expanding Test Complexity with Jest
+### Step 1: Initialize Firebase in Your Next.js Project
 
-As we progress, it's important to challenge our understanding by testing more complex scenarios. This involves not just simple input-output functions but those that involve conditional logic, loops, and even error handling.
+Ensure you've set up Firebase in your Next.js project. Refer to previous instructions if needed for installing Firebase and configuring your Firebase project.
 
-### Example: Testing a Function with Conditional Logic
+### Step 2: Implement Google Sign-In Functionality
 
-Consider a function that categorizes input based on predefined rules:
+1. **Create a Firebase Configuration File**:
+   Set up Firebase configuration in a `firebaseConfig.js` file, initializing Firebase and exporting it for use in your application.
 
-```js
-// categorizeInput.js
-function categorizeInput(value) {
-  if (value > 10) {
-    return 'large';
-  } else if (value <= 10 && value >= 1) {
-    return 'medium';
-  } else {
-    return 'small';
-  }
-}
+   ```jsx
+   // firebaseConfig.js
+   import { initializeApp } from 'firebase/app';
+   import { getAuth, GoogleAuthProvider } from 'firebase/auth';
 
-module.exports = categorizeInput;
-```
+   const firebaseConfig = {
+     apiKey: 'your-api-key',
+     authDomain: 'your-auth-domain',
+     projectId: 'your-project-id',
+     storageBucket: 'your-storage-bucket',
+     messagingSenderId: 'your-messaging-sender-id',
+     appId: 'your-app-id',
+   };
 
-A test for this function would cover all possible outcomes:
+   const app = initializeApp(firebaseConfig);
+   export const auth = getAuth(app);
+   export const googleProvider = new GoogleAuthProvider();
+   ```
 
-```js
-// categorizeInput.test.js
-const categorizeInput = require('./categorizeInput');
+2. **Implement Google Sign-In Component**:
+   Create a component that allows users to sign in with Google and logs out. Use `useState` to manage user state and `useEffect` to listen for authentication changes.
 
-describe('categorizeInput function', () => {
-  it('returns "large" for values greater than 10', () => {
-    expect(categorizeInput(11)).toBe('large');
-  });
+   ```jsx
+   import React, { useState, useEffect } from 'react';
+   import { onAuthStateChanged, signInWithPopup, signOut } from 'firebase/auth';
+   import { auth, googleProvider } from '../lib/firebaseConfig'; // Adjust path as needed
+   import { useRouter } from 'next/navigation'; // For redirecting after logout
 
-  it('returns "medium" for values between 1 and 10', () => {
-    expect(categorizeInput(5)).toBe('medium');
-  });
+   const GoogleSignIn = () => {
+     const [user, setUser] = useState(null);
+     const router = useRouter(); // Redirect to login after logout
 
-  it('returns "small" for values less than 1', () => {
-    expect(categorizeInput(0)).toBe('small');
-  });
-});
-```
+     useEffect(() => {
+       const unsubscribe = onAuthStateChanged(auth, (user) => {
+         if (user) {
+           setUser(user);
+         } else {
+           setUser(null);
+           router.push('/signin'); // Redirect if user is not signed in
+         }
+       });
 
-## Testing Asynchronous Code: Callbacks, Promises, and async/await
+       return () => unsubscribe(); // Cleanup subscription on component unmount
+     }, []);
 
-Asynchronous code is a staple in JavaScript, especially in Node.js for database operations, API calls, and file handling. Jest provides a simple API for testing code that executes asynchronously.
+     const handleGoogleSignIn = async () => {
+       try {
+         const result = await signInWithPopup(auth, googleProvider);
+         setUser(result.user); // Store user after sign-in
+         console.log('User signed in:', result.user.displayName);
+       } catch (error) {
+         console.error('Error signing in:', error);
+         setUser(null); // Clear state if error occurs
+       }
+     };
 
-### Callbacks
+     const handleLogout = async () => {
+       try {
+         await signOut(auth);
+         setUser(null); // Reset state after logout
+         router.push('/signin'); // Redirect to sign-in page
+       } catch (error) {
+         console.error('Error during logout:', error);
+       }
+     };
 
-To test a function that uses a callback, Jest needs to know when to finish the test. This is done by calling a `done` parameter that Jest provides to your test function.
+     return (
+       <>
+         {!user ? (
+           <button onClick={handleGoogleSignIn}>Sign in with Google</button>
+         ) : (
+           <>
+             <p>Welcome back, {user.displayName}!</p>
+             <button onClick={handleLogout}>Logout</button>
+           </>
+         )}
+       </>
+     );
+   };
 
-```js
-// asyncOperation.js
-function fetchData(callback) {
-  setTimeout(() => {
-    callback('peanut butter');
-  }, 1000);
-}
+   export default GoogleSignIn;
+   ```
 
-module.exports = fetchData;
-```
+3. **Use the Google Sign-In Component in Your Application**:
+   Import and use your `GoogleSignIn` component in any page where you want to enable user authentication.
 
-```js
-// asyncOperation.test.js
-const fetchData = require('./asyncOperation');
+   ```jsx
+   // app/page.js or another page
+   import GoogleSignIn from '../components/GoogleSignIn'; // Adjust path
 
-test('the data is peanut butter', (done) => {
-  function callback(data) {
-    expect(data).toBe('peanut butter');
-    done();
-  }
+   const HomePage = () => {
+     return (
+       <main>
+         <h1>Welcome to Our Application</h1>
+         <GoogleSignIn />
+       </main>
+     );
+   };
 
-  fetchData(callback);
-});
-```
+   export default HomePage;
+   ```
 
-### Promises
+### Step 3: Implement Email/Password Authentication
 
-For promises, return the promise from your test, and Jest will wait for that promise to resolve before finishing the test.
+1. **Enable Email/Password Sign-In Method**:
+   Go to the Firebase Console, navigate to the Authentication section, and under the Sign-in method tab, enable the Email/Password provider.
 
-```js
-// fetchData.js
-function fetchData() {
-  return new Promise((resolve, reject) => {
-    resolve('peanut butter');
-  });
-}
+2. **Create Email/Password Sign-In Component**:
+   Build a component that allows users to sign in using their email and password. Include a basic form to accept these details.
 
-module.exports = fetchData;
-```
+```jsx
+'use client';
+import React, { useState } from 'react';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../firebaseConfig'; // Adjust path as needed
 
-```js
-// fetchData.test.js
-const fetchData = require('./fetchData');
+const EmailPasswordSignUp = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState(null);
 
-test('the data is peanut butter', () => {
-  return fetchData().then((data) => {
-    expect(data).toBe('peanut butter');
-  });
-});
-```
+  const handleSignUp = async (e) => {
+    e.preventDefault();
+    setError(null); // Reset error state
 
-### async/await
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      console.log('User registered:', userCredential.user);
 
-Jest supports `async/await` for testing asynchronous code, which makes your tests cleaner and easier to read.
+      // Additional post-sign-up logic could go here
+    } catch (error) {
+      console.error('Error signing up:', error);
+      setError(error.message); // Store the error message to display
+    }
+  };
 
-```js
-// fetchData.test.js
-const fetchData = require('./fetchData');
-
-test('the data is peanut butter', async () => {
-  const data = await fetchData();
-  expect(data).toBe('peanut butter');
-});
-```
-
-## Conclusion
-
-This hour has expanded your testing capabilities with Jest by introducing the testing of more complex functions and asynchronous code. Understanding how to effectively test asynchronous operations is key to building robust Node.js applications. Remember, the goal is to ensure your application behaves as expected, even in asynchronous scenarios.
-
-<!-- ! Hour 2 -->
-
-# Week 4, Day 2, Hour 2: Introduction to Mocking with Jest
-
-In this hour, we dive into a critical aspect of testing complex applications: mocking. Mocking is a powerful technique in unit testing that allows you to isolate the piece of code being tested by replacing its dependencies with mock implementations. This is particularly useful for simplifying tests, speeding up test execution, and focusing on the functionality being tested without worrying about the external dependencies.
-
-## Why Mocking?
-
-- **Isolation**: Mocking allows you to isolate the unit of code you're testing, ensuring that tests are not affected by external factors such as network requests, database connections, or other modules.
-- **Control**: It gives you control over the behavior of dependencies within your tests, allowing you to simulate different scenarios.
-- **Simplicity**: By using mocks, you can simplify the setup of your tests, making them faster and more focused.
-
-## Introduction to Jest's Mocking Capabilities
-
-Jest comes with built-in support for mocking, making it straightforward to implement mocks in your tests.
-
-### Mocking Modules
-
-Suppose you have a module that fetches data from an API. You can mock this module to return a fixed response every time it's called, ensuring your tests run quickly and consistently.
-
-```js
-// api.js
-const fetchData = () => {
-  // Imagine this function fetches data from an external API
+  return (
+    <form className="m-5" onSubmit={handleSignUp}>
+      <input
+        className="m-5 text-black"
+        type="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="Email"
+      />
+      <input
+        className="m-5 text-black"
+        type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        placeholder="Password"
+      />
+      <button type="submit">Sign Up</button>
+      {error && <p className="text-red-600">{error}</p>} {/* Display error if any */}
+    </form>
+  );
 };
 
-module.exports = { fetchData };
+export default EmailPasswordSignUp;
 ```
 
-To mock this module in your test:
+```jsx
+import React, { useState } from 'react';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../lib/firebaseConfig'; // Adjust path as needed
 
-```js
-// __tests__/api.test.js
-jest.mock('../api'); // Path to the module being mocked
+const EmailPasswordSignIn = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-const { fetchData } = require('../api');
+  const handleSignIn = async (e) => {
+    e.preventDefault();
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      console.log('Signed in:', userCredential.user);
+    } catch (error) {
+      console.error('Error signing in:', error);
+    }
+  };
 
-// Implementing a mock function
-fetchData.mockImplementation(() => Promise.resolve('mock data')); // keeps track of how many times the function was called, and with what paramters
-
-test('fetches mock data', async () => {
-  const data = await fetchData("a random string");
-  expect(data).toBe('mock data');
-  // pass reference to the mocked function to see what it was called with
-  expect(fetchData).toHaveBeenCalledWith("a random string")
-});
-```
-
-### Mocking Functions
-
-Jest also allows you to mock individual functions. This is useful when you want to test how your code reacts to different return values or effects caused by those functions.
-
-```js
-// utils.js
-const calculateSomething = () => {
-  // Some complex calculation
+  return (
+    <form onSubmit={handleSignIn}>
+      <input
+        type="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="Email"
+      />
+      <input
+        type="password"
+        value(password)
+        onChange={(e) => setPassword(e.target.value)}
+        placeholder="Password"
+      />
+      <button type="submit">Sign In</button>
+    </form>
+  );
 };
-module.exports = { calculateSomething };
+
+export default EmailPasswordSignIn;
 ```
 
-Mocking `calculateSomething` function in a test:
+3. **Integrate User Session Management**:
+   Modify your application to include user session management, allowing users to sign out and restricting access to certain parts of your application based on their authentication status.
 
-```js
-// __tests__/utils.test.js
-const { calculateSomething } = require('../utils');
+### Step 4: Implement Conditional Rendering for Protected Routes
 
-jest.mock('../utils', () => ({
-  calculateSomething: jest.fn(() => 42),
-}));
+1. **Conditional Rendering Based on Authentication State**:
+   Modify your component to display protected content only if the user is authenticated. Otherwise, render a message or redirect to a sign-in page.
 
-test('calculateSomething returns 42', () => {
-  expect(calculateSomething()).toBe(42);
-});
+```jsx
+'use client';
+import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { onAuthStateChanged } from 'next/auth';
+import { auth } from '../../../firebaseConfig';
+// Adjust path
+
+const ProtectedPage = () => {
+  const [user, setUser] = useState(null);
+  const router = useRouter();
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        router.push('/'); // Redirect if user not authenticated
+      } else {
+        setUser(user);
+      }
+    });
+
+    return () => unsubscribe(); // Cleanup on component unmount
+  }, [router]);
+
+  if (!user) {
+    return <div>Loading or not authorized...</div>; // Render during auth check
+  }
+
+  return <div>Welcome, {user.displayName}! This is protected content.</div>;
+};
+
+export default ProtectedPage;
 ```
-
-## Best Practices for Organizing Tests with Mocks
-
-- **Clear Mocks**: Use `beforeEach` or `afterEach` to clear or reset mocks to ensure they don't affect other tests.
-- **Document Mocks**: Clearly document why and what you're mocking to make your tests understandable.
-- **Keep It Real**: While mocking is powerful, try to keep your mocks as close to the real implementations as possible to ensure your tests accurately reflect real-world scenarios.
-
-## Conclusion
-
-This session introduced the concept of mocking in Jest, a fundamental technique for isolating units of code, controlling dependencies, and simplifying tests. As you grow more comfortable with mocking, you'll find it an invaluable tool in your testing arsenal, enabling you to write more focused, reliable, and maintainable tests.

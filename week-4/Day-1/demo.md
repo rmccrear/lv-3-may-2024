@@ -1,138 +1,211 @@
-# Week 4, Day 1, Hour 1: Introduction to Jest and Unit Testing in Node.js
+## Week 6, Day 1, Hour 1: Introduction to Firebase and Its Services
 
-Welcome to the first hour of Week 4, where we dive into the basics of unit testing with Jest in a Node.js environment. This session is crafted for developers who are new to testing, aiming to demystify the concept of unit testing and introduce Jest as a friendly and powerful testing framework.
+Today, we embark on an exciting journey to integrate Firebase into Next.js applications. Firebase offers a comprehensive suite of tools that make it easier to develop high-quality apps, enhance user engagement, and grow your user base. Let's start by setting up Firebase in a Next.js project.
 
-## What is Unit Testing?
+### Step 1: Understanding Firebase
 
-Unit testing involves testing individual units or components of a software application. The goal is to validate that each part performs as expected. A "unit" typically refers to the smallest testable part of an application, like a function or a class method.
+- **Discuss Firebase's capabilities**: Firebase provides a variety of services such as authentication, real-time database, cloud functions, hosting, and more. It's a platform developed by Google for creating mobile and web applications.
 
-### Why Unit Testing?
+- **Open the Firebase documentation**: Navigate to [Firebase Documentation](https://firebase.google.com/docs). Spend a few minutes exploring the overview section to understand the breadth of features Firebase offers. Highlight how Firebase's scalability and integration capabilities make it a great choice for modern web applications.
 
-- **Reliability**: Ensures that your code works correctly under various scenarios.
-- **Refactoring Confidence**: Makes the codebase safer to refactor, knowing that tests will catch unexpected changes.
-- **Documentation**: Serves as documentation for your code. Tests describe what your application does and how it behaves.
+### Step 2: Creating a Firebase Project
 
-## Introduction to Jest
+1. **Visit the Firebase Console**: Open [Firebase Console](https://console.firebase.google.com/) and sign in with your Google account. Discuss the importance of creating a project in Firebase console as it serves as the container for your app's data, authentication, and configuration settings.
 
-Jest is a delightful JavaScript Testing Framework with a focus on simplicity. It's used by companies like Facebook to test their JavaScript code, including Node.js applications.
+2. **Create a new project**: Click on "Add project" and follow the prompts. Explain each step in the project creation process, highlighting the option to enable Google Analytics for your project.
 
-### Key Features of Jest
+### Step 3: Installing Firebase SDK
 
-- **Zero Configuration**: Jest is designed to work out of the box, with minimal setup.
-- **Snapshot Testing**: Allows you to test your UI without manually writing tests for each element.
-- **Built-in Coverage Reports**: Generates coverage reports to see how much of your code is covered by tests.
+1. **Initialize a Next.js project**: If you haven't already, create a new Next.js application by running:
 
-## Installing Jest and Configuring a Node.js Project
+   ```bash
+   npx create-next-app@latest
+   ```
 
-To get started with Jest in a Node.js project, you first need to install Jest as a development dependency.
+2. **Install Firebase**: Navigate to your project directory and install the Firebase package:
 
-```bash
-npm install --save-dev jest
+   ```bash
+   npm install firebase
+   ```
+
+When discussing the role of the Firebase SDK, you might say:
+
+The Firebase SDK, which stands for Software Development Kit, acts as a crucial bridge between our Next.js application and the various Firebase services we intend to use. Similar to how we configured Webpack and Babel last week to tailor our development environment, the Firebase SDK customizes our interaction with Firebase's suite of tools. By integrating this SDK, we gain streamlined access to services like Authentication, Firestore Database, Cloud Functions, and more. The SDK simplifies the complexity of communicating with Firebase's backend, providing a friendly API for our use. It enables key functionalities in our application, such as user authentication and real-time data operations, supporting rapid development and scalability through Firebase's cloud infrastructure.
+
+Think of it like an "on-switch" for features.
+
+### Step 4: Initializing Firebase in Your Next.js Project
+
+1. **Create a Firebase configuration file**: In your Next.js project, create a new file `firebaseConfig.js` in the `src` folder. Explain the significance of storing your Firebase project's configuration in this file.
+
+2. **Add Firebase configuration**: Go back to the Firebase Console, navigate to your project settings, and find your project's configuration. Copy the configuration object and paste it into `firebaseConfig.js`:
+
+https://firebase.google.com/docs/web/setup#initialize_the_sdk
+
+```js
+// Import the functions you need from the SDKs you need
+import { initializeApp } from 'firebase/app';
+import { getAuth, GoogleAuthProvider } from 'firebase/auth';
+
+const provider = new GoogleAuthProvider();
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: 'AIzaSyC6EvK2AaZmTVH5IUgIdgY1bS-example',
+  authDomain: 'example-stand-f0343.firebaseapp.com',
+  projectId: 'example-stand-f0343',
+  storageBucket: 'example-stand-f0343.appspot.com',
+  messagingSenderId: '476457416155',
+  appId: '1:476457416155:web:216dea7a1e39f6e17fe3fe',
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+export { auth, provider };
 ```
 
-After installing Jest, add a test script to your `package.json`:
+### Conclusion
 
-```json
-"scripts": {
-  "test": "jest"
+- **Review**: Recap what we've done so far—creating a Firebase project, installing Firebase SDK, and initializing Firebase in a Next.js application.
+- **Open the Firebase documentation again**: This time, navigate to the "Get Started" section specific to the Web (https://firebase.google.com/docs/web/setup). Discuss the importance of referring to the documentation for further customization and feature integration.
+
+This hour has set the foundation for integrating Firebase into Next.js applications. In the next session, we'll dive into Firebase Authentication and how to implement a basic
+
+<!-- ! Hour 2 -->
+
+## Day 1, Hour 2: Introduction to Firebase Authentication
+
+In this hour, we're diving into Firebase Authentication. We'll learn how to set up various authentication methods, with a focus on Google Sign-In, and how to implement a basic authentication flow in a Next.js project.
+
+### Step 1: Set Up Firebase Authentication
+
+Firebase Authentication provides a lot of options out of the box, including email/password, OAuth providers (Google, Facebook, Twitter, etc.), and phone authentication.
+
+This code snippet demonstrates how to create a GoogleAuthProvider instance and use it to sign in with a popup. You can handle the signed-in user's information or errors accordingly.
+
+2. **Implement the Sign-In Button**:
+   In your component or page where you want to display the sign-in button, import and use the `signInWithGoogle` function.
+
+```jsx
+'use client';
+import { signInWithPopup } from 'firebase/auth';
+import React from 'react';
+import { auth, provider } from '../../firebaseConfig';
+
+export default function GoogleSignIn() {
+  const handleGoogleSignIn = async () => {
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+      console.log('User signed in:', user.displayName);
+    } catch (error) {
+      console.error('Error signing in:', error);
+    }
+  };
+
+  return <button onClick={handleGoogleSignIn}>Sign in with Google</button>;
 }
 ```
 
-This script enables you to run your tests using `npm test` from the terminal.
+#### Add in state management and conditional rendering:
 
-## Basic Structure of a Jest Test
+```jsx
+'use client';
+import { signInWithPopup } from 'firebase/auth';
+import React, { useState } from 'react';
+import { auth, provider } from '../../firebaseConfig';
 
-A Jest test file typically contains one or more test suites, which in turn include one or more tests. The basic structure involves `describe` and `it` blocks.
+export default function GoogleSignIn() {
+  const [user, setUser] = useState(null);
+  const handleGoogleSignIn = async () => {
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+      console.log('User signed in:', user.displayName);
+      setUser(user);
+    } catch (error) {
+      setUser(null);
+      console.error('Error signing in:', error);
+    }
+  };
 
-- **`describe` Block**: Used to group together similar tests.
-- **`it` Block**: Contains the actual test.
-- **`expect` Function**: Used to make an assertion about a certain condition in the test.
-
-### Example Test
-
-Let's write a simple test to check if a function returns the expected output:
-
-```js
-// sum.js
-function sum(a, b) {
-  return a + b;
+  return (
+    <>
+      <button onClick={handleGoogleSignIn}>Sign in with Google</button>
+      {user && <p>Welcome back, {user.displayName}</p>}
+      {!user && <p>Click the button above to sign in!</p>}
+    </>
+  );
 }
-module.exports = sum;
 ```
 
-Create a test file named `sum.test.js`:
+### Step 3: Handling User Sessions
 
-```js
-const sum = require('./sum');
+Firebase Authentication integrates with Next.js to manage user sessions. Let's briefly discuss how to detect and react to authentication state changes, such as logging in and out.
 
-describe('sum function', () => {
-  it('adds 1 + 2 to equal 3', () => {
-    expect(sum(1, 2)).toBe(3);
-  });
-});
+```jsx
+'use client';
+import { onAuthStateChanged, signInWithPopup, signOut } from 'firebase/auth';
+import React, { useEffect, useState } from 'react';
+
+import { auth, provider } from '../../firebaseConfig';
+
+export default function GoogleSignIn() {
+  const [userObject, setUser] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(user); // Set the user object when authenticated
+      } else {
+        setUser(null); // Clear the user object when not authenticated
+      }
+    });
+
+    return () => unsubscribe(); // Cleanup subscription on component unmount
+  }, []);
+
+  const handleGoogleSignIn = async () => {
+    try {
+      const result = await signInWithPopup(auth, provider);
+      setUser(result.user); // Store user object after successful sign-in
+      console.log('User signed in:', result.user.displayName);
+    } catch (error) {
+      setUser(null); // Clear state on sign-in error
+      console.error('Error signing in:', error);
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth); // Logout using Firebase
+      setUser(null); // Clear the user state after logout
+      console.log('User logged out');
+    } catch (error) {
+      console.error('Error during logout:', error);
+    }
+  };
+
+  return (
+    <>
+      {!userObject ? (
+        <button onClick={handleGoogleSignIn}>Sign in with Google</button>
+      ) : (
+        <>
+          <p>Welcome back, {userObject.displayName}!</p>
+          <button onClick={handleLogout}>Logout</button>
+        </>
+      )}
+    </>
+  );
+}
 ```
 
-Running `npm test` will execute this test, verifying that our `sum` function behaves as expected.
+### Conclusion
 
-## Conclusion
+By integrating Firebase Authentication with Google Sign-In, we've laid the foundation for securing our Next.js application. Firebase offers flexibility to support various authentication providers, enabling us to cater to a wide array of user preferences.
 
-This session introduced you to the basics of unit testing and Jest. By understanding the significance of unit testing and learning how to set up Jest in a Node.js project, you're well on your way to incorporating testing into your development workflow. Keep everything simple and straightforward, and remember, the goal is to build confidence in testing as a fundamental aspect of software development.
-
-<!--! Hour 2 -->
-
-## Week 4, Day 1, Hour 2: Writing Your First Tests with Jest
-
-After familiarizing ourselves with the basics of Jest and the importance of unit testing, this hour is dedicated to putting theory into practice. We'll be writing our first tests in Jest, focusing on testing simple JavaScript functions. This hands-on approach aims to solidify your understanding of Jest's testing syntax and the concept of assertions.
-
-## Writing Your First Jest Tests
-
-Testing with Jest revolves around the idea of writing test cases that verify the behavior of your code. We'll start by testing some basic JavaScript functions to grasp the core concepts of assertions and test matching.
-
-### Testing a Simple Function
-
-Let's consider a simple JavaScript function that performs string manipulation—specifically, a function that capitalizes the first letter of a string.
-
-1. **Create the Function**:
-
-   ```js
-   // stringFunctions.js
-   function capitalize(string) {
-     return string.charAt(0).toUpperCase() + string.slice(1);
-   }
-
-   module.exports = { capitalize };
-   ```
-
-2. **Write the Test**:
-
-   Create a test file named `stringFunctions.test.js`:
-
-   ```js
-   const { capitalize } = require('./stringFunctions');
-
-   describe('capitalize function', () => {
-     it('capitalizes the first letter of a string', () => {
-       expect(capitalize('jest')).toBe('Jest');
-     });
-   });
-   ```
-
-This test checks if the `capitalize` function correctly transforms the first letter of a given string to uppercase. Running `npm test` will execute this test.
-
-### Understanding Assertions
-
-In the example above, `expect(capitalize('jest')).toBe('Jest');` is an assertion. It asserts that the outcome of `capitalize('jest')` should be `'Jest'`. Jest provides a range of matchers that you can use to test different things:
-
-- `.toBe()` checks for exact equality.
-- `.toEqual()` is used for checking the equality of object values.
-- There are many more matchers for different use cases.
-
-## Best Practices for Writing Tests
-
-- **Descriptive Test Names**: Use clear, descriptive names for your test cases to make them understandable.
-- **One Assertion Per Test**: Ideally, keep to one assertion per test to make it clear what aspect of the function you're testing.
-- **Arrange-Act-Assert Pattern**: Structure your tests in three stages: setup (arrange), executing the function to be tested (act), and asserting the results (assert).
-
-## Conclusion
-
-This session provided a practical introduction to writing tests in Jest, focusing on simple JavaScript functions. By creating a test case for a string manipulation function and understanding the basics of assertions, you're developing essential skills for test-driven development. Remember, the key to effective testing is clarity and specificity in what each test is meant to verify.
+Remember to refer to the [Firebase Authentication Documentation](https://firebase.google.com/docs/auth) for detailed information on configuring other authentication methods and further customizing the authentication flow.

@@ -1,90 +1,64 @@
-0 Assignment: Jest Assignment 2
+# Assignment: Firebase Assignment 2
 
 ## Objective
 
-Deepen your proficiency with Jest by tackling complex testing scenarios, including asynchronous functions and mocking external dependencies. This assignment will guide you through specific tasks to enhance your understanding of Jest's capabilities in testing real-world applications.
+To reinforce your understanding of Firebase Authentication within a Next.js application by incorporating comprehensive authentication mechanisms, managing user sessions, and implementing access control through protected routes.
 
 ## Instructions
 
-### Part 1: GitHub Repository Setup
+### Part 1: Authentication Enhancement
 
-1. **Create Repository**:
+- **Implement Email/Password Authentication:** Create a form that allows users to sign in using their email and password. This form should provide feedback in case of an incorrect email or password.
+- **Integrate Google Sign-In:** Add a "Sign in with Google" button to your application. Document the steps taken in the Firebase Console to enable Google Sign-In with screenshots included in your README.md.
 
-   - On GitHub, create a repository named `advanced-jest-features`.
-   - Initialize it with a `.gitignore` for Node.js and a basic README.md.
+### Part 2: User Session Management
 
-2. **Local Environment Setup**:
-   - Clone `advanced-jest-features` to your local machine.
-   - Run `npm init -y` to generate a `package.json`.
-   - Install Jest using `npm install --save-dev jest`.
-   - Configure a test script in `package.json`:
-     ```json
-     "scripts": {
-       "test": "jest"
-     }
-     ```
+- **Manage Authentication State:** Utilize React's `useState` and `useEffect` hooks to track and display the user's authentication state. Show the user's email upon successful login and implement a logout button.
+- **Session Persistence:** Ensure that the user's authentication state persists across page reloads and navigations within your application.
 
-### Part 2: Asynchronous Testing
+### Part 3: Secure Routes
 
-1. **Function Implementation**:
+- **Protected Page Creation:** Develop a page that is only accessible to authenticated users. If an unauthenticated user attempts to access this page, redirect them to the login page.
+- **Conditional UI Rendering:** Use conditional rendering based on the user's authentication status to show or hide elements related to user information.
 
-   - In `dataFetcher.js`, implement `fetchData(url)` that simulates fetching data by returning a promise that resolves to `"Fetched data from ${url}"` after a 1-second delay.
+### Submission
 
-2. **Write Asynchronous Tests**:
-   - Create `dataFetcher.test.js`.
-   - Test `fetchData` using `.then` for a URL "http://example.com".
-   - Write another test using `async/await` for the same URL.
+- Commit your code to a GitHub repository.
+- Include a README.md in your repository detailing:
+  - The steps to run your application.
+  - A brief explanation of how you implemented the functionalities.
+  - Screenshots showing the login page, the protected page accessible only when logged in, and the application displaying the user's email.
 
-### Part 3: Introduction to Mocking
+## Evaluation Rubric
 
-1. **Mocking Setup**:
+Assignments will be graded based on the following criteria, with each criterion worth 5 points for a total of 25 points:
 
-   - In `emailService.js`, write a function `sendEmail(to, subject, body)` that simulates sending an email.
-   - This function simply returns `"Email sent to ${to}"`.
+**Firebase Email/Password Authentication Implementation (5 Points)**
 
-2. **Mocking Tests**:
-   - In `emailService.test.js`, mock `sendEmail` to test without actually sending emails.
-   - Verify that `sendEmail` is called with correct parameters when you invoke it in your test.
+- Complete: All features implemented correctly.
+- Partial: Missing some functionalities or minor issues.
+- Limited: Significant functionalities missing or incorrect.
 
-### Part 4: Submission and Documentation
+**Google Sign-In Integration and Documentation (5 Points)**
 
-- **Update README.md**:
-  - Explain how to run tests.
-  - Describe the purpose of each function and the rationale behind your test cases, including how mocking is employed.
+- Complete: Integration successful with detailed documentation.
+- Partial: Integration with incomplete documentation.
+- Limited: Integration unsuccessful or not attempted.
 
-## Submission
+**User Session Management (5 Points)**
 
-- Push all changes to your `advanced-jest-features` repository.
-- Submit the URL of your GitHub repository.
+- Complete: User sessions are correctly managed and persistent.
+- Partial: User sessions mostly work with some minor issues.
+- Limited: User sessions are not managed correctly or not implemented.
 
-## Rubric
+**Protected Routes Implementation (5 Points)**
 
-### Asynchronous Function Testing - 5 points
+- Complete: Protected routes correctly redirect based on user status.
+- Partial: Some issues with redirecting or route protection.
+- Limited: Protected routes not implemented or working incorrectly.
 
-- **Complete (5 pts)**: Both `.then` and `async/await` tests for `fetchData` are correctly implemented and passing.
-- **Partial (3 pts)**: One of the tests for `fetchData` is missing or incorrect, but the other is correctly implemented.
-- **Limited (0 pt)**: Both tests for `fetchData` are incorrectly implemented or missing.
+**Documentation and README.md Completeness (5 Points)**
 
-### Mock Function Implementation - 5 points
-
-- **Complete (5 pts)**: `sendEmail` is correctly mocked; tests verify it is called with the correct parameters.
-- **Partial (3 pts)**: The mock of `sendEmail` is implemented, but tests partially verify it is called with correct parameters.
-- **Limited (0 pt)**: The mock of `sendEmail` is incorrect or missing; tests do not verify correct parameters.
-
-### Test Coverage and Quality - 5 points
-
-- **Complete (5 pts)**: Tests cover all specified scenarios with clear, concise, and correct assertions.
-- **Partial (3 pts)**: Test coverage is adequate, but some scenarios are not tested or assertions are not entirely correct.
-- **Limited (0 pt)**: Poor test coverage; many scenarios are untested or assertions are incorrect.
-
-### Code Quality and Clarity - 5 points
-
-- **Complete (5 pts)**: Code and tests are exceptionally well-written, organized, and easy to understand.
-- **Partial (3 pts)**: Minor issues with code organization or clarity, but generally well-written.
-- **Limited (0 pt)**: Code or tests are poorly organized, difficult to understand, or have significant quality issues.
-
-### Documentation in README.md - 5 points
-
-- **Complete (5 pts)**: README.md thoroughly documents how to run tests, the purpose of each function, test rationale, and the use of mocking.
-- **Partial (3 pts)**: README.md is mostly complete but lacks some details on running tests, function purposes, or the rationale behind tests.
-- **Limited (0 pt)**: README.md is incomplete, missing significant information on how to run tests, function purposes, or the rationale behind tests.
+- Complete: README.md is detailed with explanations and screenshots.
+- Partial: README.md is present but lacks some information or clarity.
+- Limited: README.md is missing, very incomplete, or unclear.

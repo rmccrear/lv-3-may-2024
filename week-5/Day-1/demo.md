@@ -1,381 +1,326 @@
-# Week 5, Day 1, Hour 1: Introduction to Webpack
+# Day 1: Splash Page Components and Setup
 
-Today, we're diving into Webpack, a powerful tool that has transformed the way we develop modern web applications. We'll start from the basics, understanding its role, and how to get a simple project up and running.
+Welcome! This week, we’re starting a guided project using Next.js, with Firebase for authentication and Firestore as our database. Each day begins with an hour of setup, followed by two hours where you'll develop your project independently while I offer support.
 
-## What is Webpack?
+We’ll kick off today by setting up your project environment and creating a wireframe. I've prepared a basic wireframe to guide you, but I encourage you to design your own to envision your app’s layout and functionality.
 
-Webpack is a static module bundler for JavaScript applications. It takes modules with dependencies and generates static assets representing those modules.(Show the node_modules here to show what dependencies are) It's widely used in the industry to bundle JavaScript files and assets like CSS, images, and more into a single or multiple bundles that can be easily used in a web environment.
+Our aim is to build an application that is not only functional but visually appealing. Focus on clean code and user-friendly design. Let’s dive in and make the most of this project!
 
-### Why Use Webpack?
+## Part 1: Project Overview and Initial Planning
 
-- **Efficiency**: Bundles multiple files into fewer bundles, reducing load times.
-- **Modularity**: Encourages writing modular code, improving maintainability.
-- **Optimization**: Offers powerful tools for optimizing your application for production.
+### Objectives and Splash Page Features
 
-## Setting Up a New Project with Webpack
+- Introduce the Community Market App, emphasizing the marketplace's community focus.
+- Outline the splash page features: local news highlights, navigation to different sections, and sponsor showcases.
 
-To get started, we'll set up a new project and configure Webpack. Follow these steps:
+### Designing the Splash Page
 
-### Step 1: Create a New Project
+- Utilize tools like Figma or Sketch to draft the splash page design, incorporating elements for the local news feed, navigation bar, and sponsors.
+- Ensure the design is responsive, leveraging Bootstrap components for consistency and speed.
 
-Open your terminal and create a new directory for your project, then navigate into it:
+## Part 2: Setting Up the Environment and Tools
 
-```bash
-mkdir webpack-demo
-cd webpack-demo
+### Next.js and Bootstrap Integration
+
+```
+npx create-next-app@latest community-market-app
+cd community-market-app
+npm install react-bootstrap bootstrap axios
 ```
 
-Initialize a new npm project:
-
-```bash
-npm init -y
+```
+import 'bootstrap/dist/css/bootstrap.min.css';
 ```
 
-This command creates a `package.json` file in your project directory.
+### Structuring the Project
 
-### Step 2: Install Webpack
+- Discuss the project structure, emphasizing the separation of components (`components` directory), pages (`app` directory), and utilities (`utils` directory).
+- Stress the importance of consistent naming conventions and organization for scalability.
 
-To harness the power of Webpack in our project, we need to install two key pieces of software: Webpack itself and the Webpack Command Line Interface (CLI).
+## Part 3: Developing the Splash Page Components
 
-#### Why Webpack CLI?
+### Local News Component
 
-The Webpack CLI provides a set of tools to facilitate interaction with Webpack from the command line. This includes initializing configurations, running the build process, and more. The CLI makes it easier to integrate Webpack into your development workflow, allowing you to execute bundling and other tasks directly from your terminal.
+- Detail the setup for the `LocalNews` and `NewsCard` components, utilizing `axios` for asynchronous data fetching from the News API, and managing state with React's `useState` and `useEffect`.
+- Implement error handling for API requests and discuss optimizing the user experience by handling loading states.
 
-### Why we use it:
+### Navigation Bar
 
-Open your terminal and create a new directory for your project, then navigate into it:
+- Introduce the `NavArea` component, utilizing React Bootstrap for a responsive navigation bar. Discuss customization options to fit the app's theme and user navigation requirements.
 
-```bash
-mkdir webpack-demo
-cd webpack-demo
+### Sponsors Display
+
+- Explain the implementation of the `Sponsors` component, showcasing sponsor information with images. Highlight the use of the `Image` component from `next/image` for optimized image handling.
+
+### Environment Variables for Security
+
+- Guide on using environment variables for storing sensitive information like the News API key:
+
+```
+touch .env.local
+echo "NEXT_PUBLIC_NEWS_API_KEY=your_api_key_here" > .env.local
 ```
 
-Initialize a new npm project:
+- Update the data fetching in `LocalNews` to utilize `process.env.NEXT_PUBLIC_NEWS_API_KEY`.
 
-```bash
-npm init -y
-```
+## Part 4: Integrating and Testing Components
 
-Create an HTML file for your app without Webpack. This example demonstrates what happens when you try to use a Lodash method without Webpack:
+### Assembling Components on the Splash Page
 
-```html
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Simple App Without Webpack</title>
-  </head>
-  <body>
-    <div id="content">Initial Text</div>
-    <script src="src/index.js"></script>
-    <!-- Include your JS file -->
-  </body>
-</html>
-```
-
-Next, create the JavaScript file mentioned in the script tag. This script will attempt to use Lodash without bundling:
+- Ensure the `LocalNews`, `NavArea`, and `Sponsors` components are correctly integrated into the splash page, creating a cohesive and functional layout.
 
 ```js
-// src/index.js
-document.getElementById('content').innerText = 'Updated Text';
+import React from 'react';
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
 
-// Trying to use Lodash without Webpack
-import _ from 'lodash'; // This will cause an error since Lodash isn't installed or bundled
-// Spend some time trying to link to lodash manually by moving into the node_modules and show what happens when you hit
-const newText = _.toUpper('some text');
-document.getElementById('content').innerText = newText;
-```
-
-Now, open the HTML file in a browser. This should produce an error because the code imports Lodash, but without Webpack, the dependencies are not bundled. The result is a "Module not found" error or a similar message indicating a missing import. This illustrates the problem of not using a module bundler like Webpack.
-
-#### Installing Webpack and Webpack CLI
-
-Run the following command in your terminal to install both Webpack and the Webpack CLI as development dependencies:
-
-```bash
-npm install --save-dev webpack webpack-cli
-```
-
-- **Development Dependencies**: We install these as development dependencies (`--save-dev`) because they are only needed during the development process, not when your application is running in production.
-
-This installation equips your project with the necessary tools to start bundling your assets with Webpack. As we progress, you'll see how these tools work together to streamline and optimize your development process.
-
-- Take a moment to open the [Webpack CLI Documentation](https://webpack.js.org/api/cli/) to understand the available commands and options. It's helpful to know what tools are at your disposal as you start to integrate Webpack into your projects.
-
-### Step 3: Create Your Project Structure
-
-Inside your project directory, create a simple file structure:
-
-- The `src` directory will contain our source code.
-- The `dist` directory will be used to output our bundled files.
-
-```plaintext
-webpack-demo/
-|- /src
-   |- index.js
-|- /dist
-   |- index.html
-```
-
-### Step 4: Add a Basic JavaScript File
-
-In `src/index.js`, add some simple JavaScript:
-
-```js
-// src/index.js
-console.log('Hello, Webpack!');
-```
-
-### Step 5: Bundle Your JavaScript
-
-To bundle your JavaScript file using Webpack, run:
-
-```bash
-npx webpack
-```
-
-Webpack will automatically look for `src/index.js` as the entry point and output the bundle in `dist/main.js`.
-
-### Step 6: Create an HTML File
-
-Create `index.html` in the `dist` directory and include the bundled JavaScript file:
-
-```html
-<!-- dist/index.html -->
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Webpack Demo</title>
-  </head>
-  <body>
-    <script src="main.js"></script>
-  </body>
-</html>
-```
-
-Open `dist/index.html` in your browser to see the output of your JavaScript code.
-
-### Step 7: Adding JavaScript Modules to Your Project
-
-To further demonstrate Webpack's capabilities and the importance of modularity in modern web development, let's add JavaScript modules to our project. This step will help us understand how Webpack bundles multiple JavaScript files into a single output file, enhancing code organization and maintainability.
-
-#### Creating JavaScript Modules
-
-First, let's create a couple of JavaScript module files in the `src` directory. These modules will contain simple functions that we'll import into our main `index.js` file.
-
-Create two new files:
-
-- `src/sayHello.js`
-- `src/sayGoodbye.js`
-
-Add the following content to them:
-
-```js
-// src/sayHello.js
-export function sayHello() {
-  console.log('Hello, Webpack and modules!');
-}
-```
-
-```js
-// src/sayGoodbye.js
-export function sayGoodbye() {
-  console.log('Goodbye, see you later!');
-}
-```
-
-#### Importing Modules in `index.js`
-
-Now, modify your `src/index.js` to import and use these modules:
-
-```js
-// src/index.js
-import { sayHello } from './sayHello';
-import { sayGoodbye } from './sayGoodbye';
-
-sayHello();
-sayGoodbye();
-```
-
-#### Running Webpack
-
-With our modules in place, let's bundle our project again using Webpack. Run the following command in your terminal:
-
-```bash
-npx webpack
-```
-
-Webpack will automatically process the imports, bundle your `index.js` along with the imported modules, and output the result to `dist/main.js`.
-
-#### Verifying the Output
-
-Open or refresh `dist/index.html` in your browser and check the developer console. You should see the messages from both of your JavaScript modules, indicating that Webpack successfully bundled them together.
-
-### Understanding the Process
-
-This exercise highlighted how Webpack treats JavaScript modules. By importing modules in `index.js`, we tell Webpack about the dependencies between our files. Webpack then intelligently bundles these files together, allowing us to organize our code into manageable, reusable pieces without worrying about the impact on the browser's ability to load and run our application efficiently.
-
-### Next Steps
-
-As we move into more complex configurations and optimizations, remember the core principles of modularity and efficiency that tools like Webpack help us achieve. In the next hour, we'll explore Webpack's configuration in more detail, setting the stage for handling CSS, images, and other assets beyond JavaScript.
-
-### Documentation and Resources
-
-- **Webpack Documentation**: [Official Webpack Docs](https://webpack.js.org/concepts/) are an excellent resource for understanding deeper concepts and configurations.
-- **Next.js and Webpack**: If you're curious, Next.js uses Webpack under the hood for its build process. Exploring the `.next` build folder in a Next.js project can be an interesting way to see Webpack's role in a larger framework. However, for now, focus on the basics to build a strong foundation.
-
-In the next hour, we'll explore more about Webpack's configuration options to customize the way it bundles our files.
-
-<!--! Houe 2  -->
-
-# Week 5, Day 1, Hour 2: Setting Up and Understanding Webpack Configuration
-
-In this session, we'll create and dissect a Webpack configuration file (`webpack.config.js`) for our project, step by step. This configuration will define how Webpack should bundle our JavaScript and later, how it integrates CSS processing with loaders. We'll link to specific sections of the Webpack documentation to deepen our understanding and validate our setup.
-
-## Creating the Webpack Configuration File
-
-### Step 1: Initialize the Configuration File
-
-Create a new file named `webpack.config.js` in the root of your project. This file will hold all our Webpack settings.
-
-### Step 2: Define the Entry Point
-
-Webpack's functionality kicks off from an entry point. This is essentially the starting point of your application from where Webpack begins to compile your JavaScript. Although Webpack defaults to using `./src/index.js` as the entry point, you have the flexibility to specify a different file or even multiple entry points based on your project's needs.
-
-Here's how you define an entry point in the `webpack.config.js` file:
-
-```js
-const path = require('path');
-
-module.exports = {
-  entry: './src/index.js',
+const NewsCard = ({ article }) => {
+  return (
+    <Card className="mb-4 shadow-lg mx-auto" style={{ width: '380px' }}>
+      <Card.Img
+        variant="top"
+        src={article.image}
+        alt="News Image"
+        className="h-48 w-full object-cover"
+      />
+      <Card.Body>
+        <Card.Title className="font-bold">{article.title}</Card.Title>
+        <Card.Text className="text-sm">{article.description}</Card.Text>
+        <Button
+          variant="primary"
+          href={article.url}
+          target="_blank"
+          className="mt-2"
+        >
+          Read More
+        </Button>
+      </Card.Body>
+    </Card>
+  );
 };
+
+export default NewsCard;
 ```
 
-- **`entry`**: This field in the Webpack configuration specifies the path to the entry file. Webpack will use this file to start building out the internal dependency graph of your application.
-
-#### Understanding `path` and `__dirname`
-
-In our configuration, we use the `path` module from Node.js and a global variable called `__dirname`. These are crucial for defining paths in a cross-platform compatible way:
-
-- **`path`**: A core Node.js module that provides utilities for working with file and directory paths. It's used to ensure your paths work correctly on different operating systems.
-- **`__dirname`**: A global variable in Node.js that returns the directory name of the current module (i.e., the folder where the currently executing file resides). This helps in constructing absolute paths, which are required by certain Webpack configurations like `output.path`.
-
-## Step 3: Setting up output
-
-For example, when setting up the `output` configuration:
-
 ```js
-output: {
-  filename: 'bundle.js',
-  path: path.resolve(__dirname, 'dist'),
-},
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import NewsCard from './NewsCard'; // Ensure the path is correct
+
+export default function LocalNews() {
+  const [news, setNews] = useState([]);
+
+  useEffect(() => {
+    async function fetchNews() {
+      try {
+        const response = await axios.get(
+          'https://gnews.io/api/v4/search?q=pittsburgh&category=general&apikey=80509269cd1bb9e61e52877670327c69&lang=en'
+        );
+        setNews(response.data.articles);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchNews();
+  }, []);
+
+  return (
+    <section className="p-4">
+      <h2 className="d-flex justify-content-center">In the Know: Local News</h2>
+      <div className="d-flex gap-5 flex-wrap">
+        {news.map((article, index) => (
+          <NewsCard key={index} article={article} />
+        ))}
+      </div>
+    </section>
+  );
+}
 ```
 
-- Here, `path.resolve(__dirname, 'dist')` creates an absolute path to the `dist` directory, ensuring Webpack correctly places the output file regardless of the environment it's run in.
+```js
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 
-- **[Webpack Entry Documentation](https://webpack.js.org/concepts/entry-points/)**: For more detailed information on configuring entry points.
+const NavArea = () => {
+  return (
+    <>
+      <Navbar expand="lg" className="bg-body-tertiary">
+        <Container>
+          <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="me-auto">
+              <Nav.Link href="#home">Home</Nav.Link>
+              <Nav.Link href="#link">Community</Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+    </>
+  );
+};
 
-Understanding how `path` and `__dirname` work is essential for configuring Webpack and other Node.js-based tools, providing you with the knowledge to set up your development environment effectively.
-
-### Step 4: Configure Loaders
-
-Loaders let you preprocess files as you import or load them. They are transformations applied to the source code of modules. For now, let's prepare our configuration to include a rule for CSS files, which we will use shortly:
+export default NavArea;
+```
 
 ```js
-module: {
-  rules: [
+import Image from 'next/image';
+
+const Sponsors = () => {
+  const sponsors = [
     {
-      test: /\.css$/,
-      use: ['style-loader', 'css-loader'],
+      name: 'Airport Express',
+      description: 'Fast and reliable airport shuttle services.',
+      contact: 'Call us at 123-456-7890',
+      src: 'airport',
     },
-  ],
-},
+    {
+      name: 'EcoRive Cleaners',
+      description:
+        'Eco-friendly car cleaning services for your cars and trucks.',
+      contact: 'Email us at contact@ecorive.com',
+      src: 'ecorive',
+    },
+    {
+      name: 'GrassRoots Landscaping',
+      description: 'Innovative landscaping solutions for modern homes.',
+      contact: 'Visit us at 123 Greenway Blvd, Nature City',
+      src: 'grass',
+    },
+    {
+      name: 'GreenLeaf Grocers',
+      description: 'Fresh organic groceries right to your doorstep.',
+      contact: 'Order online at greenleafgrocers.com',
+      src: 'greenleaf',
+    },
+    {
+      name: 'LegalEase Consultancy',
+      description: 'Expert legal advice for personal and business needs.',
+      contact: 'Schedule a consultation at legalease.com',
+      src: 'legal',
+    },
+    {
+      name: 'Mechano Auto Repairs',
+      description: 'Trusted car repair and maintenance services.',
+      contact: 'Book an appointment at 456-789-0123',
+      src: 'mechanic',
+    },
+    {
+      name: 'Pasta Panorama',
+      description: 'Delicious homemade pasta and Italian cuisine.',
+      contact: 'Reserve a table at pastapanorama.com',
+      src: 'pasta',
+    },
+    {
+      name: 'Seafood Delight',
+      description: 'The freshest seafood in town, from our shore to your door.',
+      contact: 'Order now at 789-012-3456',
+      src: 'seafood',
+    },
+    {
+      name: 'Sunset Photography',
+      description: 'Capturing your special moments against stunning sunsets.',
+      contact: 'Inquire at sunsetphoto.com',
+      src: 'sunset',
+    },
+  ];
+
+  return (
+    <section>
+      <h2 className="d-flex justify-content-center">Meet Our Sponsors</h2>
+      <div className="d-flex flex-wrap justify-center gap-4 p-5">
+        {sponsors.map((sponsor, index) => (
+          <div key={index} className="text-center">
+            <Image
+              width={150}
+              height={150}
+              src={`/sponsors/${sponsor.src}.png`}
+              alt={`${sponsor.name} Logo`}
+              className="rounded-lg shadow-lg"
+            />
+            <h3 className="mt-2">{sponsor.name}</h3>
+            <p>{sponsor.description}</p>
+            <p className="font-bold">{sponsor.contact}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+};
+
+export default Sponsors;
 ```
 
-- **Loaders**: The `test` property identifies which file or files should be transformed. The `use` property indicates which loaders to apply.
-- [Webpack Loaders Documentation](https://webpack.js.org/concepts/loaders/)
-
-At this point, we haven't installed or configured any CSS loaders yet, but we will get to that shortly. This setup is laying the groundwork.
-
-### Step 5: Understanding the Full Configuration
-
-Combining the above snippets, our `webpack.config.js` should now look something like this:
-
 ```js
-const path = require('path');
+import React from 'react';
 
-module.exports = {
-  entry: './src/index.js',
-  output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist'),
+const styles = {
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: '20px',
+    backgroundColor: '#f5f5f5',
+    borderRadius: '8px',
+    boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+    margin: '20px',
+    textAlign: 'center',
   },
-  module: {
-    rules: [
-      {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
-      },
-    ],
+  header: {
+    fontSize: '24px',
+    margin: '10px 0',
+  },
+  text: {
+    fontSize: '16px',
+    margin: '10px 0',
+  },
+  button: {
+    padding: '10px 20px',
+    fontSize: '18px',
+    color: '#fff',
+    backgroundColor: '#007bff',
+    border: 'none',
+    borderRadius: '5px',
+    cursor: 'pointer',
+    marginTop: '20px',
   },
 };
-```
 
-This configuration tells Webpack to:
-
-1. Start bundling from `./src/index.js`.
-2. Output the bundled file as `bundle.js` in the `dist` directory.
-3. Apply the CSS loaders to any `.css` files encountered.
-
-### Step 6: Configure the Mode
-
-One of Webpack's features that significantly impacts the outcome of your bundle is the `mode` configuration. By setting the mode, you can enable Webpack's built-in optimizations that are suitable for either development or production environments. This setting can drastically affect your build's performance and the size of the output file.
-
-Webpack offers three modes: `none`, `development`, and `production`, with `production` being the default if no mode is specified. Here's how to configure it:
-
-```js
-module.exports = {
-  // previous configurations...
-  mode: 'development',
+// The WelcomeBanner component
+const WelcomeBanner = () => {
+  return (
+    <div style={styles.container}>
+      <h2 style={styles.header}>Welcome to Our Community Marketplace!</h2>
+      <p style={styles.text}>
+        Our platform is designed to bring the community together by allowing you
+        to easily buy and sell items. Whether you're looking to declutter your
+        home or find treasures, our marketplace is here for you.
+      </p>
+      <p style={styles.text}>
+        Why wait? Join us now and start sharing your items with your neighbors.
+        It's easy, fast, and convenient.
+      </p>
+      <button style={styles.button}>Sell Your Stuff</button>
+    </div>
+  );
 };
+
+export default WelcomeBanner;
 ```
 
-- **`mode: 'development'`**: This setting optimizes the build for speed and makes it easier to debug. It provides more verbose output in the console and includes helpful tools like source maps.
-- **`mode: 'production'`**: When you're ready to deploy your app, switch to production mode. This enables optimizations like minification, smaller bundle sizes, and optimized assets to improve load times on your users' end.
+### Testing Functionality and Responsiveness
 
-- **`mode: 'none'`**: This option disables any of Webpack's default optimizations, giving you full control but requiring you to manually specify how you want to optimize the build.
+- Conduct thorough testing across different devices and browsers to ensure the splash page is responsive and the components function as intended.
 
-#### Why Configuring Mode Matters
+### Debugging and Refinement
 
-Configuring the `mode` properly is crucial because it directly influences the performance and behavior of your application. During development, you want fast build times and detailed error messages, which `development` mode provides. For production, it's all about optimizing for speed and efficiency, achievable with `production` mode.
+- Debug any issues discovered during testing, focusing on performance optimizations and user experience enhancements.
 
-#### Switching Between Modes
+## Conclusion
 
-For real-world projects, it's common to have separate configuration files for development and production or to dynamically set the mode based on environment variables. This allows developers to easily switch contexts and ensures that the correct optimizations are applied at the right time.
+At the end of Day 1, students will have a fully functional splash page for the Community Market App, featuring local news, navigation, and sponsors. This page not only serves as the welcoming face of the app but also sets the stage for further development of marketplace functionalities.
 
-```js
-const mode =
-  process.env.NODE_ENV === 'production' ? 'production' : 'development';
-
-module.exports = {
-  // previous configurations...
-  mode,
-};
-```
-
-- **[Webpack Mode Documentation](https://webpack.js.org/configuration/mode/)**: For an in-depth understanding of what optimizations are applied in each mode.
-
-Configuring the `mode` is a simple yet powerful way to optimize your project. Remember to review the Webpack documentation to fully leverage the optimizations each mode offers.
-
-### Exploring the Docs
-
-As we proceed, it's beneficial to keep the Webpack documentation handy:
-
-- For a broad understanding, consult the [Concepts](https://webpack.js.org/concepts/) section.
-- For specifics on configuration, see the [Configuration](https://webpack.js.org/configuration/) guide.
-
-### Next Steps
-
-Now that we have a basic understanding of a Webpack configuration file and its core components, we'll move on to installing the necessary loaders for handling CSS. This will involve modifying our project setup and `webpack.config.js` to ensure Webpack can process CSS files alongside JavaScript.
-
-Remember, the goal of this session is not just to write a configuration file, but to understand each part of it. The Webpack documentation is a valuable resource as you learn and build more complex configurations.
+This solid foundation prepares students for the exciting development journey ahead, where we will expand the app's capabilities to include core marketplace features.

@@ -1,84 +1,60 @@
-# Assignment: Jest Assignment 1
+# Assignment: Firebase Assignment 1
 
 ## Objective
 
-Gain hands-on experience with Jest by setting up a Node.js environment for unit testing. Create specific utility functions, write tests to validate their functionality, and ensure your code adheres to best practices in testing.
+Leverage Firebase to enhance a Next.js application with real-time capabilities and authentication. You'll set up Firebase in a Next.js project, implement Google Sign-In authentication, and handle user sessions.
 
 ## Instructions
 
-### Part 1: Create and Clone Your GitHub Repository
+### Part 1: Firebase Setup
 
-1. **Create a New GitHub Repository**:
+1. **Firebase Project**: Create a Firebase project through the Firebase Console. Document the process with screenshots, specifically highlighting the creation of the project and enabling Google Analytics.
 
-   - Name your repository `jest-testing-basics`.
-   - Initialize it with a `.gitignore` for Node.js and a README.md.
+2. **Firebase SDK Installation**: Integrate Firebase into your Next.js application by installing the Firebase package. Use the provided `npm install firebase` command in your project directory.
 
-2. **Clone Your Repository**:
-   - Navigate to the cloned repository's directory to begin your project setup.
+3. **Firebase Configuration**:
+   - Create a `firebaseConfig.js` file in your project. Store your Firebase project's configuration in this file.
 
-### Part 2: Setup and Configuration
+### Part 2: Implementing Authentication
 
-1. **Initialize a Node.js Project**:
+1. **Google Sign-In**:
 
-   - Within your project directory, run `npm init -y` to generate a `package.json` file.
+   - Set up Google Sign-In method in your Firebase project. Capture this process with screenshots.
+   - Implement a "Sign in with Google" button in your application that utilizes Firebase Authentication to sign in users.
+   - Use the `firebaseAuth.js` module from the demo code as a reference.
 
-2. **Install Jest**:
-   - Add Jest as a development dependency with `npm install --save-dev jest`.
-   - In your `package.json`, add a test script to run Jest:
-     ```json
-     "scripts": {
-       "test": "jest"
-     }
-     ```
+2. **Session Handling**:
 
-### Part 3: Writing Tests
+   - Display the user's name on the application's main page upon successful sign-in. If signed out, show a message indicating the user is not signed in.
 
-1. **Utility Functions Implementation**:
+### Part 3: Documentation and Submission
 
-   - Create a file `utils.js` and implement two functions:
-     - `multiply(a, b)`: Returns the multiplication of `a` and `b`.
-     - `isPrime(number)`: Checks if `number` is a prime number.
+- **Console Log and README.md**:
 
-2. **Testing**:
-   - Write tests for both functions in `utils.test.js`, covering expected behavior and edge cases. For `multiply`, test normal multiplication, multiplying by zero, and negative numbers. For `isPrime`, test prime numbers, non-prime numbers, and negative input.
+  - Ensure actions such as signing in and signing out are logged to the console.
+  - Capture a successful sign-in screen as a screenshot. Include this image in your `README.md`.
+  - Update your `README.md` with a brief explanation of your implementation process, highlighting how you integrated Firebase and managed user authentication.
 
-### Part 4: Documentation
+- **Submission**:
+  - Push your code to a GitHub repository. Include a link to the repository and ensure it contains your updated `README.md` with the required screenshots and explanations.
 
-- **Update README.md**:
-  - Document the setup process, how to run tests, and a brief explanation of each utility function and its tests.
+## Evaluation Rubric
 
-## Submission
+Your assignment will be graded on the following criteria, with a total of 25 points:
 
-- **GitHub Repository**: Submit the URL of your GitHub repository. Make sure it includes all necessary files to run the tests, the updated README.md, and is set to public.
+1. **Firebase Integration (5 points)**:
 
-## Rubric
+   - Complete (5 points): Correct installation and initialization of Firebase in the Next.js project.
+   - Partial (3 points): Firebase is installed but not properly initialized.
+   - Limited (0 points): Firebase installation or initialization is missing.
 
-### Jest Setup and Configuration - 5 points
+2. **Authentication Implementation (10 points)**:
 
-- **Complete (5 pts)**: Jest is correctly installed, and `package.json` is configured with a test script.
-- **Partial (3 pts)**: Jest is installed with minor issues in configuration.
-- **Limited (0 pts)**: Incorrect Jest setup or configuration issues preventing test execution.
+   - Complete (5 points): Successful implementation of Google Sign-In, including UI component for signing in and correct handling of authentication state changes.
+   - Partial (3 points): Google Sign-In implemented with minor issues in handling authentication states or UI.
+   - Limited (0 points): Google Sign-In not implemented or non-functional.
 
-### Function Implementation - 5 points
-
-- **Complete (5 pts)**: Both `multiply` and `isPrime` functions are implemented correctly and work as expected.
-- **Partial (3 pts)**: Minor issues in one of the function implementations.
-- **Limited (0 pts)**: Significant implementation errors or both functions not working as expected.
-
-### Test Coverage and Quality - 5 points
-
-- **Complete (5 pts)**: Comprehensive test coverage for all specified cases, demonstrating understanding of testing principles.
-- **Partial (3 pts)**: Adequate test coverage with minor gaps or some failing tests.
-- **Limited (0 pts)**: Poor test coverage, significant gaps in testing, or most tests fail.
-
-### Code Quality - 5 points
-
-- **Complete (5 pts)**: Code is clean, well-organized, and follows best practices.
-- **Partial (3 pts)**: Generally good code quality with minor areas for improvement.
-- **Limited (0 pts)**: Code is hard to read, poorly organized, or does not follow best practices.
-
-### Documentation - 5 points
-
-- **Complete (5 pts)**: The README.md thoroughly documents the project setup, how to run tests, and the logic behind the utility functions and their tests.
-- **Partial (3 pts)**: The README.md covers the basics but lacks detail or clarity in some sections.
-- **Limited (0 pts)**: Inadequate documentation in the README.md or critical sections missing.
+3. **Documentation and Submission Completeness (10 points)**:
+   - Complete (5 points): Detailed `README.md` with process explanation, console logs for sign-in/sign-out actions, and a screenshot of a successful sign-in.
+   - Partial (3 points): `README.md` is present but lacks detail or missing console logs/screenshot.
+   - Limited (0 points): `README.md` is missing or does not describe the assignment implementation.

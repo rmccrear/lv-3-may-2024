@@ -1,252 +1,184 @@
-## Day 3: Introduction to Babel and JavaScript Transpilation
+# Day 3: Integrating Firestore Database Operations
 
-### Hour 1: Understanding JavaScript Transpilation with Babel
+Day 3 is dedicated to integrating Firestore database operations into our Community Market App. We will focus on implementing functionality to add new items to the Firestore database and retrieving items to display on the classifieds page.
 
-Today, we're focusing on Babel—a powerful tool that lets us write modern JavaScript that works across all browsers. Babel converts ES6+ code into backwards-compatible versions, ensuring broad compatibility.
-Right after introducing Babel and its purpose, let's dive into some ES6 syntax examples that Babel can convert into backwards-compatible JavaScript. This will give you a clearer understanding of how Babel allows us to use modern JavaScript features without worrying about browser support.
+## Part 1: Setting Up Firestore
 
-#### Why Babel?
+Ensure that Firestore is enabled in your Firebase console and that you have initialized Firebase in your project. You should already have the Firebase SDK installed and configured from the previous day.
 
-JavaScript evolves rapidly, introducing new syntax and features that improve the developer experience and code efficiency. However, not all users' browsers support the latest JavaScript features. This is where Babel comes in, allowing us to use next-gen JavaScript without worrying about browser support.
+### Firestore Security Rules
 
-#### Setting Up Babel
-
-First, we need to initialize a new npm project and install Babel:
-
-1. **Initialize a New Project**:
-   Open your terminal, create a new directory for your project, and navigate into it:
-
-   ```bash
-   mkdir babel-demo
-   cd babel-demo
-   npm init -y
-   touch index.js
-   ```
-
-   This command creates a new npm project with default settings.
-
-### ES6 Syntax Examples
-
-ES6 (ECMAScript 2015) introduced many updates to JavaScript, including new syntax and features for more expressive and concise code. Here are a few examples of ES6 syntax that Babel can transpile:
-
-1. **Arrow Functions**:
-   ES6 introduced arrow functions, a concise way to write function expressions.
-
-   ```js
-   // ES6 Arrow Function
-   const add = (a, b) => a + b;
-   ```
-
-   Babel transpiles this to a traditional function expression for broader compatibility.
-
-2. **Template Literals**:
-   Template literals provide an easy way to interpolate variables and expressions into strings.
-
-   ```js
-   // ES6 Template Literal
-   const name = 'Babel';
-   console.log(`Hello, ${name}!`);
-   ```
-
-3. **Let and Const**:
-   `let` and `const` introduce block-scoped variable declarations, with `const` being for constants.
-
-   ```js
-   // ES6 let and const
-   let score = 0;
-   const playerName = 'Alice';
-   ```
-
-4. **Classes**:
-   ES6 classes provide a syntactic sugar for prototypal inheritance but don't introduce a new object-oriented inheritance model.
-
-   ```js
-   // ES6 Class
-   class Person {
-     constructor(name) {
-       this.name = name;
-     }
-
-     greet() {
-       console.log(`Hello, my name is ${this.name}`);
-     }
-   }
-   ```
-
-5. **Default Parameters**:
-   Functions can have default parameter values.
-
-   ```js
-   // ES6 Default Parameters
-   function greet(name = 'World') {
-     console.log(`Hello, ${name}!`);
-   }
-   ```
-
-6. **Destructuring Assignment**:
-   Destructuring allows binding using pattern matching, with support for matching arrays and objects.
-
-   ```js
-   // ES6 Destructuring Assignment
-   const { firstName, lastName } = { firstName: 'John', lastName: 'Doe' };
-   console.log(firstName); // Output: John
-   ```
-
-7. **Modules (Import/Export)**:
-   ES6 modules allow for the modularization of JavaScript code.
-
-   ```js
-   // ES6 Import/Export
-   // In file math.js
-   export const add = (a, b) => a + b;
-
-   // In another file
-   import { add } from './math';
-   console.log(add(2, 3));
-   ```
-
-Each of these features enhances JavaScript's expressiveness and can be seamlessly integrated into your projects with Babel's help. By transpiling this syntax to ES5, Babel ensures that your codebase remains compatible with older browsers, broadening your application's reach. 2. **Install Babel**:
-Install Babel core and the preset for environment:
+Before we start, make sure your Firestore database has appropriate security rules for read/write operations. For development purposes, you can use the following rules, but be sure to secure your database before going to production.
 
 ```bash
-npm install --save-dev @babel/core @babel/cli @babel/preset-env
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if true;
+    }
+  }
+}
 ```
 
-- `@babel/core` is the main part of Babel
-- `@babel/cli` is the command-line interface for Babel
-- `@babel/preset-env` is a smart preset that allows you to use the latest JavaScript.
+## Part 2: Adding New Items to Firestore
 
-3. **Create a Babel Configuration File**:
-   Babel needs to know how you want to transform your code. Create a `babel.config.json` file in the root of your project:
-   From the docs: https://babeljs.io/docs/usage
-   ```json
-   {
-     "presets": [
-       [
-         "@babel/preset-env",
-         {
-           "targets": {
-             "edge": "17",
-             "firefox": "60",
-             "chrome": "67",
-             "safari": "11.1"
-           },
-           "useBuiltIns": "usage",
-           "corejs": "3.6.5"
-         }
-       ]
-     ]
-   }
-   ```
-   This tells Babel to use the preset-env, which transforms your JavaScript to be compatible with over 90% of browsers globally.
+### Creating AddItem Function
 
-#### Writing Modern JavaScript
+Create a function within your `AddItemModal` component to handle adding new item data to Firestore. This function should be called when the form is submitted.
 
-Create a new file `src/index.js` and add some modern JavaScript code. For example:
+```javascript
+import { db } from './firebaseConfig'; // Import your Firebase config file
+import { collection, addDoc } from 'firebase/firestore';
 
-```js
-// src/index.js
-const greet = (name) => `Hello, ${name}!`;
-console.log(greet('World'));
+const auth = getAuth();
+const userId = auth.currentUser ? auth.currentUser.uid : null;
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  // Prevent submission if there's no logged in user
+  if (!userId) {
+    console.error('No user logged in');
+    return;
+  }
+  try {
+    const docRef = await addDoc(collection(db, 'items'), {
+      title,
+      description,
+      price,
+      category,
+      condition,
+      userId,
+    });
+    console.log('Document written with ID:', docRef.id);
+    handleClose();
+  } catch (error) {
+    console.error('Error adding document:', error);
+  }
+};
 ```
 
-#### Transpiling with Babel
+## Part 3: Fetching Items from Firestore
 
-Now, let's transpile our modern JavaScript to something more universally compatible:
+### Creating a Component to Display Items
 
-1. **Run Babel**:
-   To transpile your `src/index.js`, run:
+You should have an `ItemCard` and `Classifieds` component from Day 2. Now, modify the `Classifieds` component to fetch items from Firestore instead of using static data.
 
-   ```bash
-   ./node_modules/.bin/babel src --out-dir lib
-   ```
+```javascript
+import React, { useState, useEffect } from 'react';
+import { db } from './firebaseConfig'; // Adjust the import path as necessary
+import { collection, getDocs } from 'firebase/firestore';
+import ItemCard from './ItemCard'; // Adjust the import path as necessary
 
-   This command reads the JavaScript files in `src/`, transpiles them using the configuration defined in `.babelrc`, and outputs the result to `lib/`.
+const Classifieds = () => {
+  const [items, setItems] = useState([]);
 
-2. **Check the Output**:
-   Open `lib/index.js` to see the transpiled code. You should notice that the arrow function has been transformed into a function expression or declaration, depending on the specific features used and the browsers you're targeting.
+  useEffect(() => {
+    const fetchItems = async () => {
+      const querySnapshot = await getDocs(collection(db, 'items'));
+      const itemsArray = [];
+      querySnapshot.forEach((doc) => {
+        itemsArray.push({ id: doc.id, ...doc.data() });
+      });
+      setItems(itemsArray);
+    };
 
-#### Conclusion
+    fetchItems();
+  }, []);
 
-Babel is a cornerstone tool in modern web development, allowing us to leverage the full power of the latest JavaScript features while ensuring our applications remain accessible to all users. By setting up Babel in our projects, we make a significant step towards writing cleaner, more efficient code without sacrificing compatibility.
+  return (
+    <div className="classifieds-container">
+      {items.map((item) => (
+        <ItemCard
+          key={item.id}
+          item={item}
+        />
+      ))}
+    </div>
+  );
+};
+```
 
-<!--! Hour 2 -->
+## Part 4: Wiring Components Together
 
-## Day 3: Introduction to Babel and JavaScript Transpilation
+Ensure that your `AddItemModal` is correctly wired to open from a button click in the UI, and that adding a new item through the modal successfully sends the data to Firestore. Verify that the `Classifieds` component fetches and displays these items dynamically upon addition.
 
-### Hour 2: Delving Deeper into Babel's Power
+## Part 5: Authentication Flow Enhancement and Component Update
 
-Now that we've set the stage with Babel's basics, let's explore how to fine-tune our setup with presets and plugins, and understand the crucial role of polyfills in ensuring broader compatibility. We'll also correct our configuration file naming to the more recent `babel.config.json`.
+Enhance the application's authentication flow to conditionally display content based on the user's authentication status. If users are not logged in, they should see the `SignIn` component with an option to navigate to the signup route. This implementation uses Next.js's `Link` for seamless routing.
 
-#### Babel Presets: A Closer Look
+### Updating the Home Component
 
-Babel presets are essentially bundles of plugins. Each preset is a set of rules for how to transform your JavaScript code. One of the most powerful and commonly used presets is `@babel/preset-env`, which intelligently decides which transformations and polyfills are necessary based on your target environments.
+Update the `Home` component within the classifieds route to include conditional rendering based on authentication status. This modification ensures that unauthenticated users are prompted to sign in or sign up, enhancing security and user experience.
 
-1. **Configuring `@babel/preset-env`**:
-   This preset simplifies the process of ensuring your JavaScript is compatible across different environments. It reads your compatibility targets (e.g., browsers you want to support) and includes the necessary polyfills and syntax transformations.
+```javascript
+'use client';
 
+import { useState, useEffect } from 'react';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import AddItemModal from '../components/AddItemModal';
+import Classifieds from '../components/Classifieds';
+import NavBar from '../components/NavArea';
+import Signin from '../components/Signin'; // Ensure you have this component
+import { Container, Button } from 'react-bootstrap';
+import Sponsors from '../components/Sponsors';
+import Link from 'next/link';
 
-   Then, configure Babel by creating a `babel.config.json` file in your project's root:
+export default function Home() {
+  const [modalShow, setModalShow] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
 
-   ```json
-   {
-     "presets": ["@babel/preset-env"]
-   }
-   ```
+  useEffect(() => {
+    const auth = getAuth();
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setCurrentUser(user);
+    });
+    return () => unsubscribe(); // Cleanup subscription
+  }, []);
 
-2. **Understanding Browser Targets and Polyfills**:
-   You can specify which environments your project needs to support using the `browserslist` field in your `package.json`. This is crucial for determining which polyfills are needed.
+  if (!currentUser) {
+    return (
+      <main className="flex min-h-screen flex-col items-center justify-center p-24">
+        <SignIn />
+        <p className="mt-4">
+          Don't have an account? <Link href="/signup">Sign up</Link>
+        </p>
+      </main>
+    );
+  }
 
-   ```json
-   "browserslist": [
-     ">0.25%",
-     "not dead"
-   ]
-   ```
+  return (
+    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+      <NavBar />
+      <div className="d-flex flex-column">
+        <Container>
+          <Classifieds />
+          <Button
+            variant="primary"
+            onClick={() => setModalShow(true)}
+          >
+            Add New Item
+          </Button>
 
-   **Polyfills**: These are snippets of code that add missing features to older browsers. When `@babel/preset-env` is configured, it automatically includes necessary polyfills for the features used in your code based on your `browserslist`.
+          <AddItemModal
+            show={modalShow}
+            handleClose={() => setModalShow(false)}
+          />
+        </Container>
+        <Sponsors />
+      </div>
+    </main>
+  );
+}
+```
 
-#### Dive into Babel Plugins
+### Instructions for the Instructor:
 
-While presets are collections of plugins designed for specific environments, individual Babel plugins offer more granular transformations.
+1. Ensure the Firebase Authentication is properly set up in your project.
+2. Update the `Home` component as shown above. This component is a key part of the classifieds route.
+3. The updated `Home` component now includes logic to check if a user is logged in. If not, it renders a `SignIn` component along with a link to the signup page.
+4. Make sure you have a `SignIn` component and a signup page in your application. The `Link` component from Next.js is used for navigation, offering a better user experience by avoiding full page reloads.
 
-1. **Example: Transform Arrow Functions**:
-   To illustrate, let's use a plugin that transforms ES6 arrow functions into function expressions, ensuring compatibility with older JavaScript engines.
+By implementing these changes, you enhance the security and usability of your application, ensuring that users are authenticated before they can add or view classified listings.
 
-   ```bash
-   npm install --save-dev @babel/plugin-transform-arrow-functions
-   ```
+## Conclusion
 
-   Add this plugin to your `babel.config.json`:
-
-   ```json
-   {
-     "plugins": ["@babel/plugin-transform-arrow-functions"]
-   }
-   ```
-
-#### Practical Demonstration
-
-Let's see Babel in action with an example that will be transformed by our setup.
-
-1. **Create a JavaScript File**:
-   In `src/example.js`, write some modern JavaScript:
-
-   ```js
-   const greet = (name) => `Hello, ${name}!`;
-   console.log(greet('Babel'));
-   ```
-
-2. **Transpile the Code**:
-   Run Babel to transpile your `src` directory:
-
-   ```bash
-   npx babel src --out-dir lib
-   ```
-
-3. **Review the Output**:
-   Check `lib/example.js` for the transpiled version. The arrow function should now be a function expression, showing Babel's transformation in action.
-
-#### Conclusion
-
-By leveraging Babel's presets and plugins, and understanding the importance of polyfills, you're equipped to write modern, clean JavaScript without worrying about browser incompatibilities. This setup ensures your applications can reach a wider audience while you enjoy the benefits of the latest JavaScript features.
+By the end of Day 3, you'll have integrated Firestore into your app for adding and displaying items in real-time. This functionality is core to the classifieds feature of the Community Market App, allowing users to interact with a live database.

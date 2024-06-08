@@ -1,39 +1,30 @@
-# Assignment: Jest Practice
+# Assignment: Firebase Assignment 5
 
 ## Objective
 
-Transition from unit testing to the broader scope of integration testing within a Next.js application. This assignment encourages you to apply the foundational testing knowledge gained this week to a slightly more complex scenario, focusing on the interaction between components and API calls.
+Build upon the real-time application created in Firebase Assignment 5 by incorporating update and delete functionalities, along with applying basic styling to enhance the user interface. This assignment aims to deepen your understanding of CRUD operations within a real-time Firestore context and improve the overall user experience of your application.
 
 ## Instructions
 
-### Part 1: Project Setup
+### Part 1: Enhance `RealTimeForm` and `RealTimeDisplay` Components
 
-1. **Create a New Next.js Application**:
+1. **Refine `RealTimeForm` Component**:
 
-   - Use `npx create-next-app` to initialize your project.
-   - Navigate to your project directory.
+   - If not already implemented, add fields that allow for the updating of existing documents in your Firestore collection.
+   - Implement a mechanism to select a document for updating, such as a dropdown or a list from which a user can choose an entry to edit.
 
-2. **Install Testing Dependencies**:
+2. **Update `RealTimeDisplay` Component for Deletion**:
+   - Integrate a delete button or icon next to each displayed document.
+   - Implement the functionality to delete the document from Firestore in real-time when this button or icon is clicked.
 
-   - Execute `npm install --save-dev jest babel-jest @testing-library/react @testing-library/jest-dom` to add necessary libraries for testing.
+### Part 2: Implement Real-Time Document Updating
 
-3. **Jest Configuration**:
-   - Set up Jest for your Next.js project by creating a `jest.config.js` with the given configuration from the demo.
-   - Include a `jest.setup.js` file to import `@testing-library/jest-dom`.
+1. **Create an `UpdateDocumentForm` Component** (if separate from your `RealTimeForm`):
+   - This component should enable users to update fields of existing documents within your Firestore collection.
+   - Reflect changes in real-time in the `RealTimeDisplay` component upon submission.
 
-### Part 2: Integration Test Implementation
+### Part 3: Style Your Application
 
-1. **User Signup Component**:
-
-   - Implement a `UserSignup.js` component in the `components` directory. This component should include a form allowing users to sign up with their name and email.
-   - Simulate a backend API call within the component for submitting the form data.
-
-2. **Integration Test for User Signup**:
-   - Write a test in `__tests__/UserSignup.test.js` to simulate a user filling out the signup form and submitting it.
-   - Mock the API call to verify the component handles the submission correctly and displays a success message upon completion.
-
-### Part 3: Advanced Testing Scenario
-
-1. **Navigation Flow Test**:
-   - Create a simple navigation component `components/Navbar.js` that links to the `UserSignup` page and a `Home` page.
-   - In `__tests__/NavigationFlow.test.js`, write an integration test that simulates navigating from the `Home` page to the `UserSignup` page and verifies the navigation works as expected.
+1. **Apply Basic Styling**:
+   - Use CSS modules, styled-components, or another CSS-in-JS library to style your components.
+   - Focus on creating a user-friendly interface that makes it clear how to add, update, and delete documents.
