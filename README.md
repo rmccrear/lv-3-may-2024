@@ -1,4 +1,4 @@
-# Level 4 Course: 6-Week Program
+# Level 3 Course: 6-Week Program
 
 ## Week 1: Advanced JavaScript and Node.js Ecosystem
 
