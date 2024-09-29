@@ -40,7 +40,15 @@
 - **Day 4:** Building a responsive website integrating Bootstrap and Tailwind CSS.
 - **Day 5:** Review and practice day; refining styling practices and troubleshooting common issues.
 
-## Week 6: Capstone Project Development and Deployment
+## Week 6: Unit Testing with Jest in Node.js
+
+Day 1: Introduction to Jest and setting up Jest in a Node.js environment.
+Day 2: Writing unit tests for basic Node.js functions.
+Day 3: Advanced Jest features and writing integration tests for Node.js applications.
+Day 4: Introduction to testing in Next.js with Jest.
+Day 5: Practice and review of testing concepts covered during the week.
+
+## Week 7: Capstone Project Development and Deployment
 
 - **Day 1:** Capstone project planning and setup; defining scope for the community market app.
 - **Day 2:** Implementing styling with Tailwind CSS in the capstone project.
