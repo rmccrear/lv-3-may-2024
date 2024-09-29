@@ -1,87 +1,111 @@
-## Assignment: Node Assignment 1
+# Hands-On: Clone and Update a Proxy Server
 
-### Objective
+## Objective
+Learn how to create and modify a simple proxy server in Node.js using Express and fetch data from an external API while keeping API keys secure. By the end of this exercise, you'll have a customized proxy server that can be used to interact with the Hugging Face API.
 
-The purpose of this assignment is to establish a foundational understanding of Node.js setup and basic terminal commands. You will install Node.js, verify its installation, and execute a simple "Hello, World!" program. This task aims to introduce you to command-line operations and the importance of Node.js in backend development, as well as to practice documenting and sharing your work through GitHub.
+## Instructions
 
-### Instructions
+### 1. **Clone the Start Code**
 
-**Create a Level 3 Organization within GitHub to store all Level 3 repos(Optional)**
+- Visit and [fork the starter code](https://dash.deno.com/projects/hard-tuna-21) provided above in a deno sandbox. *Note: this is not forking in GitHub. Click on "Fork to Edit" in Deno. (You will have the option to create your own GitHub repo with this code. However, you will not need to use GitHub for this Hands-On assignment.)*
 
-#### Part 1: Node.js Installation and Verification
+### 2. **Add Environment Variable**
+- Create an access token from huggingface with "Make calls to the serverless Inference API" permissions.
+  > **Note:** You must have access to [Mistral Mixtral-8x7B-Instruct-v0.1](https://huggingface.co/mistralai/Mixtral-8x7B-Instruct-v0.1). So make sure to accept the license agreement on the Hugging Face website.
+  > Try it out in Postman to make sure it works.
+- In your deno playground, add the environment variable `hg_key` under Settings - Environment Variables
+- Verify that the route "/caesar-salad" returns a list of ingredients for Caesar Salad.
 
-- **Install Node.js**:
+### 3. **Change Route Name**
+- In `server.js`, change the existing route `"/caesar-salad"` to `"/fettuccine-alfredo"`.
+- Change the argument to the function fetchIngredientsList, as well.
+- Verify that the server responds correctly to requests at this new route.
 
-  - Download and install the LTS version of Node.js from the official website.
+### 4. **Add a New Route**
+- Add a new route called `"/spaghetti-bolognese"`.
+- Modify the `fetchIngredientsList` function to accept the new recipe as an argument and return the corresponding data.
+- Add your own recipe.
 
-- **Check Node.js and npm Versions**:
-  - Open your terminal or Command Prompt.
-  - Use `node -v` and `npm -v` to confirm the versions of Node.js and npm installed on your system.
+### 5. **Add Your Own Fetch Function**
+- Replace the `fetchIngredientsList` function with the fetch function you previously used in your project.
+- Add your key
+- Ensure that the function can retrieve the relevant data based on the incoming route and user input.
 
-#### Part 2: GitHub Repository Setup
+### 6. **BONUS: Update Your Project**
+- Update your existing project to use this proxy server.
+- Modify your frontend code to fetch data from your proxy server routes instead of directly accessing the Hugging Face API.
+- This will help keep your API keys secure.
 
-- **Create a New GitHub Repository**:
+## Starter Code
 
-  - Name your repository `Node-Assignment-1`.
-  - Initialize it with a README.md file.
+You may clone this from https://dash.deno.com/projects/hard-tuna-21 or copy/paste this into a new JS plaground on deno.com
 
-- **Clone the Repository**:
-  - Use the `git clone` command to clone your repository to your local machine.
+```javascript
+// This little JS file runs a server
+import express from "npm:express@4.18.2";
+const app = express();
 
-#### Part 3: Hello World Script
+// NOTE: Enable CORS for cross-origin requests
+// Uncomment these two lines to enable CORS
+// import cors from 'npm:cors';
+// app.use(cors());
 
-- **Write and Execute the Hello World Program**:
-  - Within your cloned repository, create a new file named `hello-world.js`.
-  - Edit `hello-world.js` in your text editor and enter the following code:
-    ```js
-    console.log('Hello, World!');
-    ```
-  - Save the file and run it by executing `node hello-world.js` in your terminal.
-  - Ensure "Hello, World!" is printed in the terminal.
+// HELLO WORLD server
+app.get("/", (_req, res) => {
+  res.send("Welcome to the Dinosaur API!");
+});
 
-#### Part 4: Documenting Your Work
+// PROXY SERVER route for Fettuccine Alfredo
+app.get("/fettuccine-alfredo", async (_req, res) => {
+  const recipeList = await fetchIngredientsList("Fettuccine Alfredo");
+  res.json({ ingredients: recipeList });
+});
 
-- **Update the README.md**:
+// NEW ROUTE for Spaghetti Bolognese
+app.get("/spaghetti-bolognese", async (_req, res) => {
+  const recipeList = await fetchIngredientsList("Spaghetti Bolognese");
+  res.json({ ingredients: recipeList });
+});
 
-  - Document the steps you took to complete the assignment.
-  - Include a screenshot of your terminal showing the "Hello, World!" output.
+// Start the server
+app.listen(3000, () => {
+  console.log("Server is running on port 3000");
+});
 
-- **Push Your Changes**:
-  - Use `git add`, `git commit`, and `git push` commands to push your changes to GitHub.
+// Function to fetch ingredients from Hugging Face API
+async function fetchIngredientsList(userRecipe) {
+  const HG_KEY = Deno.env.get("hg_key");
+  let url = "https://api-inference.huggingface.co/models/mistralai/Mixtral-8x7B-Instruct-v0.1/v1/chat/completions";
+  let payload = {
+    model: "mistralai/Mixtral-8x7B-Instruct-v0.1",
+    messages: [{ role: "user", content: `List only the individual ingredients in ${userRecipe} by order of importance to the recipe. Omit optional ingredients.` }],
+    max_tokens: 500,
+    stream: false
+  };
+  
+  let result = await fetch(url, {
+    method: "POST",
+    body: JSON.stringify(payload),
+    headers: {
+      "Authorization": `Bearer ${HG_KEY}`,
+      "Content-Type": "application/json"
+    }
+  });
 
-#### Part 5: Submission
+  let data = await result.json();
+  if (!(data?.choices?.length > 0)) {
+    throw { error: "Error in fetch", result: data };
+  } else {
+    return data.choices[0].message.content;
+  }
+};
+```
 
-- **Submit Your Assignment**:
-  - Provide the URL to your GitHub repository in your submission.
+## Expected Output
+Upon successful completion, you should have a running proxy server with customized routes that can securely interact with the Hugging Face API without exposing your keys in the client-side code.
 
-### Rubric
+## Turn in
 
-#### Node.js Installation and Verification - 5 points
+Just turn in the link to your playground on deno.
 
-- Complete (5 pts): Node.js and npm are installed with their versions correctly verified.
-- Partial (3 pts): Node.js is installed but with issues in version verification.
-- Limited (0 pts): Node.js is not installed or correctly verified.
-
-#### GitHub Repository Setup - 5 points
-
-- Complete (5 pts): Successfully created and cloned the GitHub repository.
-- Partial (3 pts): Repository created but issues in cloning or initial setup.
-- Limited (0 pts): Did not create or clone the repository.
-
-#### Script Execution - 5 points
-
-- Complete (5 pts): Successfully executed the "Hello, World!" script with the correct output.
-- Partial (3 pts): Script executed with minor errors in the output.
-- Limited (0 pts): Script not executed or contains significant errors.
-
-#### Documentation in README.md - 5 points
-
-- Complete (5 pts): README.md clearly documents the assignment steps and includes a terminal screenshot.
-- Partial (3 pts): README.md includes most steps but lacks details or the screenshot.
-- Limited (0 pts): Incomplete documentation or missing README.md updates.
-
-#### Submission Completeness - 5 points
-
-- Complete (5 pts): Provided a link to the fully updated GitHub repository including the README.md with a screenshot.
-- Partial (3 pts): GitHub link provided but missing complete documentation or screenshot in README.md.
-- Limited (0 pts): Did not provide a GitHub link or repository does not meet requirements.
+Bonus: Export to GitHub and deploy on deno with a free account.
