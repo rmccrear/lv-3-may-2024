@@ -104,3 +104,21 @@ By the end of this project, you will have:
 - Set up a **Next.js** page that displays a cat image and related information using mock data.
 - Practiced importing data and creating reusable components in **React**.
 - Applied **component-based architecture** to structure a webpage effectively.
+
+### Rubric
+
+(20 points)
+
+1. **Component Creation** (5 points):
+   - The `Cat` component is correctly set up to display the initial message.
+   - The `CatImage` component displays the cat image using the provided mock data.
+2. **Data Import** (5 points):
+   - The cat data is successfully imported into the `Cat` component.
+   - The imported data is logged to the console for verification.
+3. **Other Components** (5 points):
+   - Additional components are created to display more information about the cat.
+   - Components from your plan are implemented and tested.
+   - Components are structured and styled appropriately.
+4. **Overall Functionality** (5 points):
+   - The page displays the cat image and related information correctly.
+   - Components interact as expected, and Tailwind is used to make the page visually appealing.

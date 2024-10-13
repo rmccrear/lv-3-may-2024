@@ -34,11 +34,23 @@ By the end of this exercise, you will be able to:
 - Add your list of components along their data requirements. This will help you stay organized as you proceed.
 
 #### Step 6: Begin Coding
-- Start building your components according to the structure you've identified.
-- Refer to your mockup and the data file as you write the code. Each component should match a section of the mockup and pull the relevant data from `cat-data.json`.
+- Move to the next part of the assignment to start coding your components.
+- You will refer to your mockup and the data file as you write the code. Each component should match a section of the mockup and pull the relevant data from `cat-data.json`.
 
 ---
 
 ### Summary of What You've Learned:
 
 In this exercise, you learned how to break down a mockup into individual components and structure a React project around them. You practiced identifying the data that each component needs and linked it to a corresponding data source. Additionally, you documented your component structure and data requirements in a `README.md` file, which is an essential part of good development practices. By the end, you applied this structured approach to start coding the components, building a strong foundation for future projects.
+
+### Rubric
+
+20 points
+
+- **Component Identification (10 points)**
+  - Accurately identified key components from the mockup.
+- **Data Mapping (5 points)**
+  - Successfully mapped data from `cat-data.json` to the appropriate components.
+- **Project Planning (5 points)**
+  - Clearly documented the project structure in a `README.md` file.
+

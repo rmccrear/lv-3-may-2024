@@ -73,3 +73,20 @@ In this exercise, you have learned how to:
 This setup process forms a strong foundation for future Next.js projects with Tailwind CSS, allowing you to create modern, responsive web applications quickly.
 
 You may refer back to this tutorial whenever you need to set up a new Next.js project with Tailwind CSS.
+
+### Rubric
+
+(20 points)
+
+1. **Project Setup** (5 points)
+   - The Next.js project was created successfully.
+   - The development server started without errors.
+2. **Home Component** (5 points)
+   - The `Home` component was created and displayed the correct message.
+   - The message was styled using Tailwind CSS classes.
+3. **Tailwind CSS Integration** (5 points)
+   - Tailwind CSS was successfully integrated into the project.
+   - The `Home` component used Tailwind CSS classes for styling.
+4. **Splash Page Styling** (5 points)
+   - The splash page was styled using various Tailwind CSS classes.
+   - The styling enhanced the visual appeal of the page.
