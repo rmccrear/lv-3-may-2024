@@ -45,7 +45,7 @@ In this exercise, you learned how to break down a mockup into individual compone
 
 ### Rubric
 
-20 points
+(20 points)
 
 - **Component Identification (10 points)**
   - Accurately identified key components from the mockup.
