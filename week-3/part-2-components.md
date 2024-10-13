@@ -1,7 +1,3 @@
-Here’s the updated version of the instructions, with reminders to commit changes after each test.
-
----
-
 ### Project Overview
 
 In this project, you will build your own version of the **Cat App**. The goal is to create a single page that displays a cat image and additional information about the cat. You will work within the `src/pages/cat` directory and progressively build the page using mock data.
@@ -108,7 +104,3 @@ By the end of this project, you will have:
 - Set up a **Next.js** page that displays a cat image and related information using mock data.
 - Practiced importing data and creating reusable components in **React**.
 - Applied **component-based architecture** to structure a webpage effectively.
-
----
-
-Now, with a reminder to commit your changes after each test, this will help you safeguard your progress while building the Cat App!
