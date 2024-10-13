@@ -4,9 +4,18 @@ In this exercise, you'll be working with components and props in React. You'll a
 
 ## Week 3 Exercise Objectives
 
+We will be planning and building a React app in order to understand common patterns in React. We will also be learning how to use Tailwind CSS to style our components.
+
+- Day 1: JavaScript Practice
+- Day 2: Part 0 - [Planning](part-0-planning.md)
+- Day 3: Part 1 - [Splash Page with Tailwind CSS](part-1-setup.md)
+- Day 4: Part 2 - [Components and Props](part-2-components.md)
+
 ### Day 1: JavaScript Syntax and React Components
 
 JavaScript Practice for Week 3
+
+This is a separate exercise to practice JavaScript syntax and concepts that will be useful in the React exercises.
 
 See [JavaScript Practice](./javascript-practice.md) for the JavaScript practice exercise.
 
