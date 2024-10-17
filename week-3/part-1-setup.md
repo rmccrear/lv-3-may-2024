@@ -19,6 +19,17 @@ The following steps will guide you through creating a Next.js app and adding Tai
    npx create-next-app@latest
    ```
 
+Choose the following options:
+
+- TypeScript: No
+- ESLint: Yes
+- Tailwind CSS: Yes
+- Use src/ directory: Yes
+- Use App Router: No
+- Customize import alias: No
+
+
+
 #### Step 1 (Test):
 1. Navigate into your project directory using:
    ```bash
@@ -44,7 +55,7 @@ The following steps will guide you through creating a Next.js app and adding Tai
 1. Visit `http://localhost:3000` in your browser. You should now see the message "Welcome to the Cat App!".
 
 #### Step 3: Add Tailwind CSS to Your Project
-1. Follow the official Next.js Tailwind CSS installation guide to add Tailwind CSS to your project: [Tailwind CSS Next.js Setup Guide](https://tailwindcss.com/docs/guides/nextjs).
+1. ~~Follow the official Next.js Tailwind CSS installation guide to add Tailwind CSS to your project: [Tailwind CSS Next.js Setup Guide](https://tailwindcss.com/docs/guides/nextjs).~~ (This will already be configured for you if you selected the Tailwind CSS option during project creation.)
 
 #### Step 3 (Test):
 1. Add a Tailwind CSS class to the `h1` element in `src/pages/index.js`:
