@@ -68,3 +68,15 @@ import "../src/styles/globals.css";
   - Partial goal: 3 points
   - One goal: 5 points
   - Two goals: 7 points
+
+## Video
+
+NetNinja's tutorial on useEffect is a great resource to help you understand how to use useEffect in your project. (Note that he uses `.then` syntax, instead of async/await.)
+
+[Web Dev Simplified - Learn useEffect In 13 Minutes ](https://www.youtube.com/watch?v=0ZJgIjIuY7U)
+
+### Extra Video
+
+If you are interested in learning more about the similarities between promise and async/await syntax, you can watch this video:
+
+[FireShip - JavaScript Promises vs Async Await] (https://www.youtube.com/watch?v=vn3tm0quoqE)

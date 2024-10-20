@@ -21,3 +21,7 @@ Turn in: Submit a link to your forked repository with the completed exercise.
 - Update Existing Components: 5 points
 - Create new components: 5 points
 - Create stories for missing components: 5 pointsF
+
+Watch NetNinja's Props Tutorial:
+
+[NetNinja's Props Tutorial](https://youtu.be/PHaECbrKgs0?feature=shared)
