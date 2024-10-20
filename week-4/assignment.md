@@ -38,7 +38,24 @@ Watch the video from the reading on how to handle errors and/or loading states. 
 
 ### Stretch Goal 3 Custom API
 
-Try to use a different API to fetch data. You can use any open API you like. Don't use API's with authentication for this exercise.
+Try to use a different API to fetch data. You can use any open API you like. (Avoid using API's with authentication for this exercise.)
+
+### Stretch Goal 4 Implement StoryBook in your project
+
+Read the StoryBook documentation and add stories to your project. This will help you to create components in isolation and document them.
+
+Note: To use StoryBook with tailwind CSS, you add StoryBook with the command:
+
+```bash
+npx
+ storybook@latest init
+```
+
+Then, you will need to add the following to your `.storybook/preview.js`:
+
+```js
+import "../src/styles/globals.css";
+```
 
 ## Rubric (40 points)
 
