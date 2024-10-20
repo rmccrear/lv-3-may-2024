@@ -24,6 +24,8 @@ In this exercise, you will be challenged to use documentation to learn how to fe
 
 You are welcome to ask questions and work together to achieve this goal.
 
+Finally, deploy your app to [Vercel](https://vercel.com/) and link it in the about section of your README. (See the documentation at vercel.com for how to deploy your app. It is very straightforward once you push your code to GitHub. Your website will be live at `https://your-project-name.vercel.app`.)
+
 ## Stretch Goals
 
 ### Stretch Goal 1 Muli-cat
@@ -61,7 +63,8 @@ import "../src/styles/globals.css";
 
 - Fetch data from API: 15 points
 - Display data in components: 15 points
-- Stretch Goals: 10 points
-  - Partial goal: 4 points
-  - One goal: 7 points
-  - Two goals: 10 points
+- Deploy to Vercel: 3 points
+- Stretch Goals: 7 points
+  - Partial goal: 3 points
+  - One goal: 5 points
+  - Two goals: 7 points
