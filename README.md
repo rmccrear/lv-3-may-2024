@@ -38,3 +38,9 @@
 - Planning the data structure and components for the capstone project.
 - Implementing styling with Tailwind CSS in the capstone project.
 - Writing basic visual tests for the capstone project with StoryBook.
+
+## General
+
+### git and GitHub resources.
+
+[git](./general/git.md)
