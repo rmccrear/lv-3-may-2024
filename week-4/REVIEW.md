@@ -19,6 +19,7 @@
 
 - Net Ninja [Youtube](https://youtu.be/PHaECbrKgs0?feature=shared)
 - Code Bro [Youtube](https://youtu.be/uvEAvxWvwOs?feature=shared)
+- A lot of details about props [freeCodeCamp](https://www.freecodecamp.org/news/react-props-cheatsheet/)
 
 ## Testing Components and Storybook
 
