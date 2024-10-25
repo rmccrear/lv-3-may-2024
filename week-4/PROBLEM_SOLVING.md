@@ -1,4 +1,14 @@
-# Stacks and Queues
+# The Counting Queues
+
+## More on Stacks and Queues
+
+Recall that stacks are FIFO.
+
+Recall that queues are LIFO.
+
+Stacks have the methods `push` and `pop`.
+
+Queues have the methods `enqueue` and `dequeue`.
 
 ## Problem Set 1
 
