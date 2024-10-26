@@ -4,6 +4,8 @@
 
 In this assignment, you will build on your **Cats, Cats, Cats** project by consuming the endpoints you created in Part 3. You will create new pages in your `/src/pages` directory to display data fetched from the endpoints.
 
+At this point, you won't need to select a cat to fetch. You may hard code a cat name for your fetch request. (In the future, you will learn how to dynamically select a cat to fetch with a JavaScript form.)
+
 ### Step-by-Step Instructions
 
 **Styling Requirement**: Use [Tailwind CSS](https://tailwindcss.com/) for styling each of the pages you create. Ensure that your pages are visually appealing and consistent.
@@ -13,7 +15,7 @@ In this assignment, you will build on your **Cats, Cats, Cats** project by consu
    - In the `/src/pages` directory, create new folders for each page you need:
      - `pokemon/index.js` for the Pokémon data.
      - `trivia/index.js` for the trivia questions.
-     - `more-cats/index.js` for multiple cat entries (if you completed the multi-cat stretch goal).
+     - `more-cats/index.js` for multiple cat entries (if you completed the multi-cat stretch goal, you may reuse this page).
 
 2. **Fetch Data in Each Page**
 
