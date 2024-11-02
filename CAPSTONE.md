@@ -15,3 +15,7 @@
 - [ ] Persistent Data: Use a database to store data in your project. We will use upstash with Vercel to store data. The data should come from the user and be stored in the database. Examples include favorites, likes, comments, etc. (upstash is a Redis database that is free to use with Vercel.)
 - [ ] RESTful Routes (optional): Implement RESTful routes in your project. This should include at least one route for each CRUD operation (Create, Read, Update, Delete). (Try for Create and Read, at least. Then add Update and Delete if you have time.)
 - Deploy your web app to a hosting platform like Vercel or Netlify. Make sure your deployment is successful and your app is accessible online. Remember to include a link to your deployed app in your README.
+
+[rubric](CAPSTONE-RUBRIC.md)
+
+[details](CAPSTONE-RUBRIC-DETAILS.md)
