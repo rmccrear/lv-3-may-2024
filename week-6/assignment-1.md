@@ -1,4 +1,4 @@
-**Server Project Assignment**
+# Server Project Assignment
 
 In this assignment, you'll build a server that can send emails and store user data from users such as "likes," "messages," and "favorites". You'll progress through setting up email notifications, creating data persistence, and implementing login functionality using a "magic link".
 
