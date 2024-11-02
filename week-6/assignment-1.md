@@ -6,6 +6,7 @@ In this assignment, you'll build a server that can send emails and store user da
 
 - **Goal**: Set up your server to send an email when an API endpoint is hit, using Resend.
 - **Steps**:
+  0. Create a NEW Next.js project with your terminal and sync it to github. You may call it "capstone" if you wish to use this repo to get started on you capstone project.
   1. Create an endpoint in your `/api` folder called `send-email.js`.
   2. The endpoint should return a JSON object with a message that says "Email sent!" or "Error sending email!" based on a variable called `success`.
      - **Testing**: Test this endpoint by sending a request (e.g., using Postman or CURL) and verify that the correct JSON message is returned based on the success or failure of the email sending process.
