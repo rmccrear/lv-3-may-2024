@@ -38,7 +38,7 @@ In this assignment, you will build upon the server project to implement a simple
    - `add-favorite.js`: Accepts a POST request with a `userEmail` ,  `favorite`, and `token`. Store the "favorite" in Upstash under the user's key (e.g., `favorite:userEmail`).
    - In `add-favorite.js` check that the token matches the token you have stored in `magic_token`. If it does, proceed. If not, return with a 401 Unauthorized error. 
      - **Testing**: Use Postman to test to see if add-favorites work. Double check in the Upstash dashboard to see if it stored the data.
-   - &#x20;`get-favorite.js`: Accepts a `GET` request with a `userEmail` and retrieves the favorite cat associated with that user. This does not have to be password protected be cause we are sharing favorites with the world.
+   - `get-favorite.js`: Accepts a `GET` request with a `userEmail` and retrieves the favorite cat associated with that user. This does not have to be password protected be cause we are sharing favorites with the world.
    - **Testing**: Test the endpoint by sending appropriate requests and verifying that the data is stored and retrieved correctly.
    - (Optional: set other sorts of user data. You may explore the use of arrays or objects in Redis.)
 2. Reflect on the process in the README:
