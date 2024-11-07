@@ -54,21 +54,22 @@ Here is a cheat sheet.
 - **Setup Upstash KV store**:
 
   ```javascript
-  import { createClient } from '@vercel/kv';
+  import { Redis } from "@upstash/redis";
+  const store = Redis.fromEnv()
 
   export default async function handler(req, res) {
-    const store = createClient({
-      url: process.env.KV_REST_API_URL,
-      token: process.env.KV_REST_API_TOKEN
-    });
-    // Your logic here...
+    const fruit = req.query.fruit;
+    const name = req.query.name;
+    store.set("fruit", fruit); // set key "fruit" to value
+    store.set(`fruit:${name}`, fruit); // set a dynamic key
+    res.status(200).json({ fruit: fruit });
   }
   ```
 
 - **Increment a value**:
 
   ```javascript
-  await store.increment('count');
+  await store.incr('count');
   ```
 
 - **Set a value**:
