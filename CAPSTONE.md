@@ -7,7 +7,7 @@
 - [ ] At least 3 pages: Create at least 3 pages for your web app. This should include a home page, a page for your API integration and an about page. (You can add more pages if you like.)
 - [ ] Components: Create components for your web app. This should include at least 5 components. (You can add more components if you like.)
 - [ ] Test tools: Use StoryBook to test at least 3 of your components. (I recommend you test ALL your components. You will thank yourself later.) (Bonus if you use Jest and React Testing Library, too)
-- [ ] Thoughtful design: Use Tailwind CSS to style your web app. (Bonus if you use a CSS framework like Daisy UI or shadcn/ui.)
+- [ ] Thoughtful design: Use Tailwind CSS or another CSS Framework (like Bootstrap) to style your web app. (Bonus if you use a CSS framework like Daisy UI or shadcn/ui.)
 - [ ] API Integration: Integrate an API into your project. This should be an API that requires and API key hidden behind a proxy server. Create at least 2 routes in the `/api` folder in your Next.js project.
 - [ ] Services: Your web app should have at least one service that fetches data from the API and passes it to your components. It should also be able to send an email to you when a user submits a form.
 - [ ] .env file: Use a `.env.local` file to store your API key and other sensitive information. Make a `.env.local.example` file to show what keys are needed to run your app. (Don't put the actual keys in the example file!)
