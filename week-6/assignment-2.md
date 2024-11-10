@@ -21,9 +21,11 @@ In this follow-up assignment, you'll consume the server-side API you built earli
      - **Testing**: Fill out the form and check if an email is received and if the message is stored.
   4. (Bonus) Add success/error handling to display appropriate messages to users based on the API response.
 
-### Part 3: Optional Displaying Data with useEffect
+### Part 3: Optional Displaying Data with useEffect (Optional)
 
-- **Goal**: Display all messages received so far.
+Hint: in Redis you can use the `scan` command to get all keys. Then, to get several keys, you can use the `mget` (multi-get) command.
+
+- **Goal**: Display all messages **messages** received so far.
 - **Steps**:
   1. Add an endpoint to your server that returns all stored messages. (This may be tricky depending on how you stored the data.)
   2. Create a new page called `all-messages` in the `pages` folder (`pages/all-messages.js`).
@@ -31,6 +33,20 @@ In this follow-up assignment, you'll consume the server-side API you built earli
   4. Display the messages in a list below the form.
      - **Testing**: Verify that all stored messages are displayed when the page loads.
   5. Add a button to manually refresh the list if new messages have been received.
+
+```javascript
+
+import { Redis } from "@upstash/redis";
+const store = Redis.fromEnv()
+
+export default async function handler(req, res) {
+  // Get all keys that start with "messages:"
+  const keys = await store.keys("messages:*");
+  // Get all messages using the keys
+  const messages = await store.mget(...keys);
+  res.status(200).json(messages);
+}
+```
 
 ### Part 4 (optional): Enhance User Experience
 
