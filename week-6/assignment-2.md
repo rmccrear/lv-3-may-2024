@@ -23,8 +23,6 @@ In this follow-up assignment, you'll consume the server-side API you built earli
 
 ### Part 3: Optional Displaying Data with useEffect (Optional)
 
-Hint: in Redis you can use the `scan` command to get all keys. Then, to get several keys, you can use the `mget` (multi-get) command.
-
 - **Goal**: Display all messages **messages** received so far.
 - **Steps**:
   1. Add an endpoint to your server that returns all stored messages. (This may be tricky depending on how you stored the data.)
@@ -34,14 +32,20 @@ Hint: in Redis you can use the `scan` command to get all keys. Then, to get seve
      - **Testing**: Verify that all stored messages are displayed when the page loads.
   5. Add a button to manually refresh the list if new messages have been received.
 
+**Hint**: In Redis, you can use the `scan` command to get all keys. Then, to get several keys, you can use the `mget` (multi-get) command.
+
+
 ```javascript
 
 import { Redis } from "@upstash/redis";
 const store = Redis.fromEnv()
 
+// see: https://upstash.com/docs/redis/sdks/ts/commands/generic/scan
+// or https://redis.io/learn/howtos/quick-start/cheat-sheet
+
 export default async function handler(req, res) {
   // Get all keys that start with "messages:"
-  const keys = await store.keys("messages:*");
+  const [cursor, keys] = await store.scan(0, {MATCH: "messages:*"});
   // Get all messages using the keys
   const messages = await store.mget(...keys);
   res.status(200).json(messages);
